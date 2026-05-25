@@ -1,0 +1,302 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "reviews": "Reviews",
+    "catalog": "Catalog",
+    "contact": "Contact",
+    "requestQuote": "Request a Quote",
+    "menu": "Menu",
+    "close": "Close menu"
+  },
+  "hero": {
+    "tagline": "Grown in the Foothills of Uzbekistan",
+    "headline": "Premium Organic Dried Fruits, Nuts & Mung Beans",
+    "subheadline": "From pristine foothill farms to your warehouse — certified organic, export-ready, and delivered with care.",
+    "cta": "Request a Quote",
+    "ctaSecondary": "View Products",
+    "scrollHint": "Scroll to explore",
+    "badge": "B2B Export Supplier"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Three premium categories, grown without mineral fertilizers or chemicals in Uzbekistan's foothill regions.",
+    "driedFruits": {
+      "name": "Dried Fruits",
+      "slug": "dried-fruits",
+      "description": "Sun-dried apricots, raisins, plums, figs, and mulberries — naturally sweet, sulfite-free, preservative-free."
+    },
+    "nuts": {
+      "name": "Nuts",
+      "slug": "nuts",
+      "description": "Walnuts, almonds, pistachios, and hazelnuts — handpicked from Uzbekistan's mountain orchards."
+    },
+    "mungBeans": {
+      "name": "Mung Beans (Mash)",
+      "slug": "mung-beans",
+      "description": "Premium whole and split mung beans — clean, sorted, and export-grade certified from Uzbekistan."
+    },
+    "requestQuote": "Request a Quote",
+    "learnMore": "Explore Category",
+    "viewAll": "View All Products",
+    "noPrice": "Contact us for current pricing",
+    "allCategories": "All Categories"
+  },
+  "whyUs": {
+    "title": "Why Choose Nomad Agro",
+    "subtitle": "Built on trust, grown with care, delivered with precision.",
+    "pillars": [
+      {
+        "title": "Certified Quality",
+        "description": "Our products meet international quality standards and phytosanitary requirements for export to Europe, Asia, and beyond."
+      },
+      {
+        "title": "Organic & Natural",
+        "description": "Grown in Uzbekistan's foothill regions without mineral fertilizers or chemical treatments — pure, as nature intended."
+      },
+      {
+        "title": "Export Experience",
+        "description": "Years of experience in international B2B trade. We understand your import documentation, labelling, and logistics requirements."
+      },
+      {
+        "title": "Reliable Supply",
+        "description": "Consistent quality and volume across seasons, with professional logistics support and transparent communication throughout."
+      }
+    ]
+  },
+  "about": {
+    "teaser": {
+      "tagline": "Our Story",
+      "title": "Rooted in Uzbekistan's Finest Growing Regions",
+      "text": "Nomad Agro has spent years sourcing and exporting the finest organic produce from Uzbekistan's foothill regions — where clean mountain air, fertile soil, and traditional farming methods combine to produce exceptional quality.",
+      "cta": "Learn Our Story"
+    },
+    "title": "About Nomad Agro",
+    "pageSubtitle": "A Tashkent-based organic exporter connecting Uzbekistan's finest farms with wholesale buyers worldwide.",
+    "story": {
+      "title": "Our Story",
+      "text": "Founded in Tashkent, Nomad Agro was born from a deep respect for Uzbekistan's ancient agricultural traditions and a vision to connect its premium organic produce with buyers around the world. We work directly with farmers in the foothill regions — where centuries of organic farming have been preserved by geography and tradition — to bring you products of exceptional purity and quality."
+    },
+    "regions": {
+      "title": "Growing Regions",
+      "text": "Our products are sourced from Uzbekistan's foothill regions, where altitude, soil composition, and a continental climate create ideal conditions for growing exceptional dried fruits, nuts, and legumes — entirely naturally, without artificial inputs.",
+      "regionsList": ["Fergana Valley", "Surkhandarya", "Kashkadarya", "Namangan foothills", "Samarkand region"]
+    },
+    "process": {
+      "title": "From Farm to Export",
+      "text": "We oversee every step: farmer partnerships, harvesting, natural drying and processing, quality inspection, packaging, and international shipping. Our team ensures your order meets the exact specifications you need."
+    },
+    "certifications": {
+      "title": "Quality & Compliance",
+      "text": "Our products are prepared in compliance with phytosanitary and export standards, ensuring smooth customs clearance in your destination market. We provide all required export documentation."
+    },
+    "stats": [
+      { "value": "3+", "label": "Product Categories" },
+      { "value": "10+", "label": "Countries Served" },
+      { "value": "100%", "label": "Organic Methods" },
+      { "value": "B2B", "label": "Wholesale Focus" }
+    ]
+  },
+  "reviews": {
+    "title": "What Our Partners Say",
+    "subtitle": "Trusted by importers and wholesale buyers across Europe, Asia, and the Middle East.",
+    "items": [
+      {
+        "name": "Marco B.",
+        "company": "European Import Co.",
+        "country": "Germany",
+        "text": "Excellent quality dried apricots — consistent sizing, beautiful colour, and very competitive terms. Nomad Agro is a reliable long-term partner for us."
+      },
+      {
+        "name": "Asel M.",
+        "company": "Central Asia Trading",
+        "country": "Kazakhstan",
+        "text": "Their mung beans are export-grade and arrived perfectly sorted. The communication and documentation were professional throughout. Highly recommended."
+      },
+      {
+        "name": "Chen W.",
+        "company": "Pacific Naturals Ltd",
+        "country": "China",
+        "text": "We have been sourcing walnuts from Nomad Agro for two seasons now. Quality, packaging, and documentation have always met our standards precisely."
+      }
+    ]
+  },
+  "catalog": {
+    "title": "Product Catalog",
+    "subtitle": "Browse our full range of premium organic products. Contact us for current pricing.",
+    "download": "Download Full Catalog (PDF)",
+    "downloadNote": "Pricing is not included — rates update daily with crop availability. Contact us for a personalised quote.",
+    "requestQuote": "Request a Quote for This Product",
+    "sections": {
+      "driedFruits": "Dried Fruits",
+      "nuts": "Nuts & Seeds",
+      "mungBeans": "Mung Beans (Mash)"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to place an order or discuss your requirements? We respond within one business day.",
+    "channels": {
+      "title": "Reach Us Directly",
+      "email": "Email",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "emailAddress": "info@nomadagro.uz",
+      "phoneDisplay": "+998 90 997 16 15",
+      "whatsappLabel": "Chat on WhatsApp",
+      "telegramLabel": "Message on Telegram"
+    },
+    "allEmails": "All Contact Emails",
+    "allPhones": "All Phone Numbers",
+    "address": "Address",
+    "addressValue": "100077, Sayram-7, 52, Tashkent, Republic of Uzbekistan",
+    "company": "\"Nomad Agro\" Ltd",
+    "ogrn": "OGRN: 888409",
+    "mapPlaceholder": "Map — Tashkent, Uzbekistan",
+    "form": {
+      "title": "Send an Inquiry",
+      "name": "Your Name",
+      "company": "Company / Organisation",
+      "email": "Email Address",
+      "country": "Country",
+      "product": "Product of Interest",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your requirements — product, quantity, destination, any certifications needed…",
+      "submit": "Send Inquiry",
+      "submitting": "Sending…",
+      "success": "Your inquiry has been sent. We will be in touch within one business day.",
+      "error": "Something went wrong. Please email us directly at info@nomadagro.uz."
+    }
+  },
+  "footer": {
+    "tagline": "Premium organic exports from Uzbekistan's finest growing regions.",
+    "nav": "Navigation",
+    "contactUs": "Contact",
+    "company": "\"Nomad Agro\" Ltd",
+    "ogrn": "OGRN: 888409",
+    "address": "100077, Sayram-7, 52,\nTashkent, Uzbekistan",
+    "copyright": "© {year} Nomad Agro Ltd. All rights reserved.",
+    "noPrice": "Prices are not displayed — contact us for current rates.",
+    "privacyNote": "B2B Wholesale Exporter · Tashkent, Uzbekistan"
+  },
+  "cta": {
+    "requestQuote": "Request a Quote",
+    "contactUs": "Contact Us",
+    "viewProducts": "View Products",
+    "learnMore": "Learn More",
+    "getInTouch": "Get in Touch",
+    "sendInquiry": "Send Inquiry"
+  },
+  "common": {
+    "backToProducts": "Back to Products",
+    "backToHome": "Back to Home",
+    "loading": "Loading…",
+    "noPrice": "Contact us for pricing"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Common questions from wholesale buyers and importers.",
+    "items": [
+      {
+        "question": "Where are Nomad Agro's products grown?",
+        "answer": "Our dried fruits, nuts, and mung beans are grown and sourced from the foothill regions of Uzbekistan — including the Fergana Valley, Surkhandarya, and Samarkand areas — where altitude, fertile soil, and a continental climate produce exceptional natural quality."
+      },
+      {
+        "question": "Does Nomad Agro export internationally?",
+        "answer": "Yes. Nomad Agro is a Tashkent-based B2B exporter supplying wholesale buyers across Europe, Asia, and the Middle East. We handle all export documentation, phytosanitary certificates, and logistics coordination."
+      },
+      {
+        "question": "Are the products organic and certified?",
+        "answer": "Our products are grown using organic methods — no mineral fertilizers, no chemical treatments. We prepare all required export and phytosanitary documentation. Please contact us for specific certification details relevant to your market."
+      },
+      {
+        "question": "How do I request a price quote?",
+        "answer": "Prices are not published online as they change daily with crop availability and market conditions. Contact us directly via email at info@nomadagro.uz, WhatsApp, or Telegram for current pricing and availability."
+      },
+      {
+        "question": "What is the minimum order quantity?",
+        "answer": "Minimum order quantities vary by product and packaging. Please contact us to discuss your specific requirements — we work with both container-load orders and smaller wholesale quantities."
+      },
+      {
+        "question": "What packaging options are available?",
+        "answer": "We offer various packaging options including 25kg and 50kg bulk bags, as well as custom packaging upon request. Contact us to discuss the best option for your market and logistics requirements."
+      }
+    ]
+  },
+  "productsData": {
+    "driedFruits": {
+      "title": "Organic Dried Fruits",
+      "pageTitle": "Dried Fruits",
+      "description": "Sourced from Uzbekistan's sun-rich foothill regions, our dried fruits are naturally dried — no preservatives, no sulfites, no artificial coloring. Each variety is carefully processed to preserve its natural sweetness and nutritional integrity.",
+      "items": [
+        { "name": "Sun-Dried Apricots (Uryuk)", "description": "Naturally dried, sulfite-free apricots with a deep amber colour and concentrated sweetness. Available in multiple grades — soft and semi-dried." },
+        { "name": "Raisins (Kishmish)", "description": "Golden and dark raisins, naturally sun-dried from Uzbekistan's celebrated local grape varieties. Clean, sweet, and export-ready." },
+        { "name": "Dried Plums (Prunes)", "description": "Premium-grade prunes from Uzbek orchards — soft, intensely flavoured, and packed for export in various grades." },
+        { "name": "Dried Figs (Anjir)", "description": "Soft, naturally sweet figs — carefully hand-sorted, dried under the Uzbek sun, and packed for export markets." },
+        { "name": "Dried Mulberries (Tut)", "description": "White and black mulberries, one of Uzbekistan's most prized traditional dried fruits. Delicate, sweet, and naturally rich in nutrients." },
+        { "name": "Dried Dates (Xurmo)", "description": "Select varieties of naturally ripened and dried dates — premium grade for confectionery and health food markets." }
+      ]
+    },
+    "nuts": {
+      "title": "Organic Nuts",
+      "pageTitle": "Nuts",
+      "description": "Our nuts are sourced from the mountain orchards and foothill farms of Uzbekistan — harvested by hand, sorted by grade, and exported in export-standard packaging. Pure, unprocessed flavour from nature.",
+      "items": [
+        { "name": "Walnuts (Yong'oq)", "description": "Light-coloured kernels with high oil content, sourced from Uzbekistan's highland walnut orchards. Available in-shell and shelled, multiple grades." },
+        { "name": "Almonds (Bodom)", "description": "Sweet-variety Uzbek almonds — available in-shell and shelled, raw or blanched. Clean, premium grade for confectionery and snack markets." },
+        { "name": "Pistachios (Pistа)", "description": "Naturally opened pistachios from Central Asian orchards — roasted or raw, in-shell or shelled, sorted by grade." },
+        { "name": "Hazelnuts (Funduq)", "description": "Round, sweet-flavoured hazelnuts — carefully sorted by grade for confectionery, baking, and snack market applications." }
+      ]
+    },
+    "mungBeans": {
+      "title": "Mung Beans (Mash)",
+      "pageTitle": "Mung Beans",
+      "description": "Uzbekistan is one of the world's leading producers of premium mung beans. Our mash is cleaned, machine-sorted, and available in several grades — whole green, split, and hulled — to meet diverse market specifications.",
+      "items": [
+        { "name": "Whole Green Mung Beans", "description": "Premium-grade whole mung beans — thoroughly cleaned, machine-sorted, and export-ready in 25kg and 50kg bags." },
+        { "name": "Split Mung Beans (Mosh Dal)", "description": "Split and hulled mung beans for the Asian cooking ingredient and food manufacturing market." },
+        { "name": "Mung Bean Flour", "description": "Finely milled mung bean flour — available in custom grades for food manufacturing, noodle, and vermicelli production." }
+      ]
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Nomad Agro | Premium Organic Dried Fruits, Nuts & Mung Beans — Export from Uzbekistan",
+      "description": "Nomad Agro exports certified organic dried fruits, nuts, and mung beans from Uzbekistan's foothill regions. B2B wholesale supplier for importers worldwide. Request a quote."
+    },
+    "about": {
+      "title": "About Nomad Agro | Organic B2B Exporter from Uzbekistan",
+      "description": "Learn about Nomad Agro — Tashkent-based organic exporter of dried fruits, nuts, and mung beans from Uzbekistan's foothill regions. Our story, growing regions, and processes."
+    },
+    "products": {
+      "title": "Products | Organic Dried Fruits, Nuts & Mung Beans | Nomad Agro",
+      "description": "Browse Nomad Agro's full range of premium organic dried fruits, nuts, and mung beans — grown in Uzbekistan, available for B2B wholesale export worldwide."
+    },
+    "driedFruits": {
+      "title": "Organic Dried Fruits from Uzbekistan | Apricots, Raisins, Figs | Nomad Agro",
+      "description": "Premium sun-dried organic apricots, raisins, plums, figs, and mulberries from Uzbekistan. B2B wholesale export — no sulfites, no preservatives. Request a quote."
+    },
+    "nuts": {
+      "title": "Organic Nuts from Uzbekistan | Walnuts, Almonds, Pistachios | Nomad Agro",
+      "description": "Handpicked organic walnuts, almonds, pistachios, and hazelnuts from Uzbekistan's mountain orchards. Available for B2B export. Contact us for pricing."
+    },
+    "mungBeans": {
+      "title": "Mung Beans (Mash) | Organic Export from Uzbekistan | Nomad Agro",
+      "description": "Premium organic mung beans (mash) from Uzbekistan — whole green, split, and flour. Export-grade quality for B2B wholesale buyers. Request a quote."
+    },
+    "reviews": {
+      "title": "Partner Reviews | Nomad Agro Organic Exporter | Uzbekistan",
+      "description": "Testimonials from Nomad Agro's international wholesale partners and importers — Europe, Asia, Middle East."
+    },
+    "catalog": {
+      "title": "Product Catalog | Nomad Agro | Organic Dried Fruits & Nuts from Uzbekistan",
+      "description": "Browse Nomad Agro's full product catalog — organic dried fruits, nuts, and mung beans. Request current pricing by contacting us directly."
+    },
+    "contacts": {
+      "title": "Contact Nomad Agro | Wholesale Inquiries & Quote Requests",
+      "description": "Contact Nomad Agro for B2B wholesale pricing, samples, and export inquiries. Reach us by email, phone, WhatsApp, or Telegram. Tashkent, Uzbekistan."
+    }
+  }
+}
