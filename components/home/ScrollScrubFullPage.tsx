@@ -127,9 +127,10 @@ export default function ScrollScrubFullPage() {
   const locale    = useLocale()
   const prefersReducedMotion = useReducedMotion()
 
-  const containerRef = useRef<HTMLDivElement>(null)
-  const canvasRef    = useRef<HTMLCanvasElement>(null)
-  const imagesRef    = useRef<HTMLImageElement[]>([])
+  const containerRef  = useRef<HTMLDivElement>(null)
+  const canvasRef     = useRef<HTMLCanvasElement>(null)
+  const imagesRef     = useRef<HTMLImageElement[]>([])
+  const lastDrawnIdx  = useRef<number>(-1)   // guard: skip paint when frame unchanged
 
   const [progress, setProgress] = useState(0)
   const [ready,    setReady]    = useState(false)
@@ -142,15 +143,19 @@ export default function ScrollScrubFullPage() {
 
   /* ── canvas helper ──────────────────────────────────────────────────── */
   const paintFrame = (raw: number) => {
-    const canvas = canvasRef.current
-    const ctx = canvas?.getContext('2d')
-    if (!canvas || !ctx) return
+    // Snap to nearest integer frame — NO cross-fade.
+    // Blending two adjacent JPEGs with globalAlpha produces a "double-exposure"
+    // shimmer on any motion in the video; Apple's own scroll-scrub pages use
+    // a hard cut between frames and rely on frame density for smoothness.
+    const idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(raw)))
+    if (idx === lastDrawnIdx.current) return   // nothing changed, skip work
 
-    const lo = Math.max(0, Math.min(FRAME_COUNT - 1, Math.floor(raw)))
-    const hi = Math.max(0, Math.min(FRAME_COUNT - 1, lo + 1))
-    const frac = raw - lo
-    const imgLo = imagesRef.current[lo]
-    if (!imgLo?.complete) return
+    const img = imagesRef.current[idx]
+    if (!img?.complete) return
+
+    const canvas = canvasRef.current
+    const ctx    = canvas?.getContext('2d')
+    if (!canvas || !ctx) return
 
     const dpr = window.devicePixelRatio || 1
     const cw  = canvas.clientWidth
@@ -169,16 +174,8 @@ export default function ScrollScrubFullPage() {
     const dy = (ch - dh) / 2
 
     ctx.clearRect(0, 0, cw, ch)
-    ctx.globalAlpha = 1
-    ctx.drawImage(imgLo, dx, dy, dw, dh)
-    if (frac > 0.01 && hi !== lo) {
-      const imgHi = imagesRef.current[hi]
-      if (imgHi?.complete) {
-        ctx.globalAlpha = frac
-        ctx.drawImage(imgHi, dx, dy, dw, dh)
-        ctx.globalAlpha = 1
-      }
-    }
+    ctx.drawImage(img, dx, dy, dw, dh)
+    lastDrawnIdx.current = idx
   }
 
   /* ── preload all frames ─────────────────────────────────────────────── */
@@ -202,14 +199,12 @@ export default function ScrollScrubFullPage() {
   }, [prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── continuous RAF loop ────────────────────────────────────────────── */
+  // paintFrame's lastDrawnIdx guard makes most ticks instant no-ops,
+  // so a simple unconditional loop is cleaner than tracking prevRaw here.
   useEffect(() => {
     if (!ready || prefersReducedMotion) return
-    let rafId: number, prevRaw = -1
-    const tick = () => {
-      const raw = frameIndex.get()
-      if (Math.abs(raw - prevRaw) > 0.0005) { prevRaw = raw; paintFrame(raw) }
-      rafId = requestAnimationFrame(tick)
-    }
+    let rafId: number
+    const tick = () => { paintFrame(frameIndex.get()); rafId = requestAnimationFrame(tick) }
     rafId = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafId)
   }, [ready, frameIndex, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -217,7 +212,10 @@ export default function ScrollScrubFullPage() {
   /* ── redraw on resize ───────────────────────────────────────────────── */
   useEffect(() => {
     if (prefersReducedMotion) return
-    const onResize = () => paintFrame(frameIndex.get())
+    const onResize = () => {
+      lastDrawnIdx.current = -1          // force repaint at new viewport size
+      paintFrame(frameIndex.get())
+    }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [prefersReducedMotion, frameIndex]) // eslint-disable-line react-hooks/exhaustive-deps
