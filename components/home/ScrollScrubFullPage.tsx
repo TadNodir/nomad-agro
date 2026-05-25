@@ -17,7 +17,7 @@ import { COMPANY } from '@/lib/constants'
 /* ─────────────────────────────────────────────────────────────────────────
    Frame constants
    ───────────────────────────────────────────────────────────────────────── */
-const FRAME_COUNT = 120
+const FRAME_COUNT = 170
 const FRAME_W = 1600
 const FRAME_H = 900
 const TRACK_VH = 500
