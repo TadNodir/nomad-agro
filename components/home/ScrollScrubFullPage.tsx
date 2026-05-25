@@ -26,21 +26,6 @@ const FRAME_PATH = (i: number) =>
 
 /* ─────────────────────────────────────────────────────────────────────────
    Panel ranges — strictly sequential, NO overlap.
-   Each panel owns [start, end] of scrollYProgress exclusively.
-   Gaps between panels = pure-video breathing room.
-
-   Layout (scrollYProgress 0 → 1):
-     [0.00 – 0.14]  hero          (14 %)
-     [0.14 – 0.17]  ── gap ──      (3 %)
-     [0.17 – 0.31]  products      (14 %)
-     [0.31 – 0.34]  ── gap ──      (3 %)
-     [0.34 – 0.48]  whyUs         (14 %)
-     [0.48 – 0.51]  ── gap ──      (3 %)
-     [0.51 – 0.65]  about         (14 %)
-     [0.65 – 0.68]  ── gap ──      (3 %)
-     [0.68 – 0.83]  reviews       (15 %)
-     [0.83 – 0.86]  ── gap ──      (3 %)
-     [0.86 – 1.00]  contact       (14 %)
    ───────────────────────────────────────────────────────────────────────── */
 const PANELS = {
   hero:     [0.00, 0.14] as const,
@@ -51,28 +36,45 @@ const PANELS = {
   contact:  [0.86, 1.00] as const,
 }
 
-/** Fade ramp inside each panel — must be < (end-start)/2 */
 const FADE = 0.025
 
 /* ─────────────────────────────────────────────────────────────────────────
+   Liquid-Glass shared classes
+   Apple-style: heavy backdrop-blur + backdrop-saturate + specular top edge
+   ───────────────────────────────────────────────────────────────────────── */
+const glass =
+  'bg-white/[0.10] backdrop-blur-2xl backdrop-saturate-[1.6] ' +
+  'border border-white/25 rounded-2xl ' +
+  'shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.06),0_4px_24px_rgba(0,0,0,0.22)] ' +
+  'transition-all duration-200'
+
+const glassInteractive =
+  glass +
+  ' cursor-pointer hover:bg-white/[0.18] hover:border-white/35 ' +
+  'hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_32px_rgba(0,0,0,0.30)]'
+
+/* ─────────────────────────────────────────────────────────────────────────
    PanelLayer
-   Fades + lifts children within its own range.  Keys are clamped so they
-   never bleed into a neighbour's range.
+   mobileTop=true  → items-start + pt-[72px] on mobile, items-center on sm+
+                     Use for panels whose card grids exceed ~60 vh on mobile.
+   mobileTop=false → items-center on all sizes (default; fine for short panels)
    ───────────────────────────────────────────────────────────────────────── */
 function PanelLayer({
   scrollYProgress,
   start,
   end,
   className = '',
+  mobileTop = false,
   children,
 }: {
   scrollYProgress: MotionValue<number>
   start: number
   end: number
   className?: string
+  /** Pin to top on mobile so the heading is never clipped by the sticky frame */
+  mobileTop?: boolean
   children: React.ReactNode
 }) {
-  // Clamp keys to [start, end] so animation never extends into gaps
   const k0 = start
   const k1 = Math.min(start + FADE, (start + end) / 2)
   const k2 = Math.max(end - FADE, (start + end) / 2)
@@ -83,7 +85,13 @@ function PanelLayer({
 
   return (
     <motion.div
-      className={`absolute inset-0 flex items-center ${className}`}
+      className={[
+        'absolute inset-0 flex',
+        mobileTop
+          ? 'items-start pt-[72px] sm:items-center sm:pt-0'
+          : 'items-center',
+        className,
+      ].join(' ')}
       style={{ opacity, y }}
     >
       {children}
@@ -92,7 +100,7 @@ function PanelLayer({
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Inline channel icons
+   Channel icons
    ───────────────────────────────────────────────────────────────────────── */
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
@@ -141,7 +149,6 @@ export default function ScrollScrubFullPage() {
     const lo = Math.max(0, Math.min(FRAME_COUNT - 1, Math.floor(raw)))
     const hi = Math.max(0, Math.min(FRAME_COUNT - 1, lo + 1))
     const frac = raw - lo
-
     const imgLo = imagesRef.current[lo]
     if (!imgLo?.complete) return
 
@@ -162,12 +169,8 @@ export default function ScrollScrubFullPage() {
     const dy = (ch - dh) / 2
 
     ctx.clearRect(0, 0, cw, ch)
-
-    // Draw base frame
     ctx.globalAlpha = 1
     ctx.drawImage(imgLo, dx, dy, dw, dh)
-
-    // Cross-fade into next frame proportional to fractional position
     if (frac > 0.01 && hi !== lo) {
       const imgHi = imagesRef.current[hi]
       if (imgHi?.complete) {
@@ -181,10 +184,8 @@ export default function ScrollScrubFullPage() {
   /* ── preload all frames ─────────────────────────────────────────────── */
   useEffect(() => {
     if (prefersReducedMotion) { setReady(true); return }
-    let loaded = 0
-    let cancelled = false
+    let loaded = 0, cancelled = false
     const imgs: HTMLImageElement[] = []
-
     for (let i = 0; i < FRAME_COUNT; i++) {
       const img = new Image()
       img.src = FRAME_PATH(i)
@@ -192,10 +193,7 @@ export default function ScrollScrubFullPage() {
         if (cancelled) return
         loaded++
         setProgress(loaded / FRAME_COUNT)
-        if (loaded === FRAME_COUNT) {
-          setReady(true)
-          paintFrame(0)
-        }
+        if (loaded === FRAME_COUNT) { setReady(true); paintFrame(0) }
       }
       imgs.push(img)
     }
@@ -203,23 +201,15 @@ export default function ScrollScrubFullPage() {
     return () => { cancelled = true }
   }, [prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  /* ── continuous RAF loop — smooth frame interpolation ──────────────── */
+  /* ── continuous RAF loop ────────────────────────────────────────────── */
   useEffect(() => {
     if (!ready || prefersReducedMotion) return
-
-    let rafId: number
-    let prevRaw = -1
-
+    let rafId: number, prevRaw = -1
     const tick = () => {
       const raw = frameIndex.get()
-      // Only repaint when scroll position actually changed
-      if (Math.abs(raw - prevRaw) > 0.0005) {
-        prevRaw = raw
-        paintFrame(raw)
-      }
+      if (Math.abs(raw - prevRaw) > 0.0005) { prevRaw = raw; paintFrame(raw) }
       rafId = requestAnimationFrame(tick)
     }
-
     rafId = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafId)
   }, [ready, frameIndex, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -248,11 +238,8 @@ export default function ScrollScrubFullPage() {
     return (
       <section className="relative h-screen w-full overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={FRAME_PATH(0)}
-          alt="Nomad Agro premium organic products"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <img src={FRAME_PATH(0)} alt="Nomad Agro premium organic products"
+          className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full items-center">
           <div className="container-base pb-16">
@@ -280,42 +267,39 @@ export default function ScrollScrubFullPage() {
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
         {/* Video canvas */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 h-full w-full"
-          aria-hidden="true"
-        />
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 
-        {/* Persistent dark gradient for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 pointer-events-none" />
+        {/* Persistent gradient — keeps mid-screen legible too */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/65 pointer-events-none" />
 
         {/* Loading screen */}
         {!ready && (
           <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-neutral-900 text-white">
             <div className="h-1 w-48 overflow-hidden rounded-full bg-white/20">
-              <div
-                className="h-full bg-[#5CE65C] transition-[width] duration-150"
-                style={{ width: `${Math.round(progress * 100)}%` }}
-              />
+              <div className="h-full bg-[#5CE65C] transition-[width] duration-150"
+                style={{ width: `${Math.round(progress * 100)}%` }} />
             </div>
             <p className="mt-3 text-sm tracking-wide text-white/70">{Math.round(progress * 100)}%</p>
           </div>
         )}
 
-        {/* ── Panel layers — each in its own non-overlapping range ─────── */}
+        {/* ── Panel layers ─────────────────────────────────────────────── */}
         <div className="absolute inset-0 z-10">
 
           {/* 1 ── HERO ────────────────────────────────────────────────── */}
           <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.hero[0]} end={PANELS.hero[1]}>
             <div className="container-base w-full pb-16">
               <div className="max-w-2xl">
-                <p className="text-white/60 text-sm font-medium tracking-widest uppercase mb-4">
+                <p className="text-white/60 text-sm font-medium tracking-widest uppercase mb-4
+                  [text-shadow:_0_1px_8px_rgba(0,0,0,0.6)]">
                   {tHero('tagline')}
                 </p>
-                <h1 className="font-serif text-display-lg text-cream font-semibold text-balance mb-6 leading-[1.05]">
+                <h1 className="font-serif text-display-lg text-cream font-semibold text-balance mb-6 leading-[1.05]
+                  [text-shadow:_0_2px_16px_rgba(0,0,0,0.55)]">
                   {tHero('headline')}
                 </h1>
-                <p className="text-lg text-white/80 leading-relaxed mb-10 max-w-xl">
+                <p className="text-lg text-white/85 leading-relaxed mb-10 max-w-xl
+                  [text-shadow:_0_1px_10px_rgba(0,0,0,0.5)]">
                   {tHero('subheadline')}
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
@@ -328,28 +312,37 @@ export default function ScrollScrubFullPage() {
             </div>
           </PanelLayer>
 
-          {/* 2 ── OUR PRODUCTS ────────────────────────────────────────── */}
-          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.products[0]} end={PANELS.products[1]} className="justify-center">
-            <div className="container-base w-full text-center">
-              <p className="text-brand-lime text-xs font-semibold tracking-[0.22em] uppercase mb-3">
+          {/* 2 ── OUR PRODUCTS ───────────────────────────────────────── */}
+          {/* mobileTop: heading visible below the navbar on small screens */}
+          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.products[0]} end={PANELS.products[1]}
+            className="justify-center" mobileTop>
+            <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
+              <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
+                [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
                 Export Range
               </p>
-              <h2 className="font-serif text-4xl lg:text-5xl text-cream font-semibold mb-4">
+              <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-3 sm:mb-4
+                [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                 {tProducts('title')}
               </h2>
-              <p className="text-white/60 text-base mb-8 max-w-xl mx-auto">
+              {/* Subtitle hidden on mobile to reclaim vertical space */}
+              <p className="hidden sm:block text-white/65 text-base mb-8 max-w-xl mx-auto
+                [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
                 {tProducts('subtitle')}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto mb-4 sm:mb-8">
                 {productCategories.map(({ href, name, desc }) => (
-                  <a
-                    key={href}
-                    href={href}
-                    className="group block bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 text-left hover:bg-white/18 transition-colors duration-200 cursor-pointer"
-                  >
-                    <h3 className="text-cream font-semibold text-base mb-2">{name}</h3>
-                    <p className="text-white/55 text-sm leading-relaxed line-clamp-2">{desc}</p>
-                    <span className="mt-3 inline-block text-brand-lime text-sm group-hover:translate-x-1 transition-transform duration-150">→</span>
+                  <a key={href} href={href}
+                    className={`group block ${glassInteractive} p-3 sm:p-5 text-left`}>
+                    <h3 className="text-cream font-semibold text-sm sm:text-base mb-1 sm:mb-2
+                      [text-shadow:_0_1px_6px_rgba(0,0,0,0.4)]">
+                      {name}
+                    </h3>
+                    <p className="text-white/65 text-xs sm:text-sm leading-relaxed line-clamp-2">
+                      {desc}
+                    </p>
+                    <span className="mt-2 sm:mt-3 inline-block text-brand-lime text-sm
+                      group-hover:translate-x-1 transition-transform duration-150">→</span>
                   </a>
                 ))}
               </div>
@@ -359,37 +352,46 @@ export default function ScrollScrubFullPage() {
             </div>
           </PanelLayer>
 
-          {/* 3 ── WHY CHOOSE NOMAD AGRO ───────────────────────────────── */}
-          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.whyUs[0]} end={PANELS.whyUs[1]} className="justify-center">
-            <div className="container-base w-full text-center">
-              <p className="text-brand-lime text-xs font-semibold tracking-[0.22em] uppercase mb-3">
+          {/* 3 ── WHY CHOOSE NOMAD AGRO ──────────────────────────────── */}
+          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.whyUs[0]} end={PANELS.whyUs[1]}
+            className="justify-center" mobileTop>
+            <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
+              <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
+                [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
                 Our Advantage
               </p>
-              <h2 className="font-serif text-4xl lg:text-5xl text-cream font-semibold mb-8">
+              <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-5 sm:mb-8
+                [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                 {tWhyUs('title')}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-w-2xl mx-auto">
                 {pillars.map((pillar, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 text-left">
-                    <h3 className="text-cream font-semibold text-sm mb-1.5">{pillar.title}</h3>
-                    <p className="text-white/60 text-sm leading-relaxed">{pillar.description}</p>
+                  <div key={i} className={`${glass} p-3 sm:p-5 text-left`}>
+                    <h3 className="text-cream font-semibold text-sm mb-1 sm:mb-1.5
+                      [text-shadow:_0_1px_6px_rgba(0,0,0,0.4)]">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-white/65 text-xs sm:text-sm leading-relaxed">{pillar.description}</p>
                   </div>
                 ))}
               </div>
             </div>
           </PanelLayer>
 
-          {/* 4 ── ROOTED IN UZBEKISTAN ────────────────────────────────── */}
+          {/* 4 ── ROOTED IN UZBEKISTAN ───────────────────────────────── */}
           <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.about[0]} end={PANELS.about[1]}>
             <div className="container-base w-full pb-16">
               <div className="max-w-2xl">
-                <p className="text-brand-lime text-xs font-semibold tracking-[0.22em] uppercase mb-3">
+                <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-3
+                  [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
                   {tAbout('teaser.tagline')}
                 </p>
-                <h2 className="font-serif text-4xl lg:text-5xl text-cream font-semibold mb-6 leading-[1.1] text-balance">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-cream font-semibold mb-6 leading-[1.1] text-balance
+                  [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                   {tAbout('teaser.title')}
                 </h2>
-                <p className="text-lg text-white/75 leading-relaxed mb-10">
+                <p className="text-base sm:text-lg text-white/80 leading-relaxed mb-10
+                  [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
                   {tAbout('teaser.text')}
                 </p>
                 <Button variant="ghost" size="md" href={`/${locale}/about`}>
@@ -399,65 +401,84 @@ export default function ScrollScrubFullPage() {
             </div>
           </PanelLayer>
 
-          {/* 5 ── WHAT OUR PARTNERS SAY ───────────────────────────────── */}
-          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.reviews[0]} end={PANELS.reviews[1]} className="justify-center">
-            <div className="container-base w-full text-center">
-              <p className="text-brand-lime text-xs font-semibold tracking-[0.22em] uppercase mb-3">
+          {/* 5 ── WHAT OUR PARTNERS SAY ──────────────────────────────── */}
+          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.reviews[0]} end={PANELS.reviews[1]}
+            className="justify-center" mobileTop>
+            <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
+              <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
+                [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
                 Partner Reviews
               </p>
-              <h2 className="font-serif text-4xl lg:text-5xl text-cream font-semibold mb-8">
+              <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-5 sm:mb-8
+                [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                 {tReviews('title')}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-4xl mx-auto">
                 {reviews.map((review, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 text-left">
-                    <div className="flex gap-0.5 mb-3">
+                  /* Hide the 3rd card on mobile — two cards fit; three overflow */
+                  <div key={i} className={[
+                    glass,
+                    'p-3 sm:p-5 text-left',
+                    i === 2 ? 'hidden sm:block' : '',
+                  ].join(' ')}>
+                    {/* Stars */}
+                    <div className="flex gap-0.5 mb-2 sm:mb-3">
                       {Array.from({ length: 5 }).map((_, j) => (
-                        <svg key={j} className="w-3.5 h-3.5 text-brand-lime fill-current" viewBox="0 0 20 20" aria-hidden="true">
+                        <svg key={j} className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brand-lime fill-current"
+                          viewBox="0 0 20 20" aria-hidden="true">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
                     </div>
-                    <p className="text-white/80 text-sm leading-relaxed italic mb-3">"{review.text}"</p>
-                    <p className="text-cream font-semibold text-sm">{review.name}</p>
-                    <p className="text-white/50 text-xs">{review.company} · {review.country}</p>
+                    <p className="text-white/85 text-xs sm:text-sm leading-relaxed italic mb-2 sm:mb-3">
+                      &ldquo;{review.text}&rdquo;
+                    </p>
+                    <p className="text-cream font-semibold text-xs sm:text-sm
+                      [text-shadow:_0_1px_6px_rgba(0,0,0,0.4)]">
+                      {review.name}
+                    </p>
+                    <p className="text-white/55 text-[10px] sm:text-xs">{review.company} · {review.country}</p>
                   </div>
                 ))}
               </div>
             </div>
           </PanelLayer>
 
-          {/* 6 ── GET IN TOUCH ────────────────────────────────────────── */}
-          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.contact[0]} end={PANELS.contact[1]} className="justify-center">
-            <div className="container-base w-full text-center">
-              <p className="text-brand-lime text-xs font-semibold tracking-[0.22em] uppercase mb-3">
+          {/* 6 ── GET IN TOUCH ───────────────────────────────────────── */}
+          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.contact[0]} end={PANELS.contact[1]}
+            className="justify-center" mobileTop>
+            <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
+              <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
+                [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
                 Get in Touch
               </p>
-              <h2 className="font-serif text-4xl lg:text-5xl text-cream font-semibold mb-4">
+              <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-3 sm:mb-4
+                [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                 {tContact('channels.title')}
               </h2>
-              <p className="text-white/65 text-lg mb-10 max-w-md mx-auto">
+              <p className="hidden sm:block text-white/70 text-lg mb-10 max-w-md mx-auto
+                [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
                 {tContact('subtitle')}
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-5 sm:mb-8">
                 <a href={`mailto:${COMPANY.emails.primary}`}
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-cream text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/20 transition-colors duration-200 cursor-pointer">
+                  className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
                   <Mail className="w-4 h-4" />{COMPANY.emails.primary}
                 </a>
                 <a href={COMPANY.whatsapp} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-cream text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/20 transition-colors duration-200 cursor-pointer">
+                  className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
                   <WhatsAppIcon />WhatsApp
                 </a>
                 <a href={COMPANY.telegram} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-cream text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/20 transition-colors duration-200 cursor-pointer">
+                  className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
                   <TelegramIcon />Telegram
                 </a>
                 <a href={`tel:${COMPANY.phones[0].number}`}
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-cream text-sm font-medium px-5 py-3 rounded-xl hover:bg-white/20 transition-colors duration-200 cursor-pointer">
+                  className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
                   <Phone className="w-4 h-4" />{COMPANY.phones[0].display}
                 </a>
               </div>
-              <div className="flex flex-wrap items-center justify-center gap-4">
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
                 <ContactCTA variant="lime" size="lg" label={tContact('channels.whatsappLabel')} />
                 <Button variant="ghost" size="lg" href={`/${locale}/contacts`}>
                   {tContact('title')}
