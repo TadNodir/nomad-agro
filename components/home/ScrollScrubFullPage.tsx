@@ -17,9 +17,9 @@ import { COMPANY } from '@/lib/constants'
 /* ─────────────────────────────────────────────────────────────────────────
    Frame constants
    ───────────────────────────────────────────────────────────────────────── */
-const FRAME_COUNT = 170
+const FRAME_COUNT = 192
 const FRAME_W = 1600
-const FRAME_H = 900
+const FRAME_H = 600  // cinemascope crop (letterbox removed): 1600×600
 const TRACK_VH = 500
 const FRAME_PATH = (i: number) =>
   `/frames/hero/frame_${String(i + 1).padStart(4, '0')}.jpg`
@@ -42,16 +42,18 @@ const FADE = 0.025
    Liquid-Glass shared classes
    Apple-style: heavy backdrop-blur + backdrop-saturate + specular top edge
    ───────────────────────────────────────────────────────────────────────── */
+// Slightly higher opacity (0.14) than the dark-video version so the card
+// remains distinct against the new light cream background frames.
 const glass =
-  'bg-white/[0.10] backdrop-blur-2xl backdrop-saturate-[1.6] ' +
-  'border border-white/25 rounded-2xl ' +
-  'shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-1px_0_rgba(0,0,0,0.06),0_4px_24px_rgba(0,0,0,0.22)] ' +
+  'bg-white/[0.14] backdrop-blur-2xl backdrop-saturate-[1.8] ' +
+  'border border-white/30 rounded-2xl ' +
+  'shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_-1px_0_rgba(0,0,0,0.08),0_4px_28px_rgba(0,0,0,0.28)] ' +
   'transition-all duration-200'
 
 const glassInteractive =
   glass +
-  ' cursor-pointer hover:bg-white/[0.18] hover:border-white/35 ' +
-  'hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_32px_rgba(0,0,0,0.30)]'
+  ' cursor-pointer hover:bg-white/[0.22] hover:border-white/40 ' +
+  'hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.40),0_8px_36px_rgba(0,0,0,0.35)]'
 
 /* ─────────────────────────────────────────────────────────────────────────
    PanelLayer
@@ -267,8 +269,17 @@ export default function ScrollScrubFullPage() {
         {/* Video canvas */}
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 
-        {/* Persistent gradient — keeps mid-screen legible too */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/65 pointer-events-none" />
+        {/* Persistent gradient — new video has a light cream background so
+            we need a stronger veil to keep white text legible at all panels */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background:
+            'linear-gradient(to bottom,' +
+            'rgba(0,0,0,0.55) 0%,' +    /* navbar zone */
+            'rgba(0,0,0,0.35) 25%,' +   /* upper mid */
+            'rgba(0,0,0,0.40) 50%,' +   /* center */
+            'rgba(0,0,0,0.45) 75%,' +   /* lower mid */
+            'rgba(0,0,0,0.65) 100%)'    /* bottom CTAs */
+          }} />
 
         {/* Loading screen */}
         {!ready && (
