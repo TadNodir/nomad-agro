@@ -143,12 +143,13 @@ export default function ScrollScrubFullPage() {
   })
   const frameIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1])
 
+  // The video's studio backdrop (warm cream sampled from frame corners).
+  // Used to fill the top/bottom bars on portrait viewports.
+  const VIDEO_BG = '#CEBB9D'
+
   /* ── canvas helper ──────────────────────────────────────────────────── */
   const paintFrame = (raw: number) => {
     // Snap to nearest integer frame — NO cross-fade.
-    // Blending two adjacent JPEGs with globalAlpha produces a "double-exposure"
-    // shimmer on any motion in the video; Apple's own scroll-scrub pages use
-    // a hard cut between frames and rely on frame density for smoothness.
     const idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(raw)))
     if (idx === lastDrawnIdx.current) return   // nothing changed, skip work
 
@@ -169,13 +170,26 @@ export default function ScrollScrubFullPage() {
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-    const scale = Math.max(cw / FRAME_W, ch / FRAME_H)
+    // Portrait (mobile): the frame is 2.67:1 wide — using `cover` would zoom
+    // in so far that only a ~17% center slice is visible.  Instead we fit to
+    // the viewport width and fill the remaining height with the video's own
+    // background colour so the gaps are seamless and all 4 products are shown.
+    //
+    // Landscape / desktop: standard `cover` — fills the screen edge-to-edge.
+    const isPortrait = ch > cw
+    const scale = isPortrait
+      ? cw / FRAME_W                          // contain-to-width
+      : Math.max(cw / FRAME_W, ch / FRAME_H) // cover
+
     const dw = FRAME_W * scale
     const dh = FRAME_H * scale
     const dx = (cw - dw) / 2
     const dy = (ch - dh) / 2
 
-    ctx.clearRect(0, 0, cw, ch)
+    // Always fill first — on portrait this paints the top/bottom bars;
+    // on landscape the frame covers it completely so it's invisible.
+    ctx.fillStyle = VIDEO_BG
+    ctx.fillRect(0, 0, cw, ch)
     ctx.drawImage(img, dx, dy, dw, dh)
     lastDrawnIdx.current = idx
   }
@@ -236,10 +250,12 @@ export default function ScrollScrubFullPage() {
   /* ── reduced-motion fallback ────────────────────────────────────────── */
   if (prefersReducedMotion) {
     return (
-      <section className="relative h-screen w-full overflow-hidden">
+      <section className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: '#CEBB9D' }}>
+        {/* object-contain keeps the full wide frame visible on portrait mobile;
+            the cream backgroundColor fills the top/bottom gaps seamlessly */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={FRAME_PATH(0)} alt="Nomad Agro premium organic products"
-          className="absolute inset-0 h-full w-full object-cover" />
+          className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full object-contain" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full items-center">
           <div className="container-base pb-16">
@@ -424,12 +440,7 @@ export default function ScrollScrubFullPage() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-4xl mx-auto">
                 {reviews.map((review, i) => (
-                  /* Hide the 3rd card on mobile — two cards fit; three overflow */
-                  <div key={i} className={[
-                    glass,
-                    'p-3 sm:p-5 text-left',
-                    i === 2 ? 'hidden sm:block' : '',
-                  ].join(' ')}>
+                  <div key={i} className={`${glass} p-3 sm:p-5 text-left`}>
                     {/* Stars */}
                     <div className="flex gap-0.5 mb-2 sm:mb-3">
                       {Array.from({ length: 5 }).map((_, j) => (
