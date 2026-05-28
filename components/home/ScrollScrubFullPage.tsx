@@ -15,14 +15,25 @@ import { Button } from '@/components/ui/Button'
 import { COMPANY } from '@/lib/constants'
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Frame constants
+   Frame sets
+   desktop  — landscape cinemascope 1600×600  (hero-source.mp4)
+   mobile   — portrait  9:16       750×1274   (hero-source-mobile.mp4)
+   Both use cover fit; the matching bg colour fills any sub-pixel gaps.
    ───────────────────────────────────────────────────────────────────────── */
-const FRAME_COUNT = 192
-const FRAME_W = 1600
-const FRAME_H = 600  // cinemascope crop (letterbox removed): 1600×600
+type FrameSet = { count: number; w: number; h: number; bg: string; path: (i: number) => string }
+
+const FRAME_SETS: Record<'desktop' | 'mobile', FrameSet> = {
+  desktop: {
+    count: 192, w: 1600, h: 600, bg: '#CEBB9D',
+    path: (i) => `/frames/hero/frame_${String(i + 1).padStart(4, '0')}.jpg`,
+  },
+  mobile: {
+    count: 187, w: 750, h: 1274, bg: '#C8B499',
+    path: (i) => `/frames/hero-mobile/frame_${String(i + 1).padStart(4, '0')}.jpg`,
+  },
+}
+
 const TRACK_VH = 500
-const FRAME_PATH = (i: number) =>
-  `/frames/hero/frame_${String(i + 1).padStart(4, '0')}.jpg`
 
 /* ─────────────────────────────────────────────────────────────────────────
    Panel ranges — strictly sequential, NO overlap.
@@ -132,25 +143,42 @@ export default function ScrollScrubFullPage() {
   const containerRef  = useRef<HTMLDivElement>(null)
   const canvasRef     = useRef<HTMLCanvasElement>(null)
   const imagesRef     = useRef<HTMLImageElement[]>([])
-  const lastDrawnIdx  = useRef<number>(-1)   // guard: skip paint when frame unchanged
+  const lastDrawnIdx  = useRef<number>(-1)
+  // Holds the active frame set config; updated synchronously in the
+  // matchMedia handler so paintFrame always reads the correct dimensions.
+  const frameSetRef   = useRef<FrameSet>(FRAME_SETS.desktop)
 
-  const [progress, setProgress] = useState(0)
-  const [ready,    setReady]    = useState(false)
+  const [isPortrait, setIsPortrait] = useState(false)
+  const [progress,   setProgress]   = useState(0)
+  const [ready,      setReady]      = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   })
-  const frameIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1])
+  // scrollYProgress is already 0→1 — we use it directly; each frame set
+  // scales it to its own count inside paintFrame.
 
-  // The video's studio backdrop (warm cream sampled from frame corners).
-  // Used to fill the top/bottom bars on portrait viewports.
-  const VIDEO_BG = '#CEBB9D'
+  /* ── orientation detection ──────────────────────────────────────────── */
+  useEffect(() => {
+    const mq = window.matchMedia('(orientation: portrait)')
+    const handler = (e: MediaQueryList | MediaQueryListEvent) => {
+      // Update the ref synchronously so paintFrame sees the right set
+      // even before React re-renders.
+      frameSetRef.current = e.matches ? FRAME_SETS.mobile : FRAME_SETS.desktop
+      setIsPortrait(e.matches)
+    }
+    handler(mq)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   /* ── canvas helper ──────────────────────────────────────────────────── */
-  const paintFrame = (raw: number) => {
-    // Snap to nearest integer frame — NO cross-fade.
-    const idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(raw)))
+  // progress: normalised scroll position 0→1 (= scrollYProgress.get())
+  const paintFrame = (progress: number) => {
+    const set = frameSetRef.current
+    // Map 0→1 progress to the frame set's frame count
+    const idx = Math.max(0, Math.min(set.count - 1, Math.round(progress * (set.count - 1))))
     if (idx === lastDrawnIdx.current) return   // nothing changed, skip work
 
     const img = imagesRef.current[idx]
@@ -170,71 +198,70 @@ export default function ScrollScrubFullPage() {
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-    // Portrait (mobile): the frame is 2.67:1 wide — using `cover` would zoom
-    // in so far that only a ~17% center slice is visible.  Instead we fit to
-    // the viewport width and fill the remaining height with the video's own
-    // background colour so the gaps are seamless and all 4 products are shown.
-    //
-    // Landscape / desktop: standard `cover` — fills the screen edge-to-edge.
-    const isPortrait = ch > cw
-    const scale = isPortrait
-      ? cw / FRAME_W                          // contain-to-width
-      : Math.max(cw / FRAME_W, ch / FRAME_H) // cover
-
-    const dw = FRAME_W * scale
-    const dh = FRAME_H * scale
+    // Both sets use cover — the desktop set is widescreen (fills landscape
+    // viewports edge-to-edge) and the mobile set is 9:16 (fills portrait
+    // phones edge-to-edge).  Fill with the set's bg colour first to cover
+    // any sub-pixel gaps.
+    const scale = Math.max(cw / set.w, ch / set.h)
+    const dw = set.w * scale
+    const dh = set.h * scale
     const dx = (cw - dw) / 2
     const dy = (ch - dh) / 2
 
-    // Always fill first — on portrait this paints the top/bottom bars;
-    // on landscape the frame covers it completely so it's invisible.
-    ctx.fillStyle = VIDEO_BG
+    ctx.fillStyle = set.bg
     ctx.fillRect(0, 0, cw, ch)
     ctx.drawImage(img, dx, dy, dw, dh)
     lastDrawnIdx.current = idx
   }
 
-  /* ── preload all frames ─────────────────────────────────────────────── */
+  /* ── preload frames for the current orientation ─────────────────────── */
+  // Re-runs whenever isPortrait flips (phone rotated) — clears the old
+  // frame set, resets ready, and loads the new one.
   useEffect(() => {
     if (prefersReducedMotion) { setReady(true); return }
+    setReady(false)
+    setProgress(0)
+    lastDrawnIdx.current = -1
+    imagesRef.current = []
+
+    const set = frameSetRef.current
     let loaded = 0, cancelled = false
-    const imgs: HTMLImageElement[] = []
-    for (let i = 0; i < FRAME_COUNT; i++) {
+    const imgs: HTMLImageElement[] = new Array(set.count)
+
+    for (let i = 0; i < set.count; i++) {
       const img = new Image()
-      img.src = FRAME_PATH(i)
+      img.src = set.path(i)
       img.onload = img.onerror = () => {
         if (cancelled) return
         loaded++
-        setProgress(loaded / FRAME_COUNT)
-        if (loaded === FRAME_COUNT) { setReady(true); paintFrame(0) }
+        setProgress(loaded / set.count)
+        if (loaded === set.count) { setReady(true); paintFrame(scrollYProgress.get()) }
       }
-      imgs.push(img)
+      imgs[i] = img
     }
     imagesRef.current = imgs
-    return () => { cancelled = true }
-  }, [prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
+    return () => { cancelled = true; imagesRef.current = [] }
+  }, [isPortrait, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── continuous RAF loop ────────────────────────────────────────────── */
-  // paintFrame's lastDrawnIdx guard makes most ticks instant no-ops,
-  // so a simple unconditional loop is cleaner than tracking prevRaw here.
   useEffect(() => {
     if (!ready || prefersReducedMotion) return
     let rafId: number
-    const tick = () => { paintFrame(frameIndex.get()); rafId = requestAnimationFrame(tick) }
+    const tick = () => { paintFrame(scrollYProgress.get()); rafId = requestAnimationFrame(tick) }
     rafId = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafId)
-  }, [ready, frameIndex, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [ready, scrollYProgress, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── redraw on resize ───────────────────────────────────────────────── */
   useEffect(() => {
     if (prefersReducedMotion) return
     const onResize = () => {
-      lastDrawnIdx.current = -1          // force repaint at new viewport size
-      paintFrame(frameIndex.get())
+      lastDrawnIdx.current = -1
+      paintFrame(scrollYProgress.get())
     }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [prefersReducedMotion, frameIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [prefersReducedMotion, scrollYProgress]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── translation data ───────────────────────────────────────────────── */
   const pillars = tWhyUs.raw('pillars') as Array<{ title: string; description: string }>
@@ -250,12 +277,11 @@ export default function ScrollScrubFullPage() {
   /* ── reduced-motion fallback ────────────────────────────────────────── */
   if (prefersReducedMotion) {
     return (
-      <section className="relative h-screen w-full overflow-hidden" style={{ backgroundColor: '#CEBB9D' }}>
-        {/* object-contain keeps the full wide frame visible on portrait mobile;
-            the cream backgroundColor fills the top/bottom gaps seamlessly */}
+      <section className="relative h-screen w-full overflow-hidden"
+        style={{ backgroundColor: frameSetRef.current.bg }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={FRAME_PATH(0)} alt="Nomad Agro premium organic products"
-          className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full object-contain" />
+        <img src={frameSetRef.current.path(0)} alt="Nomad Agro premium organic products"
+          className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full items-center">
           <div className="container-base pb-16">
