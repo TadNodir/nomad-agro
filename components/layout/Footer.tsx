@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
@@ -27,7 +28,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <a href={`/${locale}`} className="inline-block mb-4" aria-label="Nomad Agro">
+            <Link href={`/${locale}`} className="inline-block mb-4" aria-label="Nomad Agro">
               <Image
                 src="/logotype1.webp"
                 alt="Nomad Agro"
@@ -35,7 +36,7 @@ export default function Footer() {
                 height={38}
                 className="h-9 w-auto object-contain brightness-0 invert"
               />
-            </a>
+            </Link>
             <p className="text-stone text-sm leading-relaxed mb-6">{t('tagline')}</p>
             {/* Social/contact quick links */}
             <div className="flex gap-3">
@@ -75,12 +76,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {NAV_LINKS.map(({ href, key }) => (
                 <li key={key}>
-                  <a
+                  <Link
                     href={`/${locale}${href}`}
                     className="text-stone hover:text-cream text-sm transition-colors duration-150"
                   >
                     {tNav(key as 'home' | 'about' | 'products' | 'reviews' | 'catalog' | 'contact')}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

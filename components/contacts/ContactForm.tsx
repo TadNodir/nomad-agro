@@ -36,7 +36,13 @@ export function ContactForm() {
     'w-full rounded-xl border border-parchment bg-white px-4 py-3 text-soil text-sm placeholder:text-stone focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/20 transition-all duration-150'
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Honeypot — hidden from sighted and screen-reader users, bots fill it in */}
+      <div className="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-soil mb-1.5">

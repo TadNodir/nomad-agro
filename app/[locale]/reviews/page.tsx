@@ -53,7 +53,7 @@ export default async function ReviewsPage({ params }: { params: Promise<{ locale
         <div className="container-base">
           <FadeInView>
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-lime block mb-4">
-              Partner Reviews
+              {t('eyebrow')}
             </span>
             <h1 className="font-serif text-display-md text-cream font-semibold text-balance max-w-3xl mb-6">
               {t('title')}
@@ -96,10 +96,10 @@ export default async function ReviewsPage({ params }: { params: Promise<{ locale
       <Section background="parchment">
         <FadeInView className="text-center">
           <h2 className="font-serif text-display-sm font-semibold text-soil mb-4">
-            Ready to become a partner?
+            {t('ctaTitle')}
           </h2>
           <p className="text-bark text-lg max-w-xl mx-auto mb-8">
-            Join our growing network of wholesale importers. Contact us to discuss your requirements.
+            {t('ctaText')}
           </p>
           <ContactCTA size="lg" />
         </FadeInView>

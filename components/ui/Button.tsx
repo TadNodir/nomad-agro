@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import type { ReactNode } from 'react'
@@ -66,19 +67,38 @@ export function Button({
       }
 
   if (href) {
+    // Internal links get client-side navigation via next/link (no full page
+    // reload). External links stay as plain anchors with target/rel.
+    if (external) {
+      return (
+        <motion.a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={baseClasses}
+          {...motionProps}
+        >
+          {isLoading ? (
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          ) : null}
+          {children}
+        </motion.a>
+      )
+    }
+
     return (
-      <motion.a
+      <Link
         href={href}
-        target={external ? '_blank' : undefined}
-        rel={external ? 'noopener noreferrer' : undefined}
-        className={baseClasses}
-        {...motionProps}
+        className={cn(
+          baseClasses,
+          !prefersReducedMotion && 'hover:-translate-y-0.5 active:scale-[0.97]'
+        )}
       >
         {isLoading ? (
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
         ) : null}
         {children}
-      </motion.a>
+      </Link>
     )
   }
 

@@ -21,6 +21,9 @@
   },
   "products": {
     "title": "Bizning mahsulotlarimiz",
+    "eyebrow": "Eksport assortimenti",
+    "ctaTitle": "Mahsulotlarimiz bilan qiziqasizmi?",
+    "ctaTextSuffix": "— narxlar hosil mavjudligiga qarab har kuni yangilanadi. Individual taklif uchun biz bilan bogʻlaning.",
     "subtitle": "Oʻzbekiston togʻ etaklarida mineral oʻgʻitlar va kimyoviy moddалarsiz yetishtirilgan uchta premium kategoriya.",
     "driedFruits": {
       "name": "Quritilgan mevalar",
@@ -45,6 +48,7 @@
   },
   "whyUs": {
     "title": "Nima uchun Nomad Agro",
+    "eyebrow": "Bizning afzalligimiz",
     "subtitle": "Ishonchga asoslangan, g'amxoʻrlik bilan yetishtirilgan, aniqlik bilan yetkazilgan.",
     "pillars": [
       {
@@ -100,6 +104,9 @@
   },
   "reviews": {
     "title": "Hamkorlarimiz nima deydi",
+    "eyebrow": "Hamkorlar sharhlari",
+    "ctaTitle": "Hamkor boʻlishga tayyormisiz?",
+    "ctaText": "Bizning oʻsib borayotgan ulgurji importchilar tarmogʻimizga qoʻshiling. Talablaringizni muhokama qilish uchun biz bilan bogʻlaning.",
     "subtitle": "Yevropa, Osiyo va Yaqin Sharqdagi importchilar va ulgurji xaridorlar tomonidan ishoniladi.",
     "items": [
       {
@@ -124,10 +131,13 @@
   },
   "catalog": {
     "title": "Mahsulotlar katalogi",
+    "eyebrow": "Toʻliq assortiment",
     "subtitle": "Premium organik mahsulotlarning toʻliq assortimentini koʻring. Narxlar uchun biz bilan bogʻlaning.",
     "download": "Toʻliq katalogni yuklab olish (PDF)",
     "downloadNote": "Narxlar kiritilmagan — ular mahsulotning mavjudligiga qarab har kuni yangilanadi. Shaxsiy taklif uchun biz bilan bogʻlaning.",
     "requestQuote": "Bu mahsulot uchun narx soʻrash",
+    "finalCtaTitle": "Individual taklif soʻrash",
+    "finalCtaText": "Qaysi mahsulotlar va qancha miqdorda kerakligini ayting — biz bir ish kuni ichida joriy narxlar va yetkazib berish variantlarini taqdim etamiz.",
     "sections": {
       "driedFruits": "Quritilgan mevalar",
       "nuts": "Yongʻoqlar va urug'lar",
@@ -195,6 +205,10 @@
     "loading": "Yuklanmoqda…",
     "noPrice": "Narx uchun biz bilan bogʻlaning"
   },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "text": "Siz qidirayotgan sahifa mavjud emas yoki koʻchirilgan boʻlishi mumkin."
+  },
   "faq": {
     "title": "Koʻp beriladigan savollar",
     "subtitle": "Ulgurji xaridorlar va importchilardan tez-tez beriladigan savollar.",
@@ -226,9 +240,11 @@
     ]
   },
   "productsData": {
+    "detailCtaText": "Joriy narxlar, navlar va mavjudlik haqida biz bilan bogʻlaning. Biz bir ish kuni ichida javob beramiz.",
     "driedFruits": {
       "title": "Organik quritilgan mevalar",
       "pageTitle": "Quritilgan mevalar",
+      "ctaTitle": "Quritilgan mevalarimiz bilan qiziqasizmi?",
       "description": "Oʻzbekistonning quyoshli togʻ etagi hududlaridan olingan mevalarimiz tabiiy ravishda quritiladi — hech qanday saqlovchi, sulfит yoki sun'iy rang beruvchi moddalar ishlatilmaydi. Har bir nav tabiiy shirin tatini va oziq-ovqat qiymatini saqlab qolish uchun ehtiyotkorlik bilan qayta ishlanadi.",
       "items": [
         { "name": "Quyoshda quritilgan oʻrik (Urʻuk)", "description": "Sulfitsiz, tabiiy quritilgan, toʻq sariq rangdagi va konsentrlangan shirinlikka ega oʻriklar. Bir nechta navlarda mavjud." },
@@ -242,6 +258,7 @@
     "nuts": {
       "title": "Organik yongʻoqlar",
       "pageTitle": "Yongʻoqlar",
+      "ctaTitle": "Yongʻoqlarimiz bilan qiziqasizmi?",
       "description": "Yongʻoqlarimiz Oʻzbekistonning togʻ bogʻlari va togʻ etagi fermalaridan olinadi — qoʻlda teriladi, navlarga saralanadi va eksport standartlariga muvofiq qadoqlanadi. Tabiatdan toza, qayta ishlanmagan taʼm.",
       "items": [
         { "name": "Yongʻoq", "description": "Yengil rangli, yuqori moyli yadro — Oʻzbekistonning togʻ yongʻoqzorlaridan. Qobiqda va yadroda, bir nechta navlarda mavjud." },
@@ -253,6 +270,7 @@
     "mungBeans": {
       "title": "Mosh (mung loviya)",
       "pageTitle": "Mosh",
+      "ctaTitle": "Moshimiz bilan qiziqasizmi?",
       "description": "Oʻzbekiston dunyo boʻylab eng yaxshi mosh ishlab chiqaruvchilaridan biri. Bizning moshimiz tozalangan, mashinada saralangan va bir nechta navlarda — butun yashil, yorilgan va po'stloqsiz — turli bozor talablarini qondirish uchun mavjud.",
       "items": [
         { "name": "Butun yashil mosh", "description": "Birinchi sifatli butun mosh — chuqur tozalangan, mashinada saralangan, 25 kg va 50 kg qoplarda eksportga tayyor." },

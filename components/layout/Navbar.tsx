@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { useTranslations, useLocale } from 'next-intl'
 import { usePathname } from 'next/navigation'
@@ -54,7 +55,7 @@ export default function Navbar() {
         <div className="container-base">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <a
+            <Link
               href={`/${locale}`}
               className="flex-shrink-0 focus-visible:outline-brand-green rounded-lg"
               aria-label="Nomad Agro — Home"
@@ -67,15 +68,16 @@ export default function Navbar() {
                 className="h-8 md:h-10 w-auto object-contain"
                 priority
               />
-            </a>
+            </Link>
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
               {NAV_LINKS.map(({ href, key }) => {
                 const fullHref = `/${locale}${href}`
-                const isActive = pathname === fullHref || (href !== '/' && pathname.startsWith(fullHref))
+                const isActive =
+                  pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
                 return (
-                  <a
+                  <Link
                     key={key}
                     href={fullHref}
                     className={cn(
@@ -101,7 +103,7 @@ export default function Navbar() {
                         )}
                       />
                     )}
-                  </a>
+                  </Link>
                 )
               })}
             </nav>
@@ -148,24 +150,28 @@ export default function Navbar() {
             <nav className="flex flex-col gap-1 mb-8" aria-label="Mobile navigation">
               {NAV_LINKS.map(({ href, key }, i) => {
                 const fullHref = `/${locale}${href}`
-                const isActive = pathname === fullHref || (href !== '/' && pathname.startsWith(fullHref))
+                const isActive =
+                  pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
                 return (
-                  <motion.a
+                  <motion.div
                     key={key}
-                    href={fullHref}
                     initial={prefersReducedMotion ? {} : { opacity: 0, x: 24 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05, duration: 0.3 }}
-                    className={cn(
-                      'px-4 py-4 rounded-xl text-lg font-medium transition-colors duration-150',
-                      isActive
-                        ? 'text-brand-green bg-parchment font-semibold'
-                        : 'text-bark hover:text-soil hover:bg-parchment'
-                    )}
-                    aria-current={isActive ? 'page' : undefined}
                   >
-                    {t(key as 'home' | 'about' | 'products' | 'reviews' | 'catalog' | 'contact')}
-                  </motion.a>
+                    <Link
+                      href={fullHref}
+                      className={cn(
+                        'block px-4 py-4 rounded-xl text-lg font-medium transition-colors duration-150',
+                        isActive
+                          ? 'text-brand-green bg-parchment font-semibold'
+                          : 'text-bark hover:text-soil hover:bg-parchment'
+                      )}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {t(key as 'home' | 'about' | 'products' | 'reviews' | 'catalog' | 'contact')}
+                    </Link>
+                  </motion.div>
                 )
               })}
             </nav>

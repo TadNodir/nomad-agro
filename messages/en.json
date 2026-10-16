@@ -21,6 +21,9 @@
   },
   "products": {
     "title": "Our Products",
+    "eyebrow": "Export Range",
+    "ctaTitle": "Interested in our products?",
+    "ctaTextSuffix": "— prices update daily with crop availability. Contact us for a personalised quote.",
     "subtitle": "Three premium categories, grown without mineral fertilizers or chemicals in Uzbekistan's foothill regions.",
     "driedFruits": {
       "name": "Dried Fruits",
@@ -45,6 +48,7 @@
   },
   "whyUs": {
     "title": "Why Choose Nomad Agro",
+    "eyebrow": "Our Advantage",
     "subtitle": "Built on trust, grown with care, delivered with precision.",
     "pillars": [
       {
@@ -100,6 +104,9 @@
   },
   "reviews": {
     "title": "What Our Partners Say",
+    "eyebrow": "Partner Reviews",
+    "ctaTitle": "Ready to become a partner?",
+    "ctaText": "Join our growing network of wholesale importers. Contact us to discuss your requirements.",
     "subtitle": "Trusted by importers and wholesale buyers across Europe, Asia, and the Middle East.",
     "items": [
       {
@@ -124,10 +131,13 @@
   },
   "catalog": {
     "title": "Product Catalog",
+    "eyebrow": "Full Range",
     "subtitle": "Browse our full range of premium organic products. Contact us for current pricing.",
     "download": "Download Full Catalog (PDF)",
     "downloadNote": "Pricing is not included — rates update daily with crop availability. Contact us for a personalised quote.",
     "requestQuote": "Request a Quote for This Product",
+    "finalCtaTitle": "Request a Custom Quote",
+    "finalCtaText": "Tell us which products and quantities you need — we will provide current pricing and shipping options within one business day.",
     "sections": {
       "driedFruits": "Dried Fruits",
       "nuts": "Nuts & Seeds",
@@ -195,6 +205,10 @@
     "loading": "Loading…",
     "noPrice": "Contact us for pricing"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "text": "The page you're looking for doesn't exist or may have moved."
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Common questions from wholesale buyers and importers.",
@@ -226,9 +240,11 @@
     ]
   },
   "productsData": {
+    "detailCtaText": "Contact us for current pricing, grades, and availability. We respond within one business day.",
     "driedFruits": {
       "title": "Organic Dried Fruits",
       "pageTitle": "Dried Fruits",
+      "ctaTitle": "Interested in our Dried Fruits?",
       "description": "Sourced from Uzbekistan's sun-rich foothill regions, our dried fruits are naturally dried — no preservatives, no sulfites, no artificial coloring. Each variety is carefully processed to preserve its natural sweetness and nutritional integrity.",
       "items": [
         { "name": "Sun-Dried Apricots (Uryuk)", "description": "Naturally dried, sulfite-free apricots with a deep amber colour and concentrated sweetness. Available in multiple grades — soft and semi-dried." },
@@ -242,6 +258,7 @@
     "nuts": {
       "title": "Organic Nuts",
       "pageTitle": "Nuts",
+      "ctaTitle": "Interested in our Nuts?",
       "description": "Our nuts are sourced from the mountain orchards and foothill farms of Uzbekistan — harvested by hand, sorted by grade, and exported in export-standard packaging. Pure, unprocessed flavour from nature.",
       "items": [
         { "name": "Walnuts (Yong'oq)", "description": "Light-coloured kernels with high oil content, sourced from Uzbekistan's highland walnut orchards. Available in-shell and shelled, multiple grades." },
@@ -253,6 +270,7 @@
     "mungBeans": {
       "title": "Mung Beans (Mash)",
       "pageTitle": "Mung Beans",
+      "ctaTitle": "Interested in our Mung Beans?",
       "description": "Uzbekistan is one of the world's leading producers of premium mung beans. Our mash is cleaned, machine-sorted, and available in several grades — whole green, split, and hulled — to meet diverse market specifications.",
       "items": [
         { "name": "Whole Green Mung Beans", "description": "Premium-grade whole mung beans — thoroughly cleaned, machine-sorted, and export-ready in 25kg and 50kg bags." },

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
@@ -27,6 +28,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function NutsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'productsData.nuts' })
+  const tShared = await getTranslations({ locale, namespace: 'productsData' })
+  const tCommon = await getTranslations({ locale, namespace: 'common' })
   const items = t.raw('items') as Array<{ name: string; description: string }>
 
   return (
@@ -44,9 +47,9 @@ export default async function NutsPage({ params }: { params: Promise<{ locale: s
       <section className="pt-32 pb-16 bg-gradient-to-br from-stone-800 via-stone-700 to-amber-900 grain-overlay" aria-label="Nuts hero">
         <div className="container-base">
           <FadeInView>
-            <a href={`/${locale}/products`} className="text-stone-300/70 text-sm hover:text-stone-200 transition-colors mb-4 inline-block">
-              ← Back to Products
-            </a>
+            <Link href={`/${locale}/products`} className="text-stone-300/70 text-sm hover:text-stone-200 transition-colors mb-4 inline-block">
+              ← {tCommon('backToProducts')}
+            </Link>
             <h1 className="font-serif text-display-md text-cream font-semibold text-balance max-w-3xl mb-6">
               {t('title')}
             </h1>
@@ -66,7 +69,7 @@ export default async function NutsPage({ params }: { params: Promise<{ locale: s
                 </div>
                 <div className="absolute top-3 right-3">
                   <span className="bg-black/30 backdrop-blur-sm text-white/70 text-[10px] font-medium px-2.5 py-1 rounded-full">
-                    Contact for price
+                    {tCommon('noPrice')}
                   </span>
                 </div>
               </div>
@@ -82,9 +85,9 @@ export default async function NutsPage({ params }: { params: Promise<{ locale: s
       {/* CTA */}
       <Section background="parchment">
         <FadeInView className="text-center">
-          <h2 className="font-serif text-display-sm font-semibold text-soil mb-4">Interested in our Nuts?</h2>
+          <h2 className="font-serif text-display-sm font-semibold text-soil mb-4">{t('ctaTitle')}</h2>
           <p className="text-bark text-lg max-w-xl mx-auto mb-8">
-            Contact us for current pricing, grades, and availability. We respond within one business day.
+            {tShared('detailCtaText')}
           </p>
           <ContactCTA size="lg" />
         </FadeInView>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
+import Link from 'next/link'
 import {
   motion,
   useScroll,
@@ -151,6 +152,7 @@ export default function ScrollScrubFullPage() {
   const [isPortrait, setIsPortrait] = useState(false)
   const [progress,   setProgress]   = useState(0)
   const [ready,      setReady]      = useState(false)
+  const [isSlowConnection, setIsSlowConnection] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -158,6 +160,30 @@ export default function ScrollScrubFullPage() {
   })
   // scrollYProgress is already 0→1 — we use it directly; each frame set
   // scales it to its own count inside paintFrame.
+
+  // Skip the ~190-frame-per-breakpoint preload on reduced motion OR a slow /
+  // metered connection (Save-Data, 2G) — both get the static poster fallback.
+  const skipHeroAnimation = prefersReducedMotion || isSlowConnection
+
+  /* ── slow/metered connection detection ──────────────────────────────── */
+  useEffect(() => {
+    type NetworkInformation = {
+      saveData?: boolean
+      effectiveType?: string
+      addEventListener?: (type: 'change', cb: () => void) => void
+      removeEventListener?: (type: 'change', cb: () => void) => void
+    }
+    const conn = (navigator as Navigator & { connection?: NetworkInformation }).connection
+    if (!conn) return
+    const update = () => {
+      setIsSlowConnection(
+        Boolean(conn.saveData) || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g'
+      )
+    }
+    update()
+    conn.addEventListener?.('change', update)
+    return () => conn.removeEventListener?.('change', update)
+  }, [])
 
   /* ── orientation detection ──────────────────────────────────────────── */
   useEffect(() => {
@@ -218,7 +244,7 @@ export default function ScrollScrubFullPage() {
   // Re-runs whenever isPortrait flips (phone rotated) — clears the old
   // frame set, resets ready, and loads the new one.
   useEffect(() => {
-    if (prefersReducedMotion) { setReady(true); return }
+    if (skipHeroAnimation) { setReady(true); return }
     setReady(false)
     setProgress(0)
     lastDrawnIdx.current = -1
@@ -241,27 +267,27 @@ export default function ScrollScrubFullPage() {
     }
     imagesRef.current = imgs
     return () => { cancelled = true; imagesRef.current = [] }
-  }, [isPortrait, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isPortrait, skipHeroAnimation]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── continuous RAF loop ────────────────────────────────────────────── */
   useEffect(() => {
-    if (!ready || prefersReducedMotion) return
+    if (!ready || skipHeroAnimation) return
     let rafId: number
     const tick = () => { paintFrame(scrollYProgress.get()); rafId = requestAnimationFrame(tick) }
     rafId = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafId)
-  }, [ready, scrollYProgress, prefersReducedMotion]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [ready, scrollYProgress, skipHeroAnimation]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── redraw on resize ───────────────────────────────────────────────── */
   useEffect(() => {
-    if (prefersReducedMotion) return
+    if (skipHeroAnimation) return
     const onResize = () => {
       lastDrawnIdx.current = -1
       paintFrame(scrollYProgress.get())
     }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [prefersReducedMotion, scrollYProgress]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [skipHeroAnimation, scrollYProgress]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── translation data ───────────────────────────────────────────────── */
   const pillars = tWhyUs.raw('pillars') as Array<{ title: string; description: string }>
@@ -274,8 +300,8 @@ export default function ScrollScrubFullPage() {
     { href: `/${locale}/products/${tProducts('mungBeans.slug')}`,   name: tProducts('mungBeans.name'),   desc: tProducts('mungBeans.description') },
   ]
 
-  /* ── reduced-motion fallback ────────────────────────────────────────── */
-  if (prefersReducedMotion) {
+  /* ── reduced-motion / slow-connection fallback ───────────────────────── */
+  if (skipHeroAnimation) {
     return (
       <section className="relative h-screen w-full overflow-hidden"
         style={{ backgroundColor: frameSetRef.current.bg }}>
@@ -370,7 +396,7 @@ export default function ScrollScrubFullPage() {
             <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
               <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
                 [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
-                Export Range
+                {tProducts('eyebrow')}
               </p>
               <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-3 sm:mb-4
                 [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
@@ -383,7 +409,7 @@ export default function ScrollScrubFullPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto mb-4 sm:mb-8">
                 {productCategories.map(({ href, name, desc }) => (
-                  <a key={href} href={href}
+                  <Link key={href} href={href}
                     className={`group block ${glassInteractive} p-3 sm:p-5 text-left`}>
                     <h3 className="text-cream font-semibold text-sm sm:text-base mb-1 sm:mb-2
                       [text-shadow:_0_1px_6px_rgba(0,0,0,0.4)]">
@@ -394,7 +420,7 @@ export default function ScrollScrubFullPage() {
                     </p>
                     <span className="mt-2 sm:mt-3 inline-block text-brand-lime text-sm
                       group-hover:translate-x-1 transition-transform duration-150">→</span>
-                  </a>
+                  </Link>
                 ))}
               </div>
               <Button variant="ghost" size="md" href={`/${locale}/products`}>
@@ -409,7 +435,7 @@ export default function ScrollScrubFullPage() {
             <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
               <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
                 [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
-                Our Advantage
+                {tWhyUs('eyebrow')}
               </p>
               <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-5 sm:mb-8
                 [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
@@ -458,7 +484,7 @@ export default function ScrollScrubFullPage() {
             <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
               <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
                 [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
-                Partner Reviews
+                {tReviews('eyebrow')}
               </p>
               <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-5 sm:mb-8
                 [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
@@ -496,7 +522,7 @@ export default function ScrollScrubFullPage() {
             <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
               <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
                 [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
-                Get in Touch
+                {tContact('title')}
               </p>
               <h2 className="font-serif text-[1.65rem] sm:text-4xl lg:text-5xl text-cream font-semibold mb-3 sm:mb-4
                 [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">

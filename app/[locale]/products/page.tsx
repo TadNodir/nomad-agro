@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { ArrowRight } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
@@ -34,19 +35,16 @@ const categories = [
     key: 'driedFruits' as const,
     slug: 'dried-fruits',
     gradient: 'from-amber-900 via-amber-800 to-orange-900',
-    items: ['Apricots (Uryuk)', 'Raisins (Kishmish)', 'Prunes', 'Figs (Anjir)', 'Mulberries (Tut)', 'Dates'],
   },
   {
     key: 'nuts' as const,
     slug: 'nuts',
     gradient: 'from-stone-700 via-stone-600 to-amber-900',
-    items: ['Walnuts', 'Almonds (Bodom)', 'Pistachios', 'Hazelnuts'],
   },
   {
     key: 'mungBeans' as const,
     slug: 'mung-beans',
     gradient: 'from-brand-green via-brand-green-mid to-brand-forest',
-    items: ['Whole Green', 'Split (Mosh Dal)', 'Flour'],
   },
 ]
 
@@ -57,6 +55,7 @@ export default async function ProductsPage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'products' })
+  const tProductsData = await getTranslations({ locale, namespace: 'productsData' })
 
   return (
     <>
@@ -72,7 +71,7 @@ export default async function ProductsPage({
         <div className="container-base">
           <FadeInView>
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-lime block mb-4">
-              Export Range
+              {t('eyebrow')}
             </span>
             <h1 className="font-serif text-display-md text-cream font-semibold text-balance max-w-3xl mb-6">
               {t('title')}
@@ -88,12 +87,15 @@ export default async function ProductsPage({
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           stagger={0.12}
         >
-          {categories.map(({ key, slug, gradient, items }) => {
+          {categories.map(({ key, slug, gradient }) => {
             const name = t(`${key}.name`)
             const description = t(`${key}.description`)
+            const items = (
+              tProductsData.raw(`${key}.items`) as Array<{ name: string; description: string }>
+            ).map((item) => item.name)
             return (
               <article key={key} className="group rounded-3xl overflow-hidden bg-white shadow-md hover:shadow-xl border border-parchment transition-shadow duration-300">
-                <a
+                <Link
                   href={`/${locale}/products/${slug}`}
                   className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-inset rounded-3xl"
                 >
@@ -133,7 +135,7 @@ export default async function ProductsPage({
                       {t('learnMore')} <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
-                </a>
+                </Link>
               </article>
             )
           })}
@@ -144,10 +146,10 @@ export default async function ProductsPage({
       <Section background="parchment">
         <FadeInView className="text-center">
           <h2 className="font-serif text-display-sm font-semibold text-soil mb-4 text-balance">
-            Interested in our products?
+            {t('ctaTitle')}
           </h2>
           <p className="text-bark text-lg max-w-xl mx-auto mb-8">
-            {t('noPrice')} — prices update daily with crop availability. Contact us for a personalised quote.
+            {t('noPrice')} {t('ctaTextSuffix')}
           </p>
           <ContactCTA size="lg" />
         </FadeInView>

@@ -47,6 +47,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'catalog' })
   const tProducts = await getTranslations({ locale, namespace: 'productsData' })
+  const tCommon = await getTranslations({ locale, namespace: 'common' })
 
   return (
     <>
@@ -62,7 +63,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
         <div className="container-base">
           <FadeInView>
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-lime block mb-4">
-              Full Range
+              {t('eyebrow')}
             </span>
             <h1 className="font-serif text-display-md text-cream font-semibold text-balance max-w-3xl mb-6">
               {t('title')}
@@ -121,7 +122,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                     </div>
                     <div className="absolute top-2.5 right-2.5">
                       <span className="bg-black/30 text-white/70 text-[10px] font-medium px-2 py-0.5 rounded-full">
-                        Contact for price
+                        {tCommon('noPrice')}
                       </span>
                     </div>
                   </div>
@@ -139,9 +140,9 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
       {/* Final CTA */}
       <Section background="parchment">
         <FadeInView className="text-center">
-          <h2 className="font-serif text-display-sm font-semibold text-soil mb-4">Request a Custom Quote</h2>
+          <h2 className="font-serif text-display-sm font-semibold text-soil mb-4">{t('finalCtaTitle')}</h2>
           <p className="text-bark text-lg max-w-xl mx-auto mb-8">
-            Tell us which products and quantities you need — we will provide current pricing and shipping options within one business day.
+            {t('finalCtaText')}
           </p>
           <ContactCTA size="lg" />
         </FadeInView>
