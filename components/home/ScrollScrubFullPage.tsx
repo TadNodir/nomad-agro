@@ -79,6 +79,8 @@ function PanelLayer({
   end,
   className = '',
   mobileTop = false,
+  first = false,
+  last = false,
   children,
 }: {
   scrollYProgress: MotionValue<number>
@@ -87,6 +89,10 @@ function PanelLayer({
   className?: string
   /** Pin to top on mobile so the heading is never clipped by the sticky frame */
   mobileTop?: boolean
+  /** Visible from scroll position 0 (no fade-in) */
+  first?: boolean
+  /** Stays visible at the end of the track (no fade-out) */
+  last?: boolean
   children: React.ReactNode
 }) {
   const k0 = start
@@ -94,8 +100,11 @@ function PanelLayer({
   const k2 = Math.max(end - FADE, (start + end) / 2)
   const k3 = end
 
-  const opacity = useTransform(scrollYProgress, [k0, k1, k2, k3], [0, 1, 1, 0])
-  const y       = useTransform(scrollYProgress, [k0, k1, k2, k3], [18, 0, 0, -18])
+  const opacity = useTransform(scrollYProgress, [k0, k1, k2, k3], [first ? 1 : 0, 1, 1, last ? 1 : 0])
+  const y       = useTransform(scrollYProgress, [k0, k1, k2, k3], [first ? 0 : 18, 0, 0, last ? 0 : -18])
+  // Panels are stacked on top of each other; an invisible panel must not
+  // swallow clicks meant for the visible one underneath.
+  const visibility = useTransform(opacity, (v) => (v > 0.02 ? 'visible' : 'hidden') as 'visible' | 'hidden')
 
   return (
     <motion.div
@@ -106,7 +115,7 @@ function PanelLayer({
           : 'items-center',
         className,
       ].join(' ')}
-      style={{ opacity, y }}
+      style={{ opacity, y, visibility }}
     >
       {children}
     </motion.div>
@@ -138,7 +147,8 @@ export default function ScrollScrubFullPage() {
   const tAbout    = useTranslations('about')
   const tReviews  = useTranslations('reviews')
   const tContact  = useTranslations('contact')
-  const locale    = useLocale()
+  const tCta      = useTranslations('cta')
+  const locale   = useLocale()
   const prefersReducedMotion = useReducedMotion()
 
   const containerRef  = useRef<HTMLDivElement>(null)
@@ -364,14 +374,14 @@ export default function ScrollScrubFullPage() {
         <div className="absolute inset-0 z-10">
 
           {/* 1 ── HERO ────────────────────────────────────────────────── */}
-          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.hero[0]} end={PANELS.hero[1]}>
-            <div className="container-base w-full pb-16">
-              <div className="max-w-2xl">
+          <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.hero[0]} end={PANELS.hero[1]} first>
+            <div className="container-base w-full pt-24 pb-12">
+              <div className="max-w-3xl">
                 <p className="text-white/60 text-sm font-medium tracking-widest uppercase mb-4
                   [text-shadow:_0_1px_8px_rgba(0,0,0,0.6)]">
                   {tHero('tagline')}
                 </p>
-                <h1 className="font-serif text-display-lg text-cream font-semibold text-balance mb-6 leading-[1.05]
+                <h1 className="font-serif text-[clamp(2.5rem,5.5vw,4.5rem)] text-cream font-semibold text-balance mb-6 leading-[1.05]
                   [text-shadow:_0_2px_16px_rgba(0,0,0,0.55)]">
                   {tHero('headline')}
                 </h1>
@@ -518,7 +528,7 @@ export default function ScrollScrubFullPage() {
 
           {/* 6 ── GET IN TOUCH ───────────────────────────────────────── */}
           <PanelLayer scrollYProgress={scrollYProgress} start={PANELS.contact[0]} end={PANELS.contact[1]}
-            className="justify-center" mobileTop>
+            className="justify-center" mobileTop last>
             <div className="container-base w-full text-center px-4 sm:px-6 pb-4 sm:pb-0">
               <p className="text-brand-lime text-[10px] sm:text-xs font-semibold tracking-[0.22em] uppercase mb-2 sm:mb-3
                 [text-shadow:_0_1px_8px_rgba(0,0,0,0.7)]">
@@ -551,9 +561,9 @@ export default function ScrollScrubFullPage() {
                 </a>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                <ContactCTA variant="lime" size="lg" label={tContact('channels.whatsappLabel')} />
+                <ContactCTA variant="lime" size="lg" label={tCta('contactUs')} />
                 <Button variant="ghost" size="lg" href={`/${locale}/contacts`}>
-                  {tContact('title')}
+                  {tCta('sendInquiry')}
                 </Button>
               </div>
             </div>
