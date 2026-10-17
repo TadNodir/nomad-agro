@@ -5,23 +5,45 @@ import { Send } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/Button'
 
+// Web3Forms only accepts submissions made directly from the browser (their
+// free plan rejects server-proxied requests), so this key is submitted
+// client-side by design — it's public, protected by domain restriction in
+// the Web3Forms dashboard rather than secrecy.
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+
 export function ContactForm() {
   const t = useTranslations('contact.form')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setStatus('submitting')
     const form = e.currentTarget
-    const data = Object.fromEntries(new FormData(form).entries())
+    const formData = new FormData(form)
+
+    // Honeypot (Web3Forms' own convention) — bots fill hidden fields, humans don't.
+    if (formData.get('botcheck')) {
+      setStatus('success')
+      form.reset()
+      return
+    }
+
+    if (!WEB3FORMS_ACCESS_KEY) {
+      console.error('[Contact form] NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY is not set.')
+      setStatus('error')
+      return
+    }
+
+    setStatus('submitting')
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY)
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: { Accept: 'application/json' },
+        body: formData,
       })
-      if (res.ok) {
+      const result = (await res.json()) as { success: boolean }
+      if (result.success) {
         setStatus('success')
         form.reset()
       } else {
@@ -37,11 +59,16 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot — hidden from sighted and screen-reader users, bots fill it in */}
-      <div className="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
-        <label htmlFor="website">Website</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
+      {/* Honeypot (Web3Forms' "botcheck" convention) — hidden from sighted and screen-reader users, bots fill it in */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        className="hidden"
+        style={{ display: 'none' }}
+        tabIndex={-1}
+        aria-hidden="true"
+        autoComplete="off"
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
