@@ -118,12 +118,14 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
             aria-hidden="true"
           />
 
-          {/* Sheet */}
+          {/* Sheet — flex wrapper centres it (bottom sheet on mobile, centred dialog on md+);
+              framer-motion's inline transform would override Tailwind translate centring. */}
+          <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center pointer-events-none">
           <motion.div
             role="dialog"
             aria-modal="true"
             aria-label={t('channels.title')}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-cream rounded-t-3xl shadow-2xl max-h-[90dvh] overflow-y-auto md:top-1/2 md:bottom-auto md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-3xl md:max-w-md md:w-full"
+            className="pointer-events-auto w-full bg-cream rounded-t-3xl shadow-2xl max-h-[90dvh] overflow-y-auto md:rounded-3xl md:max-w-md"
             variants={sheetVariants}
             initial="hidden"
             animate="visible"
@@ -182,6 +184,7 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
               </p>
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>,

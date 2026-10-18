@@ -87,9 +87,9 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
             <p className="text-bark text-sm mt-1">{t('downloadNote')}</p>
           </div>
           <div className="flex gap-3 flex-wrap">
-            {/* PDF download — TODO: add real /catalog.pdf to public/ */}
             <a
-              href="/catalog.pdf"
+              href="/NOMAD_AGRO_PRODUCTS.pdf"
+              download="Nomad-Agro-Catalog.pdf"
               className="inline-flex items-center gap-2 bg-brand-green text-white px-5 py-3 rounded-xl font-semibold text-sm hover:bg-brand-green-hover transition-colors duration-200 cursor-pointer"
             >
               <Download className="w-4 h-4" />
