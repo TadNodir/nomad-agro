@@ -46,7 +46,7 @@
     "pillars": [
       {
         "title": "Eksport sifati",
-        "description": "Mahsulotlarimiz Yevropa, Osiyo va boshqa mintaqalarga eksport uchun xalqaro sifat standartlari va fitosanitar talablarga javob beradi."
+        "description": "Mahsulotlarimiz Yevropa, Rossiya, Buyuk Britaniya, AQSH va Osiyoga eksport uchun xalqaro sifat standartlari va fitosanitar talablarga javob beradi."
       },
       {
         "title": "Tabiiy xomashyo",
@@ -124,7 +124,7 @@
         "label": "Mahsulot kategoriyalari"
       },
       {
-        "value": "10+",
+        "value": "7+",
         "label": "Xizmat qilinadigan mamlakatlar"
       },
       {
@@ -145,7 +145,7 @@
     "eyebrow": "Hamkorlar sharhlari",
     "ctaTitle": "Hamkor boʻlishga tayyormisiz?",
     "ctaText": "Bizning oʻsib borayotgan ulgurji importchilar tarmogʻimizga qoʻshiling. Talablaringizni muhokama qilish uchun biz bilan bogʻlaning.",
-    "subtitle": "Yevropa, Osiyo va Yaqin Sharqdagi importchilar va ulgurji xaridorlar tomonidan ishoniladi.",
+    "subtitle": "Yevropa, Rossiya, Buyuk Britaniya, AQSH, Ozarbayjon, Belarus, Xitoy va Gruziyadagi importchilar va ulgurji xaridorlar tomonidan ishoniladi.",
     "items": [
       {
         "name": "Marko B.",
@@ -199,8 +199,7 @@
       "foreignMaterial": "Begona qoʻshimchalar",
       "mold": "Mogʻor",
       "admixture": "Aralashmalar",
-      "packaging": "Qadoqlash",
-      "crop": "Hosil"
+      "packaging": "Qadoqlash"
     },
     "values": {
       "absent": "Yoʻq",
@@ -323,7 +322,7 @@
       },
       {
         "question": "Nomad Agro xalqaro eksport qiladimi?",
-        "answer": "Ha. Nomad Agro — Yevropa, Osiyo va Yaqin Sharqdagi ulgurji xaridorlarga mahsulot yetkazadigan Toshkentdagi B2B eksportchi. Biz barcha eksport hujjatlarini, fitosanitar sertifikatlarni va logistika muvofiqlashtirishini oʻz zimmamizga olamiz."
+        "answer": "Ha. Nomad Agro — Yevropa, Rossiya, Buyuk Britaniya, AQSH, Ozarbayjon, Belarus, Xitoy va Gruziyadagi ulgurji xaridorlarga mahsulot yetkazadigan Toshkentdagi B2B eksportchi. Biz barcha eksport hujjatlarini, fitosanitar sertifikatlarni va logistika muvofiqlashtirishini oʻz zimmamizga olamiz."
       },
       {
         "question": "Mahsulot sifati qanday tasdiqlanadi?",

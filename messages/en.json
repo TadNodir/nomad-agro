@@ -46,7 +46,7 @@
     "pillars": [
       {
         "title": "Export-Grade Quality",
-        "description": "Our products meet international quality standards and phytosanitary requirements for export to Europe, Asia, and beyond."
+        "description": "Our products meet international quality standards and phytosanitary requirements for export to Europe, Russia, the United Kingdom, the United States, and Asia."
       },
       {
         "title": "Natural Sourcing",
@@ -124,7 +124,7 @@
         "label": "Product Categories"
       },
       {
-        "value": "10+",
+        "value": "7+",
         "label": "Countries Served"
       },
       {
@@ -145,7 +145,7 @@
     "eyebrow": "Partner Reviews",
     "ctaTitle": "Ready to become a partner?",
     "ctaText": "Join our growing network of wholesale importers. Contact us to discuss your requirements.",
-    "subtitle": "Trusted by importers and wholesale buyers across Europe, Asia, and the Middle East.",
+    "subtitle": "Trusted by importers and wholesale buyers in Europe, Russia, the United Kingdom, the United States, Azerbaijan, Belarus, China, and Georgia.",
     "items": [
       {
         "name": "Marco B.",
@@ -199,8 +199,7 @@
       "foreignMaterial": "Foreign material",
       "mold": "Mold",
       "admixture": "Admixture",
-      "packaging": "Packaging",
-      "crop": "Crop"
+      "packaging": "Packaging"
     },
     "values": {
       "absent": "Absent",
@@ -323,7 +322,7 @@
       },
       {
         "question": "Does Nomad Agro export internationally?",
-        "answer": "Yes. Nomad Agro is a Tashkent-based B2B exporter supplying wholesale buyers across Europe, Asia, and the Middle East. We handle all export documentation, phytosanitary certificates, and logistics coordination."
+        "answer": "Yes. Nomad Agro is a Tashkent-based B2B exporter supplying wholesale buyers in Europe, Russia, the United Kingdom, the United States, Azerbaijan, Belarus, China, and Georgia. We handle all export documentation, phytosanitary certificates, and logistics coordination."
       },
       {
         "question": "How is product quality documented?",
@@ -354,7 +353,7 @@
     },
     "reviews": {
       "title": "Partner Reviews | Nomad Agro Exporter | Uzbekistan",
-      "description": "Testimonials from Nomad Agro's international wholesale partners and importers — Europe, Asia, Middle East."
+      "description": "Testimonials from Nomad Agro's international wholesale partners and importers — Europe, Russia, UK, USA, Azerbaijan, Belarus, China, Georgia."
     },
     "catalog": {
       "title": "Product Catalog | Nomad Agro | Dried Fruits, Nuts & Mung Beans from Uzbekistan",

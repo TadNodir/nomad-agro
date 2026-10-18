@@ -14,7 +14,6 @@ export type SpecLabel =
   | 'mold'
   | 'admixture'
   | 'packaging'
-  | 'crop'
 
 export type ValueKey =
   | 'absent'
@@ -88,7 +87,6 @@ const apricot = (id: string, grade: ValueKey, size: string): Product => ({
     ['size', cm(size)],
     ['sulphur', sulphur],
     ['foreignMaterial', absent],
-    ['crop', '2024'],
   ],
 })
 
@@ -164,7 +162,6 @@ export const CATALOG: CatalogCategory[] = [
               ['size', cm('2.5–3.5')],
               ['sulphur', sulphur],
               ['foreignMaterial', absent],
-              ['crop', '2024'],
             ],
           },
           apricot('apricotSubhanaLarge', 'highest', '5.0–6.0'),
