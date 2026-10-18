@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { Download, AlertCircle } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
-import { Section, SectionHeader } from '@/components/ui/Section'
+import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
 import { BASE_URL } from '@/lib/constants'
+import { CATALOG, type SpecValue } from '@/lib/catalog'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -25,29 +27,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   }
 }
 
-const catalogSections = [
-  {
-    sectionKey: 'driedFruits' as const,
-    gradient: 'from-amber-800 to-orange-900',
-    productKey: 'driedFruits' as const,
-  },
-  {
-    sectionKey: 'nuts' as const,
-    gradient: 'from-stone-700 to-amber-900',
-    productKey: 'nuts' as const,
-  },
-  {
-    sectionKey: 'mungBeans' as const,
-    gradient: 'from-brand-green to-brand-forest',
-    productKey: 'mungBeans' as const,
-  },
-]
-
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'catalog' })
-  const tProducts = await getTranslations({ locale, namespace: 'productsData' })
+  const tProducts = await getTranslations({ locale, namespace: 'products' })
+  const tItems = await getTranslations({ locale, namespace: 'catalog.items' })
+  const tSpecs = await getTranslations({ locale, namespace: 'catalog.specs' })
+  const tValues = await getTranslations({ locale, namespace: 'catalog.values' })
+  const tGroups = await getTranslations({ locale, namespace: 'catalog.groups' })
   const tCommon = await getTranslations({ locale, namespace: 'common' })
+  const tCta = await getTranslations({ locale, namespace: 'cta' })
+
+  const specText = (value: SpecValue) =>
+    typeof value === 'string' ? value : tValues(value.key, value.n ? { n: value.n } : undefined)
 
   return (
     <>
@@ -95,47 +87,77 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
               <Download className="w-4 h-4" />
               {t('download')}
             </a>
-            <ContactCTA size="sm" label={t('requestQuote')} />
+            <ContactCTA size="sm" label={tCta('requestQuote')} />
           </div>
         </FadeInView>
       </Section>
 
       {/* Catalog sections */}
-      {catalogSections.map(({ sectionKey, gradient, productKey }) => {
-        const sectionLabel = t(`sections.${sectionKey}`)
-        const items = tProducts.raw(`${productKey}.items`) as Array<{ name: string; description: string }>
-        const categoryDesc = tProducts(`${productKey}.description`)
+      {CATALOG.map(({ id, slug, gradient, groups }) => (
+        <Section
+          key={id}
+          id={slug}
+          background={id === 'nuts' ? 'parchment' : 'cream'}
+          className="scroll-mt-20"
+        >
+          <FadeInView>
+            <h2 className="font-serif text-display-sm font-semibold text-soil mb-2">{t(`sections.${id}`)}</h2>
+            <p className="text-bark text-base leading-relaxed max-w-2xl mb-10">
+              {tProducts(`${id}.description`)}
+            </p>
+          </FadeInView>
 
-        return (
-          <Section key={sectionKey} background={sectionKey === 'nuts' ? 'parchment' : 'cream'}>
-            <FadeInView>
-              <h2 className="font-serif text-display-sm font-semibold text-soil mb-2">{sectionLabel}</h2>
-              <p className="text-bark text-base leading-relaxed max-w-2xl mb-10">{categoryDesc}</p>
-            </FadeInView>
+          {groups.map((group) => (
+            <div key={group.id} className="mb-12 last:mb-0">
+              {groups.length > 1 && (
+                <h3 className="font-serif text-xl font-semibold text-brand-green mb-5">
+                  {tGroups(group.id)}
+                </h3>
+              )}
 
-            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.07}>
-              {items.map((item, i) => (
-                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-parchment hover:shadow-md transition-shadow duration-200">
-                  <div className={`aspect-[16/9] bg-gradient-to-br ${gradient} relative`}>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white/20 text-[10px] tracking-widest uppercase">{item.name}</span>
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.05}>
+                {group.products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="h-full bg-white rounded-2xl overflow-hidden shadow-sm border border-parchment hover:shadow-md transition-shadow duration-200"
+                  >
+                    <div className={`aspect-[4/3] bg-gradient-to-br ${gradient} relative`}>
+                      <Image
+                        src={`/images/catalog/${product.id}.webp`}
+                        alt={tItems(product.id)}
+                        fill
+                        sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute top-2.5 right-2.5">
+                        <span className="bg-black/50 backdrop-blur-sm text-white/90 text-[10px] font-medium px-2 py-0.5 rounded-full">
+                          {tCommon('noPrice')}
+                        </span>
+                      </div>
                     </div>
-                    <div className="absolute top-2.5 right-2.5">
-                      <span className="bg-black/30 text-white/70 text-[10px] font-medium px-2 py-0.5 rounded-full">
-                        {tCommon('noPrice')}
-                      </span>
+                    <div className="p-4">
+                      <h4 className="font-serif text-base font-semibold text-soil mb-3">
+                        {tItems(product.id)}
+                      </h4>
+                      <dl className="space-y-1.5 text-xs">
+                        {product.specs.map(([label, value]) => (
+                          <div
+                            key={label}
+                            className="flex justify-between gap-4 border-b border-parchment/70 pb-1.5 last:border-0 last:pb-0"
+                          >
+                            <dt className="text-stone">{tSpecs(label)}</dt>
+                            <dd className="text-soil font-medium text-right">{specText(value)}</dd>
+                          </div>
+                        ))}
+                      </dl>
                     </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-serif text-base font-semibold text-soil mb-1.5">{item.name}</h3>
-                    <p className="text-bark text-xs leading-relaxed line-clamp-2">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </StaggerContainer>
-          </Section>
-        )
-      })}
+                ))}
+              </StaggerContainer>
+            </div>
+          ))}
+        </Section>
+      ))}
 
       {/* Final CTA */}
       <Section background="parchment">

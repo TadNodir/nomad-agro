@@ -2,7 +2,6 @@
   "nav": {
     "home": "Bosh sahifa",
     "about": "Biz haqimizda",
-    "products": "Mahsulotlar",
     "reviews": "Sharhlar",
     "catalog": "Katalog",
     "contact": "Aloqa",
@@ -12,39 +11,33 @@
   },
   "hero": {
     "tagline": "Oʻzbekiston togʻ etaklarida yetishtirilgan",
-    "headline": "Premium organik quritilgan mevalar, yongʻoqlar va mosh",
-    "subheadline": "Toza togʻ etagi fermalaridan sizning omboringizgacha — sertifikatlangan organik mahsulot, eksportga tayyor.",
+    "headline": "Premium quritilgan mevalar, yongʻoqlar va mosh",
+    "subheadline": "Toza togʻ etagi fermalaridan sizning omboringizgacha — kimyoviy moddalar va mineral oʻgʻitlarsiz yetishtirilgan, eksportga tayyor.",
     "cta": "Narx soʻrash",
-    "ctaSecondary": "Mahsulotlarni koʻrish",
+    "ctaSecondary": "Katalogni koʻrish",
     "scrollHint": "Pastga aylantiring",
     "badge": "B2B Ulgurji Eksportchi"
   },
   "products": {
     "title": "Bizning mahsulotlarimiz",
     "eyebrow": "Eksport assortimenti",
-    "ctaTitle": "Mahsulotlarimiz bilan qiziqasizmi?",
-    "ctaTextSuffix": "— narxlar hosil mavjudligiga qarab har kuni yangilanadi. Individual taklif uchun biz bilan bogʻlaning.",
-    "subtitle": "Oʻzbekiston togʻ etaklarida mineral oʻgʻitlar va kimyoviy moddалarsiz yetishtirilgan uchta premium kategoriya.",
+    "subtitle": "Oʻzbekiston togʻ etaklarida mineral oʻgʻitlar va kimyoviy moddalarsiz yetishtirilgan uchta premium kategoriya.",
     "driedFruits": {
       "name": "Quritilgan mevalar",
       "slug": "dried-fruits",
-      "description": "Quyoshda quritilgan oʻrik, mayiz, olcha, anjir va tutlar — tabiiy shirin, saqlovchisiz, sulfitsiz."
+      "description": "13 xil mayiz, quritilgan oʻrik va olxoʻri — tabiiy quritilgan, sun’iy rang va saqlovchilarsiz."
     },
     "nuts": {
       "name": "Yongʻoqlar",
       "slug": "nuts",
-      "description": "Yongʻoq, bodom, pista va findiq — Oʻzbekiston togʻ bogʻlaridan qoʻlda terilgan."
+      "description": "Tozalangan yongʻoq va yeryongʻoq — qobiqli, magʻiz va moylik navlar — Oʻzbekistondan."
     },
     "mungBeans": {
       "name": "Mosh (mung loviya)",
       "slug": "mung-beans",
-      "description": "Premium butun va yorilgan mosh — toza, saralangan, Oʻzbekistondan eksport sifatida sertifikatlangan."
+      "description": "Yashil mosh — tozalangan, saralangan, eksport sifatidagi, Oʻzbekistondan."
     },
-    "requestQuote": "Narx soʻrash",
-    "learnMore": "Kategoriyani koʻrish",
-    "viewAll": "Barcha mahsulotlar",
-    "noPrice": "Narx uchun biz bilan bogʻlaning",
-    "allCategories": "Barcha kategoriyalar"
+    "viewAll": "Toʻliq katalog"
   },
   "whyUs": {
     "title": "Nima uchun Nomad Agro",
@@ -52,11 +45,11 @@
     "subtitle": "Ishonchga asoslangan, g'amxoʻrlik bilan yetishtirilgan, aniqlik bilan yetkazilgan.",
     "pillars": [
       {
-        "title": "Sertifikatlangan sifat",
+        "title": "Eksport sifati",
         "description": "Mahsulotlarimiz Yevropa, Osiyo va boshqa mintaqalarga eksport uchun xalqaro sifat standartlari va fitosanitar talablarga javob beradi."
       },
       {
-        "title": "Organik va tabiiy",
+        "title": "Tabiiy va kimyoviy moddalarsiz",
         "description": "Oʻzbekistonning togʻ etaklarida mineral oʻgʻitlar va kimyoviy ishlov berishsiz yetishtirilgan — tabiat belgilaganidek toza."
       },
       {
@@ -73,33 +66,66 @@
     "teaser": {
       "tagline": "Bizning tariximiz",
       "title": "Oʻzbekistonning eng yaxshi qishloq xoʻjaligi hududlarida ildiz otgan",
-      "text": "Nomad Agro koʻp yillar davomida Oʻzbekiston togʻ etaklaridan eng yaxshi organik mahsulotlarni topib eksport qilmoqda — bu yerda toza togʻ havosi, unumdor tuproq va an'anaviy dehqonchilik usullari bir aroyda yoʻqolib ketmas sifatni yaratadi.",
+      "text": "Nomad Agro koʻp yillar davomida Oʻzbekiston togʻ etaklaridan eng yaxshi tabiiy mahsulotlarni topib eksport qilmoqda — bu yerda toza togʻ havosi, unumdor tuproq va an'anaviy dehqonchilik usullari bir aroyda yoʻqolib ketmas sifatni yaratadi.",
       "cta": "Tariximizni oʻqing"
     },
     "title": "Nomad Agro haqida",
-    "pageSubtitle": "Toshkentda joylashgan organik eksportchi — Oʻzbekistonning eng yaxshi fermerlik xoʻjaliklarini dunyo boʻylab ulgurji xaridorlar bilan bogʻlovchi.",
+    "pageSubtitle": "Toshkentda joylashgan eksportchi — Oʻzbekistonning eng yaxshi fermerlik xoʻjaliklarini dunyo boʻylab ulgurji xaridorlar bilan bogʻlovchi.",
     "story": {
       "title": "Bizning tariximiz",
-      "text": "Toshkentda tashkil etilgan Nomad Agro — Oʻzbekistonning qadimiy qishloq xoʻjaligi an'analariga chuqur hurmat va uning premium organik mahsulotlarini dunyo xaridorlari bilan bogʻlash istagi bilan yaratildi. Biz togʻ etagi hududlaridagi fermerlar bilan bevosita hamkorlik qilamiz — bu yerda yuzlab yillik organik dehqonchilik geografiya va an'ana bilan saqlanib kelgan."
+      "text": "Toshkentda tashkil etilgan Nomad Agro — Oʻzbekistonning qadimiy qishloq xoʻjaligi an'analariga chuqur hurmat va uning premium tabiiy mahsulotlarini dunyo xaridorlari bilan bogʻlash istagi bilan yaratildi. Biz togʻ etagi hududlaridagi fermerlar bilan bevosita hamkorlik qilamiz — bu yerda yuzlab yillik an’anaviy dehqonchilik geografiya va an'ana bilan saqlanib kelgan."
     },
     "regions": {
       "title": "Yetishtirish hududlari",
       "text": "Mahsulotlarimiz Oʻzbekistonning togʻ etagi hududlaridan olinadi — bu yerda dengiz sathidan balandlik, tuproq tarkibi va kontinental iqlim sun'iy yordamsiz ajoyib quritilgan mevalar, yongʻoqlar va dukkaklilarni yetishtirish uchun ideal sharoit yaratadi.",
-      "regionsList": ["Fargʻona vodiysi", "Surxondaryo", "Qashqadaryo", "Namangan togʻ etaklari", "Samarqand viloyati"]
+      "regionsList": [
+        "Fargʻona vodiysi",
+        "Surxondaryo",
+        "Qashqadaryo",
+        "Namangan togʻ etaklari",
+        "Samarqand viloyati"
+      ]
     },
     "process": {
       "title": "Fermadan eksportgacha",
-      "text": "Biz har bir bosqichni nazorat qilamiz: fermerlar bilan hamkorlik, hosil yigʻish, tabiiy quritish va qayta ishlash, sifat nazorati, qadoqlash va xalqaro yetkazib berish. Bizning jamoamiz buyurtmangiz aynan sizning talablaringizga javob berishini taʼminlaydi."
+      "text": "Biz har bir bosqichni nazorat qilamiz: fermerlar bilan hamkorlik, hosil yigʻish, tabiiy quritish va qayta ishlash, sifat nazorati, qadoqlash va xalqaro yetkazib berish. Bizning jamoamiz buyurtmangiz aynan sizning talablaringizga javob berishini taʼminlaydi.",
+      "tagline": "Biz qanday ishlaymiz",
+      "steps": [
+        {
+          "title": "Tabiiy dehqonchilik",
+          "description": "Hamkor fermerlar an’anaviy usullardan foydalanadi — mineral oʻgʻitlarsiz va kimyoviy ishlovsiz."
+        },
+        {
+          "title": "Sifat nazorati",
+          "description": "Har bir partiya navi, tozaligi, namligi va eksport talablari boʻyicha tekshiriladi."
+        },
+        {
+          "title": "Eksport va yetkazib berish",
+          "description": "Biz barcha hujjatlar, logistika va manzil bozoringiz uchun fitosanitar sertifikatlashni oʻz zimmamizga olamiz."
+        }
+      ]
     },
     "certifications": {
       "title": "Sifat va muvofiqlik",
       "text": "Mahsulotlarimiz fitosanitar va eksport standartlariga muvofiq tayyorlanadi, bu esa manzil mamlakatda bojxona rasmiyatchiligini bemalol oʻtkazishni taʼminlaydi. Biz barcha zarur eksport hujjatlarini taqdim etamiz."
     },
     "stats": [
-      { "value": "3+", "label": "Mahsulot kategoriyalari" },
-      { "value": "10+", "label": "Xizmat qilinadigan mamlakatlar" },
-      { "value": "100%", "label": "Organik usullar" },
-      { "value": "B2B", "label": "Ulgurji yoʻnalish" }
+      {
+        "value": "3+",
+        "label": "Mahsulot kategoriyalari"
+      },
+      {
+        "value": "10+",
+        "label": "Xizmat qilinadigan mamlakatlar"
+      },
+      {
+        "value": "100%",
+        "label": "Kimyoviy moddalarsiz yetishtirish"
+      },
+      {
+        "value": "B2B",
+        "label": "Ulgurji yoʻnalish"
+      }
     ]
   },
   "reviews": {
@@ -132,16 +158,82 @@
   "catalog": {
     "title": "Mahsulotlar katalogi",
     "eyebrow": "Toʻliq assortiment",
-    "subtitle": "Premium organik mahsulotlarning toʻliq assortimentini koʻring. Narxlar uchun biz bilan bogʻlaning.",
+    "subtitle": "Premium mahsulotlarning toʻliq assortimentini koʻring. Narxlar uchun biz bilan bogʻlaning.",
     "download": "Toʻliq katalogni yuklab olish (PDF)",
     "downloadNote": "Narxlar kiritilmagan — ular mahsulotning mavjudligiga qarab har kuni yangilanadi. Shaxsiy taklif uchun biz bilan bogʻlaning.",
-    "requestQuote": "Bu mahsulot uchun narx soʻrash",
     "finalCtaTitle": "Individual taklif soʻrash",
     "finalCtaText": "Qaysi mahsulotlar va qancha miqdorda kerakligini ayting — biz bir ish kuni ichida joriy narxlar va yetkazib berish variantlarini taqdim etamiz.",
     "sections": {
       "driedFruits": "Quritilgan mevalar",
-      "nuts": "Yongʻoqlar va urug'lar",
+      "nuts": "Yongʻoqlar",
       "mungBeans": "Mosh (mung loviya)"
+    },
+    "groups": {
+      "raisins": "Mayiz",
+      "apricots": "Quritilgan oʻrik",
+      "prunes": "Quritilgan olxoʻri",
+      "peanuts": "Yeryongʻoq",
+      "walnuts": "Yongʻoq",
+      "mungBeans": "Mosh (mung loviya)"
+    },
+    "specs": {
+      "grade": "Navi",
+      "moisture": "Namlik",
+      "size": "Oʻlcham",
+      "caliber": "Kalibr",
+      "sulphur": "Oltingugurt",
+      "splitBroken": "Singan / boʻlingan",
+      "damaged": "Shikastlangan",
+      "foreignMaterial": "Begona qoʻshimchalar",
+      "mold": "Mogʻor",
+      "admixture": "Aralashmalar",
+      "packaging": "Qadoqlash",
+      "crop": "Hosil"
+    },
+    "values": {
+      "absent": "Yoʻq",
+      "notAllowed": "Ruxsat etilmaydi",
+      "highest": "Oliy",
+      "firstGrade": "1-nav",
+      "secondGrade": "2-nav",
+      "thirdIndustrial": "3-nav, sanoat",
+      "box10kg": "10 kg quti",
+      "pcs100": "{n} dona / 100 g",
+      "perOunce": "1 untsiyada {n}",
+      "cm": "{n} sm",
+      "gKg": "{n} g/kg",
+      "noMoreThan": "{n} dan oshmasligi kerak",
+      "mixedForOil": "Aralash, moy ishlab chiqarish uchun"
+    },
+    "items": {
+      "raisinBlackRed": "Qora-qizil mayiz",
+      "raisinBlackSun220": "Quyoshda quritilgan qora mayiz (220–240)",
+      "raisinBlackSmall": "Qora mayiz, mayda",
+      "raisinBlackMedium": "Qora mayiz, oʻrtacha",
+      "raisinBlackSun200": "Quyoshda quritilgan qora mayiz (200–220)",
+      "raisinSoyakiSmall": "Soyaki mayizi, mayda",
+      "raisinSoyakiMedium": "Soyaki mayizi, oʻrtacha",
+      "raisinSoyakiLarge120": "Soyaki mayizi, yirik (120–130)",
+      "raisinSoyakiLarge100": "Soyaki mayizi, yirik (100–110)",
+      "raisinSultana": "Sultana mayizi",
+      "raisinGolden150": "Oltin mayiz (150–160)",
+      "raisinGolden120": "Oltin mayiz (120–140)",
+      "raisinSultanaCalibrated": "Kalibrlangan sultana mayizi",
+      "apricotBakery": "Qandolat va non sanoati uchun quritilgan oʻrik",
+      "apricotSubhanaLarge": "Subhana quritilgan oʻrigi (5.0–6.0 sm)",
+      "apricotSubhanaMedium": "Subhana quritilgan oʻrigi (4.0–4.5 sm)",
+      "apricotHandak": "Handak quritilgan oʻrigi",
+      "pruneSpain": "Quritilgan olxoʻri — ispan turi",
+      "pruneHungarian": "Quritilgan olxoʻri — venger turi",
+      "pruneBalonchik": "Quritilgan olxoʻri «Balonchik»",
+      "peanutInShell": "Qobiqli yeryongʻoq",
+      "peanutKernel6070": "Yeryongʻoq magʻzi 60/70",
+      "peanutKernel5060": "Yeryongʻoq magʻzi 50/60",
+      "peanutKernelOil": "Yeryongʻoq magʻzi, 3-nav (moy uchun)",
+      "walnutButterfly": "Tozalangan yongʻoq, «kapalak»",
+      "walnutWhite": "Tozalangan yongʻoq, oq",
+      "walnutAmber": "Tozalangan yongʻoq, qahrabo rang",
+      "mungGreen": "Yashil mosh"
     }
   },
   "contact": {
@@ -153,15 +245,13 @@
       "phone": "Telefon",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
-      "emailAddress": "info@nomadagro.uz",
-      "phoneDisplay": "+998 90 997 16 15",
       "whatsappLabel": "WhatsAppda yozing",
       "telegramLabel": "Telegramda yozing"
     },
     "allEmails": "Barcha elektron pochta manzillari",
     "allPhones": "Barcha telefon raqamlari",
     "address": "Manzil",
-    "addressValue": "100077, Sayram-7, 52, Toshkent, Oʻzbekiston Respublikasi",
+    "addressValue": "100077, Oʻzbekiston Respublikasi, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy",
     "company": "\"Nomad Agro\" MChJ",
     "ogrn": "OGRN: 888409",
     "mapPlaceholder": "Xarita — Toshkent, Oʻzbekiston",
@@ -181,12 +271,12 @@
     }
   },
   "footer": {
-    "tagline": "Oʻzbekistonning eng yaxshi qishloq xoʻjaligi hududlaridan premium organik eksport.",
+    "tagline": "Oʻzbekistonning eng yaxshi qishloq xoʻjaligi hududlaridan premium eksport.",
     "nav": "Navigatsiya",
     "contactUs": "Aloqa",
     "company": "\"Nomad Agro\" MChJ",
     "ogrn": "OGRN: 888409",
-    "address": "100077, Sayram-7, 52,\nToshkent, Oʻzbekiston",
+    "address": "100077, Toshkent shahri,\nSayram koʻchasi, 7-tor koʻcha, 52-uy, Oʻzbekiston",
     "copyright": "© {year} Nomad Agro Ltd. Barcha huquqlar himoyalangan.",
     "noPrice": "Narxlar koʻrsatilmaydi — joriy narxlar uchun biz bilan bogʻlaning.",
     "privacyNote": "B2B Ulgurji Eksportchi · Toshkent, Oʻzbekiston"
@@ -200,7 +290,6 @@
     "sendInquiry": "Soʻrov yuborish"
   },
   "common": {
-    "backToProducts": "Mahsulotlarga qaytish",
     "backToHome": "Bosh sahifaga",
     "loading": "Yuklanmoqda…",
     "noPrice": "Narx uchun biz bilan bogʻlaning"
@@ -222,8 +311,8 @@
         "answer": "Ha. Nomad Agro — Yevropa, Osiyo va Yaqin Sharqdagi ulgurji xaridorlarga mahsulot yetkazadigan Toshkentdagi B2B eksportchi. Biz barcha eksport hujjatlarini, fitosanitar sertifikatlarni va logistika muvofiqlashtirishini oʻz zimmamizga olamiz."
       },
       {
-        "question": "Mahsulotlar organik va sertifikatlangan ekanmi?",
-        "answer": "Mahsulotlarimiz organik usullarda yetishtiriladi — mineral oʻgʻitsiz, kimyoviy ishlovsiz. Biz barcha zarur eksport va fitosanitar hujjatlarni tayyorlaymiz. Bozor talablaringizga oid batafsil maʼlumot uchun biz bilan bogʻlaning."
+        "question": "Mahsulotlar kimyoviy moddalarsiz yetishtiriladimi?",
+        "answer": "Mahsulotlarimiz mineral oʻgʻitsiz va kimyoviy ishlovsiz yetishtiriladi. Biz barcha zarur eksport va fitosanitar hujjatlarni tayyorlaymiz. Bozor talablaringizga oid batafsil maʼlumot uchun biz bilan bogʻlaning."
       },
       {
         "question": "Narx taklifi qanday soʻraladi?",
@@ -239,78 +328,22 @@
       }
     ]
   },
-  "productsData": {
-    "detailCtaText": "Joriy narxlar, navlar va mavjudlik haqida biz bilan bogʻlaning. Biz bir ish kuni ichida javob beramiz.",
-    "driedFruits": {
-      "title": "Organik quritilgan mevalar",
-      "pageTitle": "Quritilgan mevalar",
-      "ctaTitle": "Quritilgan mevalarimiz bilan qiziqasizmi?",
-      "description": "Oʻzbekistonning quyoshli togʻ etagi hududlaridan olingan mevalarimiz tabiiy ravishda quritiladi — hech qanday saqlovchi, sulfит yoki sun'iy rang beruvchi moddalar ishlatilmaydi. Har bir nav tabiiy shirin tatini va oziq-ovqat qiymatini saqlab qolish uchun ehtiyotkorlik bilan qayta ishlanadi.",
-      "items": [
-        { "name": "Quyoshda quritilgan oʻrik (Urʻuk)", "description": "Sulfitsiz, tabiiy quritilgan, toʻq sariq rangdagi va konsentrlangan shirinlikka ega oʻriklar. Bir nechta navlarda mavjud." },
-        { "name": "Mayiz (Kishmish)", "description": "Oʻzbekistonning mashhur mahalliy uzum navlaridan tabiiy quyoshda quritilgan sariq va toʻq mayiz. Toza, shirin, eksportga tayyor." },
-        { "name": "Quritilgan olcha (Chernosliv)", "description": "Oʻzbek bogʻlaridan birinchi sinfli quritilgan olcha — yumshoq, boy tatimli, turli navlarda eksport uchun qadoqlangan." },
-        { "name": "Quritilgan anjir", "description": "Yumshoq, tabiiy shirin anjir — ehtiyotkorlik bilan qoʻlda saralanib, oʻzbek quyoshi ostida quritilgan va eksport bozorlariga yetkazilgan." },
-        { "name": "Quritilgan tut", "description": "Oq va qora tutlar — Oʻzbekistonning eng qadrli an'anaviy quritilgan mevalaridan biri. Nozik, shirin, tabiiy oziq moddalarga boy." },
-        { "name": "Quritilgan xurmo", "description": "Tabiiy pishib quritilgan tanlangan xurmo navlari — qandolat va sog'lom ovqatlanish bozori uchun premium sifat." }
-      ]
-    },
-    "nuts": {
-      "title": "Organik yongʻoqlar",
-      "pageTitle": "Yongʻoqlar",
-      "ctaTitle": "Yongʻoqlarimiz bilan qiziqasizmi?",
-      "description": "Yongʻoqlarimiz Oʻzbekistonning togʻ bogʻlari va togʻ etagi fermalaridan olinadi — qoʻlda teriladi, navlarga saralanadi va eksport standartlariga muvofiq qadoqlanadi. Tabiatdan toza, qayta ishlanmagan taʼm.",
-      "items": [
-        { "name": "Yongʻoq", "description": "Yengil rangli, yuqori moyli yadro — Oʻzbekistonning togʻ yongʻoqzorlaridan. Qobiqda va yadroda, bir nechta navlarda mavjud." },
-        { "name": "Bodom", "description": "Oʻzbek shirinmiya bodom navlari — qobiqda va tozalab, xom yoki blanjirlangan. Qandolat va sneck bozori uchun toza, birinchi sifat." },
-        { "name": "Pista", "description": "Markaziy Osiyo bogʻlaridan tabiiy ochiladigan pistalar — qovurilgan yoki xom, qobiqda yoki tozalanib, navlarga saralanib." },
-        { "name": "Findiq", "description": "Dumaloq, shirin findiqlar — qandolat, non mahsulotlari va sneck bozori uchun ehtiyotkorlik bilan navlarga saralangan." }
-      ]
-    },
-    "mungBeans": {
-      "title": "Mosh (mung loviya)",
-      "pageTitle": "Mosh",
-      "ctaTitle": "Moshimiz bilan qiziqasizmi?",
-      "description": "Oʻzbekiston dunyo boʻylab eng yaxshi mosh ishlab chiqaruvchilaridan biri. Bizning moshimiz tozalangan, mashinada saralangan va bir nechta navlarda — butun yashil, yorilgan va po'stloqsiz — turli bozor talablarini qondirish uchun mavjud.",
-      "items": [
-        { "name": "Butun yashil mosh", "description": "Birinchi sifatli butun mosh — chuqur tozalangan, mashinada saralangan, 25 kg va 50 kg qoplarda eksportga tayyor." },
-        { "name": "Yorilgan mosh (Moʻsh dal)", "description": "Osiyo oshpazlik ingredientlari va oziq-ovqat ishlab chiqarish bozori uchun yorilgan va po'stloqsiz mosh." },
-        { "name": "Mosh uni", "description": "Mayda oʻralgan mosh uni — oziq-ovqat ishlab chiqarish, makaron va verm uchun maxsus navlarda mavjud." }
-      ]
-    }
-  },
   "seo": {
     "home": {
-      "title": "Nomad Agro | Premium organik quritilgan mevalar, yongʻoqlar va mosh — Oʻzbekistondan eksport",
-      "description": "Nomad Agro Oʻzbekiston togʻ etaklaridan sertifikatlangan organik quritilgan mevalar, yongʻoqlar va moshni eksport qiladi. Dunyo boʻylab importchilar uchun B2B ulgurji yetkazuvchi."
+      "title": "Nomad Agro | Premium quritilgan mevalar, yongʻoqlar va mosh — Oʻzbekistondan eksport",
+      "description": "Nomad Agro Oʻzbekiston togʻ etaklaridan quritilgan mevalar, yongʻoqlar va moshni eksport qiladi. Dunyo boʻylab importchilar uchun B2B ulgurji yetkazuvchi."
     },
     "about": {
-      "title": "Nomad Agro haqida | Oʻzbekistondan organik eksportchi",
+      "title": "Nomad Agro haqida | Oʻzbekistondan eksportchi",
       "description": "Nomad Agro — Oʻzbekiston togʻ etaklaridan quritilgan mevalar, yongʻoqlar va mosh eksportchisi. Tariximiz, yetishtirish hududlari va jarayonlarimiz."
     },
-    "products": {
-      "title": "Mahsulotlar | Organik quritilgan mevalar, yongʻoqlar va mosh | Nomad Agro",
-      "description": "Nomad Agroning premium organik quritilgan mevalar, yongʻoqlar va mosh assortimentini koʻring — Oʻzbekistonda yetishtirilgan, dunyo boʻylab B2B ulgurji eksportga tayyor."
-    },
-    "driedFruits": {
-      "title": "Oʻzbekistondan organik quritilgan mevalar | Nomad Agro",
-      "description": "Oʻzbekistondan premium quyoshda quritilgan organik oʻrik, mayiz, anjir va tutlar. Sulfitsiz, saqlovchisiz B2B ulgurji eksport."
-    },
-    "nuts": {
-      "title": "Oʻzbekistondan organik yongʻoqlar | Nomad Agro",
-      "description": "Oʻzbekiston togʻ bogʻlaridan qoʻlda terilgan organik yongʻoq, bodom, pista va findiqlar. B2B eksportga mavjud."
-    },
-    "mungBeans": {
-      "title": "Mosh | Oʻzbekistondan organik eksport | Nomad Agro",
-      "description": "Oʻzbekistondan premium organik mosh — butun, yorilgan va un. B2B ulgurji xaridorlar uchun eksport sifati."
-    },
     "reviews": {
-      "title": "Hamkorlar sharhlari | Nomad Agro | Organik eksportchi",
+      "title": "Hamkorlar sharhlari | Nomad Agro | Eksportchi",
       "description": "Nomad Agroning xalqaro ulgurji hamkorlari va importchilaridan sharhlar."
     },
     "catalog": {
-      "title": "Mahsulotlar katalogi | Nomad Agro | Organik quritilgan mevalar va yongʻoqlar",
-      "description": "Nomad Agro mahsulotlar katalogi — organik quritilgan mevalar, yongʻoqlar va mosh. Joriy narxlar uchun toʻgʻridan-toʻgʻri bizga murojaat qiling."
+      "title": "Mahsulotlar katalogi | Nomad Agro | Quritilgan mevalar, yongʻoqlar va mosh",
+      "description": "Nomad Agro katalogi — mayiz, quritilgan oʻrik, olxoʻri, yeryongʻoq, yongʻoq va mosh. Joriy narxlar uchun toʻgʻridan-toʻgʻri bizga murojaat qiling."
     },
     "contacts": {
       "title": "Nomad Agro bilan bogʻlaning | Ulgurji soʻrovlar va narx takliflari",

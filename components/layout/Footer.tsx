@@ -80,7 +80,7 @@ export default function Footer() {
                     href={`/${locale}${href}`}
                     className="text-stone hover:text-cream text-sm transition-colors duration-150"
                   >
-                    {tNav(key as 'home' | 'about' | 'products' | 'reviews' | 'catalog' | 'contact')}
+                    {tNav(key as 'home' | 'about' | 'reviews' | 'catalog' | 'contact')}
                   </Link>
                 </li>
               ))}
@@ -93,16 +93,18 @@ export default function Footer() {
               {t('contactUs')}
             </h3>
             <ul className="space-y-3">
-              <li>
-                <a
-                  href={`mailto:${COMPANY.emails.primary}`}
-                  className="flex items-center gap-2 text-stone hover:text-cream text-sm transition-colors duration-150"
-                >
-                  <Mail className="w-4 h-4 flex-shrink-0" />
-                  {COMPANY.emails.primary}
-                </a>
-              </li>
-              {COMPANY.phones.slice(0, 2).map((p) => (
+              {Object.values(COMPANY.emails).map((email) => (
+                <li key={email}>
+                  <a
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-2 text-stone hover:text-cream text-sm transition-colors duration-150"
+                  >
+                    <Mail className="w-4 h-4 flex-shrink-0" />
+                    {email}
+                  </a>
+                </li>
+              ))}
+              {COMPANY.phones.map((p) => (
                 <li key={p.number}>
                   <a
                     href={`tel:${p.number}`}
@@ -126,7 +128,7 @@ export default function Footer() {
               <p>{t('ogrn')}</p>
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                <span>{COMPANY.address}</span>
+                <span className="whitespace-pre-line">{t('address')}</span>
               </p>
             </address>
           </div>

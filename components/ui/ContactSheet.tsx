@@ -179,9 +179,26 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
                 ))}
               </div>
 
-              <p className="text-center text-xs text-stone mt-5">
-                {t('channels.emailAddress')} · {t('channels.phoneDisplay')}
-              </p>
+              <div className="mt-5 pt-4 border-t border-parchment grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                <ul className="space-y-1">
+                  {Object.values(COMPANY.emails).map((email) => (
+                    <li key={email}>
+                      <a href={`mailto:${email}`} className="text-bark hover:text-brand-green break-all">
+                        {email}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="space-y-1">
+                  {COMPANY.phones.map((p) => (
+                    <li key={p.number}>
+                      <a href={`tel:${p.number}`} className="text-bark hover:text-brand-green">
+                        {p.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </motion.div>
           </div>

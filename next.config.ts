@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     remotePatterns: [],
   },
+  async redirects() {
+    return [
+      { source: '/:locale(en|ru|uz)/products/dried-fruits', destination: '/:locale/catalog#dried-fruits', permanent: true },
+      { source: '/:locale(en|ru|uz)/products/nuts', destination: '/:locale/catalog#nuts', permanent: true },
+      { source: '/:locale(en|ru|uz)/products/mung-beans', destination: '/:locale/catalog#mung-beans', permanent: true },
+      { source: '/:locale(en|ru|uz)/products', destination: '/:locale/catalog', permanent: true },
+    ]
+  },
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },

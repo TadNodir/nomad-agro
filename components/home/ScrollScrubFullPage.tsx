@@ -305,9 +305,9 @@ export default function ScrollScrubFullPage() {
     name: string; company: string; country: string; text: string
   }>
   const productCategories = [
-    { href: `/${locale}/products/${tProducts('driedFruits.slug')}`, name: tProducts('driedFruits.name'), desc: tProducts('driedFruits.description') },
-    { href: `/${locale}/products/${tProducts('nuts.slug')}`,        name: tProducts('nuts.name'),        desc: tProducts('nuts.description') },
-    { href: `/${locale}/products/${tProducts('mungBeans.slug')}`,   name: tProducts('mungBeans.name'),   desc: tProducts('mungBeans.description') },
+    { href: `/${locale}/catalog#${tProducts('driedFruits.slug')}`, name: tProducts('driedFruits.name'), desc: tProducts('driedFruits.description') },
+    { href: `/${locale}/catalog#${tProducts('nuts.slug')}`,        name: tProducts('nuts.name'),        desc: tProducts('nuts.description') },
+    { href: `/${locale}/catalog#${tProducts('mungBeans.slug')}`,   name: tProducts('mungBeans.name'),   desc: tProducts('mungBeans.description') },
   ]
 
   /* ── reduced-motion / slow-connection fallback ───────────────────────── */
@@ -316,7 +316,7 @@ export default function ScrollScrubFullPage() {
       <section className="relative h-screen w-full overflow-hidden"
         style={{ backgroundColor: frameSetRef.current.bg }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={frameSetRef.current.path(0)} alt="Nomad Agro premium organic products"
+        <img src={frameSetRef.current.path(0)} alt="Nomad Agro dried fruits, nuts and mung beans"
           className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full items-center">
@@ -326,7 +326,7 @@ export default function ScrollScrubFullPage() {
             <p className="text-lg text-white/75 leading-relaxed mb-10 max-w-xl">{tHero('subheadline')}</p>
             <div className="flex flex-wrap items-center gap-4">
               <ContactCTA variant="lime" size="lg" label={tHero('cta')} />
-              <Button variant="ghost" size="lg" href={`/${locale}/products`}>{tHero('ctaSecondary')}</Button>
+              <Button variant="ghost" size="lg" href={`/${locale}/catalog`}>{tHero('ctaSecondary')}</Button>
             </div>
           </div>
         </div>
@@ -391,7 +391,7 @@ export default function ScrollScrubFullPage() {
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
                   <ContactCTA variant="lime" size="lg" label={tHero('cta')} />
-                  <Button variant="ghost" size="lg" href={`/${locale}/products`}>
+                  <Button variant="ghost" size="lg" href={`/${locale}/catalog`}>
                     {tHero('ctaSecondary')}
                   </Button>
                 </div>
@@ -433,7 +433,7 @@ export default function ScrollScrubFullPage() {
                   </Link>
                 ))}
               </div>
-              <Button variant="ghost" size="md" href={`/${locale}/products`}>
+              <Button variant="ghost" size="md" href={`/${locale}/catalog`}>
                 {tProducts('viewAll')}
               </Button>
             </div>

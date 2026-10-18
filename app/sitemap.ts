@@ -4,10 +4,6 @@ import { BASE_URL, LOCALES } from '@/lib/constants'
 const pages = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
-  { path: '/products', priority: 0.9, changeFrequency: 'monthly' as const },
-  { path: '/products/dried-fruits', priority: 0.8, changeFrequency: 'monthly' as const },
-  { path: '/products/nuts', priority: 0.8, changeFrequency: 'monthly' as const },
-  { path: '/products/mung-beans', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/reviews', priority: 0.7, changeFrequency: 'monthly' as const },
   { path: '/catalog', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contacts', priority: 0.9, changeFrequency: 'monthly' as const },

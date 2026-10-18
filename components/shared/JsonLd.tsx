@@ -17,23 +17,21 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
           height: 80,
         },
         description:
-          'Nomad Agro exports certified organic dried fruits, nuts, and mung beans from the foothill regions of Uzbekistan for B2B wholesale buyers worldwide.',
+          'Nomad Agro exports dried fruits, nuts, and mung beans from the foothill regions of Uzbekistan for B2B wholesale buyers worldwide.',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Sayram-7, 52',
+          streetAddress: 'Sayram Street, Passage 7, House 52',
           addressLocality: 'Tashkent',
           postalCode: '100077',
           addressCountry: 'UZ',
         },
-        contactPoint: [
-          {
-            '@type': 'ContactPoint',
-            telephone: `+${COMPANY.phones[0].number}`,
-            contactType: 'sales',
-            email: COMPANY.emails.primary,
-            availableLanguage: ['English', 'Russian', 'Uzbek'],
-          },
-        ],
+        contactPoint: COMPANY.phones.map((phone) => ({
+          '@type': 'ContactPoint',
+          telephone: phone.number,
+          contactType: 'sales',
+          email: COMPANY.emails.primary,
+          availableLanguage: ['English', 'Russian', 'Uzbek'],
+        })),
         email: COMPANY.emails.primary,
         identifier: {
           '@type': 'PropertyValue',
@@ -45,7 +43,7 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
           '@type': 'Place',
           name: 'Tashkent, Uzbekistan',
         },
-        knowsAbout: ['Organic Dried Fruits', 'Nuts Export', 'Mung Beans', 'Agricultural Export', 'Uzbekistan Organic Products'],
+        knowsAbout: ['Dried Fruits', 'Nuts Export', 'Mung Beans', 'Agricultural Export', 'Uzbekistan Agricultural Products'],
         sameAs: [],
       },
       {
@@ -107,51 +105,6 @@ export function FaqJsonLd({
         text: item.answer,
       },
     })),
-  }
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  )
-}
-
-export function ProductCategoryJsonLd({
-  name,
-  description,
-  locale,
-}: {
-  name: string
-  description: string
-  locale: string
-}) {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name,
-    description,
-    brand: {
-      '@type': 'Brand',
-      name: 'Nomad Agro',
-    },
-    manufacturer: {
-      '@id': `${BASE_URL}/#organization`,
-    },
-    countryOfOrigin: {
-      '@type': 'Country',
-      name: 'Uzbekistan',
-    },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      seller: { '@id': `${BASE_URL}/#organization` },
-      priceCurrency: 'USD',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        description: 'Contact for pricing — rates updated daily with crop availability',
-      },
-    },
   }
 
   return (

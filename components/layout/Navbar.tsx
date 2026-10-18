@@ -93,7 +93,7 @@ export default function Navbar() {
                     )}
                     aria-current={isActive ? 'page' : undefined}
                   >
-                    {t(key as 'home' | 'about' | 'products' | 'reviews' | 'catalog' | 'contact')}
+                    {t(key as 'home' | 'about' | 'reviews' | 'catalog' | 'contact')}
                     {isActive && (
                       <motion.span
                         layoutId="nav-underline"
@@ -169,7 +169,7 @@ export default function Navbar() {
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >
-                      {t(key as 'home' | 'about' | 'products' | 'reviews' | 'catalog' | 'contact')}
+                      {t(key as 'home' | 'about' | 'reviews' | 'catalog' | 'contact')}
                     </Link>
                   </motion.div>
                 )

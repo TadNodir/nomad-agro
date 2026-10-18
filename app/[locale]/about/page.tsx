@@ -29,11 +29,7 @@ export async function generateMetadata({
   }
 }
 
-const processSteps = [
-  { icon: Leaf, title: 'Organic Farming', description: 'Partnered farmers use traditional methods — no mineral fertilizers, no chemical treatments.' },
-  { icon: Award, title: 'Quality Inspection', description: 'Every batch is inspected for grade, cleanliness, moisture, and export specifications.' },
-  { icon: TrendingUp, title: 'Export & Delivery', description: 'We handle all documentation, logistics, and phytosanitary certification for your destination market.' },
-]
+const processIcons = [Leaf, Award, TrendingUp]
 
 export default async function AboutPage({
   params,
@@ -44,6 +40,7 @@ export default async function AboutPage({
   const t = await getTranslations({ locale, namespace: 'about' })
   const stats = t.raw('stats') as Array<{ value: string; label: string }>
   const regions = t.raw('regions.regionsList') as string[]
+  const processSteps = t.raw('process.steps') as Array<{ title: string; description: string }>
 
   return (
     <>
@@ -120,10 +117,12 @@ export default async function AboutPage({
       {/* Process */}
       <Section>
         <FadeInView>
-          <SectionHeader title={t('process.title')} tagline="How We Work" />
+          <SectionHeader title={t('process.title')} tagline={t('process.tagline')} />
         </FadeInView>
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8" stagger={0.1}>
-          {processSteps.map(({ icon: Icon, title, description }, i) => (
+          {processSteps.map(({ title, description }, i) => {
+            const Icon = processIcons[i]
+            return (
             <div key={i} className="relative">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-brand-green/10 flex items-center justify-center">
@@ -136,7 +135,7 @@ export default async function AboutPage({
               <h3 className="font-serif text-lg font-semibold text-soil mb-2">{title}</h3>
               <p className="text-bark text-sm leading-relaxed">{description}</p>
             </div>
-          ))}
+          )})}
         </StaggerContainer>
       </Section>
 
