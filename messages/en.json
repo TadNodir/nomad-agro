@@ -12,7 +12,7 @@
   "hero": {
     "tagline": "Grown in the Foothills of Uzbekistan",
     "headline": "Premium Dried Fruits, Nuts & Mung Beans",
-    "subheadline": "From pristine foothill farms to your warehouse — grown without chemicals or mineral fertilizers, export-ready, and delivered with care.",
+    "subheadline": "From pristine foothill farms to your warehouse — export-ready, with documented quality, and delivered with care.",
     "cta": "Request a Quote",
     "ctaSecondary": "View Catalog",
     "scrollHint": "Scroll to explore",
@@ -21,11 +21,11 @@
   "products": {
     "title": "Our Products",
     "eyebrow": "Export Range",
-    "subtitle": "Three premium categories, grown without mineral fertilizers or chemicals in Uzbekistan's foothill regions.",
+    "subtitle": "Three premium categories sourced from Uzbekistan's foothill regions.",
     "driedFruits": {
       "name": "Dried Fruits",
       "slug": "dried-fruits",
-      "description": "Raisins in 13 grades and sizes, dried apricots, and prunes — naturally dried, with no artificial colours or preservatives."
+      "description": "Raisins in 13 grades and sizes, dried apricots, and prunes — export-grade, with quality specifications available on request."
     },
     "nuts": {
       "name": "Nuts",
@@ -49,8 +49,8 @@
         "description": "Our products meet international quality standards and phytosanitary requirements for export to Europe, Asia, and beyond."
       },
       {
-        "title": "Natural & Chemical-Free",
-        "description": "Grown in Uzbekistan's foothill regions without mineral fertilizers or chemical treatments — pure, as nature intended."
+        "title": "Natural Sourcing",
+        "description": "Sourced from Uzbekistan's foothill regions, where altitude, soil, and climate favour exceptional natural quality."
       },
       {
         "title": "Export Experience",
@@ -77,7 +77,7 @@
     },
     "regions": {
       "title": "Growing Regions",
-      "text": "Our products are sourced from Uzbekistan's foothill regions, where altitude, soil composition, and a continental climate create ideal conditions for growing exceptional dried fruits, nuts, and legumes — entirely naturally, without artificial inputs.",
+      "text": "Our products are sourced from Uzbekistan's foothill regions, where altitude, soil composition, and a continental climate create ideal conditions for growing exceptional dried fruits, nuts, and legumes.",
       "regionsList": [
         "Fergana Valley",
         "Surkhandarya",
@@ -92,8 +92,8 @@
       "tagline": "How We Work",
       "steps": [
         {
-          "title": "Natural Farming",
-          "description": "Partnered farmers use traditional methods — no mineral fertilizers, no chemical treatments."
+          "title": "Partner Farms",
+          "description": "We work directly with partner farmers in Uzbekistan's foothill regions."
         },
         {
           "title": "Quality Inspection",
@@ -107,7 +107,16 @@
     },
     "certifications": {
       "title": "Quality & Compliance",
-      "text": "Our products are prepared in compliance with phytosanitary and export standards, ensuring smooth customs clearance in your destination market. We provide all required export documentation."
+      "text": "Our products are prepared in compliance with phytosanitary and export standards, ensuring smooth customs clearance in your destination market. We provide all required export documentation.",
+      "cardSubtitle": "Food Safety Management System",
+      "issuerLabel": "Certified by",
+      "numberLabel": "Certificate No.",
+      "issuedLabel": "Issued",
+      "scopeLabel": "Scope",
+      "scopeValue": "Wholesale trade of fruits and vegetables",
+      "view": "View certificate (PDF)",
+      "specsNote": "Detailed product specification sheets are available on request.",
+      "registered": "Registered in Tashkent in 2020"
     },
     "stats": [
       {
@@ -119,14 +128,17 @@
         "label": "Countries Served"
       },
       {
-        "value": "100%",
-        "label": "Chemical-Free Farming"
+        "value": "2020",
+        "label": "Established"
       },
       {
         "value": "B2B",
         "label": "Wholesale Focus"
       }
-    ]
+    ],
+    "video": {
+      "title": "Company Presentation"
+    }
   },
   "reviews": {
     "title": "What Our Partners Say",
@@ -234,7 +246,8 @@
       "walnutWhite": "Peeled Walnuts, White",
       "walnutAmber": "Peeled Walnuts, Amber",
       "mungGreen": "Green Mung Beans"
-    }
+    },
+    "requestSpec": "Request spec sheet"
   },
   "contact": {
     "title": "Get in Touch",
@@ -253,7 +266,6 @@
     "address": "Address",
     "addressValue": "100077, Sayram Street, Passage 7, House 52, Tashkent, Republic of Uzbekistan",
     "company": "\"Nomad Agro\" Ltd",
-    "ogrn": "OGRN: 888409",
     "mapPlaceholder": "Map — Tashkent, Uzbekistan",
     "form": {
       "title": "Send an Inquiry",
@@ -267,19 +279,22 @@
       "submit": "Send Inquiry",
       "submitting": "Sending…",
       "success": "Your inquiry has been sent. We will be in touch within one business day.",
-      "error": "Something went wrong. Please email us directly at info@nomadagro.uz."
-    }
+      "error": "Something went wrong. Please email us directly at info@nomadagro.uz.",
+      "specMessage": "Please send me the specification sheet for: {product}"
+    },
+    "registration": "TIN: 307 699 304"
   },
   "footer": {
     "tagline": "Premium exports from Uzbekistan's finest growing regions.",
     "nav": "Navigation",
     "contactUs": "Contact",
     "company": "\"Nomad Agro\" Ltd",
-    "ogrn": "OGRN: 888409",
     "address": "100077, Sayram Street, Passage 7, House 52,\nTashkent, Uzbekistan",
     "copyright": "© {year} Nomad Agro Ltd. All rights reserved.",
     "noPrice": "Prices are not displayed — contact us for current rates.",
-    "privacyNote": "B2B Wholesale Exporter · Tashkent, Uzbekistan"
+    "privacyNote": "B2B Wholesale Exporter · Tashkent, Uzbekistan",
+    "registration": "TIN: 307 699 304",
+    "poweredBy": "Powered by IO Projects"
   },
   "cta": {
     "requestQuote": "Request a Quote",
@@ -311,8 +326,8 @@
         "answer": "Yes. Nomad Agro is a Tashkent-based B2B exporter supplying wholesale buyers across Europe, Asia, and the Middle East. We handle all export documentation, phytosanitary certificates, and logistics coordination."
       },
       {
-        "question": "Are the products grown without chemicals?",
-        "answer": "Our products are grown without mineral fertilizers or chemical treatments. We prepare all required export and phytosanitary documentation. Please contact us for details relevant to your market."
+        "question": "How is product quality documented?",
+        "answer": "Every batch is inspected for grade, cleanliness, and moisture, and our food safety management system is certified to ISO 22000:2018. Product specification sheets are available on request."
       },
       {
         "question": "How do I request a price quote?",

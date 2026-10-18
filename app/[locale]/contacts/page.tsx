@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
@@ -123,12 +124,14 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Form */}
-          <div className="lg:col-span-3">
+          <div id="inquiry" className="lg:col-span-3 scroll-mt-24">
             <FadeInView direction="left">
               <h2 className="font-serif text-display-sm font-semibold text-soil mb-6">
                 {t('form.title')}
               </h2>
-              <ContactForm />
+              <Suspense>
+                <ContactForm />
+              </Suspense>
             </FadeInView>
           </div>
 
@@ -186,7 +189,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                     <div>
                       <p className="font-medium text-soil">{t('company')}</p>
                       <p className="mt-1">{t('addressValue')}</p>
-                      <p className="mt-1 text-stone">{t('ogrn')}</p>
+                      <p className="mt-1 text-stone">{t('registration')}</p>
                     </div>
                   </address>
                 </div>

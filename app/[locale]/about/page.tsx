@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
-import { MapPin, Leaf, Award, TrendingUp } from 'lucide-react'
+import { MapPin, Leaf, Award, TrendingUp, ExternalLink } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
@@ -88,9 +89,17 @@ export default async function AboutPage({
             <p className="text-bark text-lg leading-relaxed mb-6">{t('story.text')}</p>
           </FadeInView>
           <FadeInView direction="right" delay={0.1}>
-            {/* Story image placeholder */}
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-brand-green-hover to-brand-forest flex items-center justify-center shadow-xl">
-              <span className="text-cream/20 text-xs tracking-widest uppercase">Company Story Photo</span>
+            <div className="aspect-[848/464] rounded-3xl overflow-hidden bg-black shadow-xl">
+              <video
+                controls
+                playsInline
+                preload="none"
+                poster="/images/about-video-poster.webp"
+                aria-label={t('video.title')}
+                className="w-full h-full"
+              >
+                <source src="/video_presentation.mp4" type="video/mp4" />
+              </video>
             </div>
           </FadeInView>
         </div>
@@ -148,8 +157,58 @@ export default async function AboutPage({
             <ContactCTA size="lg" />
           </FadeInView>
           <FadeInView delay={0.1}>
-            <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-parchment to-white border border-parchment flex items-center justify-center shadow-inner">
-              <span className="text-stone text-xs tracking-widest uppercase">Certifications / Quality marks</span>
+            <div className="bg-white rounded-3xl border border-parchment shadow-sm p-6 sm:p-8">
+              <div className="flex items-start gap-5">
+                <a
+                  href="/documents/ISO-22000-Nomad-Agro.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 block w-28 sm:w-36 rounded-lg overflow-hidden border border-parchment shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <Image
+                    src="/images/iso-22000-certificate.webp"
+                    alt={`ISO 22000:2018 — ${t('certifications.cardSubtitle')}`}
+                    width={974}
+                    height={1351}
+                    className="w-full h-auto"
+                  />
+                </a>
+                <div className="min-w-0">
+                  <p className="font-serif text-2xl font-semibold text-brand-green">ISO 22000:2018</p>
+                  <p className="text-bark text-sm mb-4">{t('certifications.cardSubtitle')}</p>
+                  <dl className="space-y-2 text-sm">
+                    <div>
+                      <dt className="text-stone text-xs">{t('certifications.issuerLabel')}</dt>
+                      <dd className="text-soil font-medium">First Quality Certification (FQC)</dd>
+                    </div>
+                    <div>
+                      <dt className="text-stone text-xs">{t('certifications.numberLabel')}</dt>
+                      <dd className="text-soil font-medium break-all">12.25.77812.99182.I</dd>
+                    </div>
+                    <div>
+                      <dt className="text-stone text-xs">{t('certifications.issuedLabel')}</dt>
+                      <dd className="text-soil font-medium">29.08.2025</dd>
+                    </div>
+                    <div>
+                      <dt className="text-stone text-xs">{t('certifications.scopeLabel')}</dt>
+                      <dd className="text-soil font-medium">{t('certifications.scopeValue')}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              <div className="mt-6 pt-5 border-t border-parchment space-y-3">
+                <a
+                  href="/documents/ISO-22000-Nomad-Agro.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green hover:text-brand-green-hover transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  {t('certifications.view')}
+                </a>
+                <p className="text-bark text-sm">{t('certifications.specsNote')}</p>
+                <p className="text-stone text-xs">{t('certifications.registered')}</p>
+              </div>
             </div>
           </FadeInView>
         </div>

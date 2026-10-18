@@ -123,6 +123,12 @@ const walnut = (id: string, caliber: string): Product => ({
   ],
 })
 
+/** Products with a downloadable-on-request specification sheet (prunes, apricots, golden and sultana raisins). */
+export const hasSpecSheet = (id: string) =>
+  id.startsWith('apricot') ||
+  id.startsWith('prune') ||
+  ['raisinGolden150', 'raisinGolden120', 'raisinSultana', 'raisinSultanaCalibrated'].includes(id)
+
 export const CATALOG: CatalogCategory[] = [
   {
     id: 'driedFruits',

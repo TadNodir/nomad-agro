@@ -12,7 +12,7 @@
   "hero": {
     "tagline": "Oʻzbekiston togʻ etaklarida yetishtirilgan",
     "headline": "Premium quritilgan mevalar, yongʻoqlar va mosh",
-    "subheadline": "Toza togʻ etagi fermalaridan sizning omboringizgacha — kimyoviy moddalar va mineral oʻgʻitlarsiz yetishtirilgan, eksportga tayyor.",
+    "subheadline": "Toza togʻ etagi fermalaridan sizning omboringizgacha — eksportga tayyor, hujjatlashtirilgan sifat bilan.",
     "cta": "Narx soʻrash",
     "ctaSecondary": "Katalogni koʻrish",
     "scrollHint": "Pastga aylantiring",
@@ -21,11 +21,11 @@
   "products": {
     "title": "Bizning mahsulotlarimiz",
     "eyebrow": "Eksport assortimenti",
-    "subtitle": "Oʻzbekiston togʻ etaklarida mineral oʻgʻitlar va kimyoviy moddalarsiz yetishtirilgan uchta premium kategoriya.",
+    "subtitle": "Oʻzbekiston togʻ etaklaridan olingan uchta premium kategoriya.",
     "driedFruits": {
       "name": "Quritilgan mevalar",
       "slug": "dried-fruits",
-      "description": "13 xil mayiz, quritilgan oʻrik va olxoʻri — tabiiy quritilgan, sun’iy rang va saqlovchilarsiz."
+      "description": "Quritilgan mevalar: 13 xil mayiz, quritilgan oʻrik va olxoʻri — eksport sifatida, spetsifikatsiyalar soʻrov boʻyicha taqdim etiladi."
     },
     "nuts": {
       "name": "Yongʻoqlar",
@@ -49,8 +49,8 @@
         "description": "Mahsulotlarimiz Yevropa, Osiyo va boshqa mintaqalarga eksport uchun xalqaro sifat standartlari va fitosanitar talablarga javob beradi."
       },
       {
-        "title": "Tabiiy va kimyoviy moddalarsiz",
-        "description": "Oʻzbekistonning togʻ etaklarida mineral oʻgʻitlar va kimyoviy ishlov berishsiz yetishtirilgan — tabiat belgilaganidek toza."
+        "title": "Tabiiy xomashyo",
+        "description": "Oʻzbekistonning togʻ etagi hududlaridan olinadi, bu yerda balandlik, tuproq va iqlim ajoyib tabiiy sifatni taʼminlaydi."
       },
       {
         "title": "Eksport tajribasi",
@@ -77,7 +77,7 @@
     },
     "regions": {
       "title": "Yetishtirish hududlari",
-      "text": "Mahsulotlarimiz Oʻzbekistonning togʻ etagi hududlaridan olinadi — bu yerda dengiz sathidan balandlik, tuproq tarkibi va kontinental iqlim sun'iy yordamsiz ajoyib quritilgan mevalar, yongʻoqlar va dukkaklilarni yetishtirish uchun ideal sharoit yaratadi.",
+      "text": "Mahsulotlarimiz Oʻzbekistonning togʻ etagi hududlaridan olinadi — bu yerda dengiz sathidan balandlik, tuproq tarkibi va kontinental iqlim ajoyib quritilgan mevalar, yongʻoqlar va dukkaklilarni yetishtirish uchun ideal sharoit yaratadi.",
       "regionsList": [
         "Fargʻona vodiysi",
         "Surxondaryo",
@@ -92,8 +92,8 @@
       "tagline": "Biz qanday ishlaymiz",
       "steps": [
         {
-          "title": "Tabiiy dehqonchilik",
-          "description": "Hamkor fermerlar an’anaviy usullardan foydalanadi — mineral oʻgʻitlarsiz va kimyoviy ishlovsiz."
+          "title": "Hamkor fermer xoʻjaliklari",
+          "description": "Biz Oʻzbekiston togʻ etaklaridagi hamkor fermerlar bilan bevosita ishlaymiz."
         },
         {
           "title": "Sifat nazorati",
@@ -107,7 +107,16 @@
     },
     "certifications": {
       "title": "Sifat va muvofiqlik",
-      "text": "Mahsulotlarimiz fitosanitar va eksport standartlariga muvofiq tayyorlanadi, bu esa manzil mamlakatda bojxona rasmiyatchiligini bemalol oʻtkazishni taʼminlaydi. Biz barcha zarur eksport hujjatlarini taqdim etamiz."
+      "text": "Mahsulotlarimiz fitosanitar va eksport standartlariga muvofiq tayyorlanadi, bu esa manzil mamlakatda bojxona rasmiyatchiligini bemalol oʻtkazishni taʼminlaydi. Biz barcha zarur eksport hujjatlarini taqdim etamiz.",
+      "cardSubtitle": "Oziq-ovqat xavfsizligi boshqaruv tizimi",
+      "issuerLabel": "Sertifikatlovchi organ",
+      "numberLabel": "Sertifikat raqami",
+      "issuedLabel": "Berilgan sana",
+      "scopeLabel": "Qoʻllanish sohasi",
+      "scopeValue": "Meva va sabzavotlarni ulgurji savdo qilish",
+      "view": "Sertifikatni koʻrish (PDF)",
+      "specsNote": "Mahsulotlarning batafsil spetsifikatsiyalari soʻrov boʻyicha taqdim etiladi.",
+      "registered": "2020-yilda Toshkentda roʻyxatdan oʻtgan"
     },
     "stats": [
       {
@@ -119,14 +128,17 @@
         "label": "Xizmat qilinadigan mamlakatlar"
       },
       {
-        "value": "100%",
-        "label": "Kimyoviy moddalarsiz yetishtirish"
+        "value": "2020",
+        "label": "Tashkil etilgan yil"
       },
       {
         "value": "B2B",
         "label": "Ulgurji yoʻnalish"
       }
-    ]
+    ],
+    "video": {
+      "title": "Kompaniya taqdimoti"
+    }
   },
   "reviews": {
     "title": "Hamkorlarimiz nima deydi",
@@ -234,7 +246,8 @@
       "walnutWhite": "Tozalangan yongʻoq, oq",
       "walnutAmber": "Tozalangan yongʻoq, qahrabo rang",
       "mungGreen": "Yashil mosh"
-    }
+    },
+    "requestSpec": "Spetsifikatsiyani soʻrash"
   },
   "contact": {
     "title": "Biz bilan bogʻlaning",
@@ -253,7 +266,6 @@
     "address": "Manzil",
     "addressValue": "100077, Oʻzbekiston Respublikasi, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy",
     "company": "\"Nomad Agro\" MChJ",
-    "ogrn": "OGRN: 888409",
     "mapPlaceholder": "Xarita — Toshkent, Oʻzbekiston",
     "form": {
       "title": "Soʻrov yuborish",
@@ -267,19 +279,22 @@
       "submit": "Soʻrov yuborish",
       "submitting": "Yuborilmoqda…",
       "success": "Soʻrovingiz yuborildi. Biz bir ish kuni ichida siz bilan bogʻlanamiz.",
-      "error": "Xato yuz berdi. Iltimos, bizga toʻgʻridan-toʻgʻri info@nomadagro.uz manziliga yozing."
-    }
+      "error": "Xato yuz berdi. Iltimos, bizga toʻgʻridan-toʻgʻri info@nomadagro.uz manziliga yozing.",
+      "specMessage": "Iltimos, quyidagi mahsulot uchun spetsifikatsiyani yuboring: {product}"
+    },
+    "registration": "OGRN: 888409"
   },
   "footer": {
     "tagline": "Oʻzbekistonning eng yaxshi qishloq xoʻjaligi hududlaridan premium eksport.",
     "nav": "Navigatsiya",
     "contactUs": "Aloqa",
     "company": "\"Nomad Agro\" MChJ",
-    "ogrn": "OGRN: 888409",
     "address": "100077, Toshkent shahri,\nSayram koʻchasi, 7-tor koʻcha, 52-uy, Oʻzbekiston",
     "copyright": "© {year} Nomad Agro Ltd. Barcha huquqlar himoyalangan.",
     "noPrice": "Narxlar koʻrsatilmaydi — joriy narxlar uchun biz bilan bogʻlaning.",
-    "privacyNote": "B2B Ulgurji Eksportchi · Toshkent, Oʻzbekiston"
+    "privacyNote": "B2B Ulgurji Eksportchi · Toshkent, Oʻzbekiston",
+    "registration": "OGRN: 888409",
+    "poweredBy": "Sayt IO Projects tomonidan ishlab chiqilgan"
   },
   "cta": {
     "requestQuote": "Narx soʻrash",
@@ -311,8 +326,8 @@
         "answer": "Ha. Nomad Agro — Yevropa, Osiyo va Yaqin Sharqdagi ulgurji xaridorlarga mahsulot yetkazadigan Toshkentdagi B2B eksportchi. Biz barcha eksport hujjatlarini, fitosanitar sertifikatlarni va logistika muvofiqlashtirishini oʻz zimmamizga olamiz."
       },
       {
-        "question": "Mahsulotlar kimyoviy moddalarsiz yetishtiriladimi?",
-        "answer": "Mahsulotlarimiz mineral oʻgʻitsiz va kimyoviy ishlovsiz yetishtiriladi. Biz barcha zarur eksport va fitosanitar hujjatlarni tayyorlaymiz. Bozor talablaringizga oid batafsil maʼlumot uchun biz bilan bogʻlaning."
+        "question": "Mahsulot sifati qanday tasdiqlanadi?",
+        "answer": "Har bir partiya navi, tozaligi va namligi boʻyicha tekshiriladi, oziq-ovqat xavfsizligi boshqaruv tizimimiz esa ISO 22000:2018 boʻyicha sertifikatlangan. Mahsulot spetsifikatsiyalari soʻrov boʻyicha taqdim etiladi."
       },
       {
         "question": "Narx taklifi qanday soʻraladi?",

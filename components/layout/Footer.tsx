@@ -125,7 +125,7 @@ export default function Footer() {
             </h3>
             <address className="not-italic text-stone text-sm space-y-2">
               <p className="font-medium text-cream/90">{t('company')}</p>
-              <p>{t('ogrn')}</p>
+              <p>{t('registration')}</p>
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <span className="whitespace-pre-line">{t('address')}</span>
@@ -136,10 +136,21 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-stone text-xs">
-            {t('copyright', { year })}
-          </p>
-          <p className="text-stone text-xs">{t('privacyNote')}</p>
+          <div className="text-center sm:text-left space-y-1">
+            <p className="text-stone text-xs">{t('copyright', { year })}</p>
+            <p className="text-stone text-xs">{t('privacyNote')}</p>
+          </div>
+          <a
+            href="https://ioprojects.ai"
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center gap-2 text-stone hover:text-cream text-xs transition-colors duration-150"
+          >
+            <span className="flex rounded-full bg-cream p-0.5">
+              <Image src="/images/ioprojects-logo.png" alt="" width={24} height={24} />
+            </span>
+            {t('poweredBy')}
+          </a>
         </div>
       </div>
     </footer>

@@ -1,7 +1,7 @@
 export const COMPANY = {
   name: '"Nomad Agro" Ltd',
   nameShort: 'Nomad Agro',
-  ogrn: '888409',
+  tin: '307 699 304',
   address: '100077, Sayram Street, Passage 7, House 52, Tashkent, Republic of Uzbekistan',
   city: 'Tashkent',
   country: 'Uzbekistan',

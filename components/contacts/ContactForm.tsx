@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Send } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/Button'
+import { CATALOG } from '@/lib/catalog'
 
 // Web3Forms only accepts submissions made directly from the browser (their
 // free plan rejects server-proxied requests), so this key is submitted
@@ -13,6 +15,14 @@ const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 
 export function ContactForm() {
   const t = useTranslations('contact.form')
+  const tItems = useTranslations('catalog.items')
+  const searchParams = useSearchParams()
+
+  // Arriving from a catalog "Request spec sheet" link: prefill product and message.
+  const specId = searchParams.get('spec')
+  const specCategory = CATALOG.find((c) => c.groups.some((g) => g.products.some((p) => p.id === specId)))
+  const defaultProduct = specCategory?.slug ?? ''
+  const defaultMessage = specCategory && specId ? t('specMessage', { product: tItems(specId) }) : ''
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -46,6 +56,8 @@ export function ContactForm() {
       if (result.success) {
         setStatus('success')
         form.reset()
+        ;(form.elements.namedItem('message') as HTMLTextAreaElement).value = ''
+        ;(form.elements.namedItem('product') as HTMLSelectElement).value = ''
       } else {
         setStatus('error')
       }
@@ -102,7 +114,7 @@ export function ContactForm() {
         <label htmlFor="product" className="block text-sm font-medium text-soil mb-1.5">
           {t('product')}
         </label>
-        <select id="product" name="product" className={inputClasses}>
+        <select id="product" name="product" defaultValue={defaultProduct} className={inputClasses}>
           <option value="">Select a product…</option>
           <option value="dried-fruits">Dried Fruits</option>
           <option value="nuts">Nuts</option>
@@ -118,6 +130,7 @@ export function ContactForm() {
           id="message"
           name="message"
           rows={5}
+          defaultValue={defaultMessage}
           className={inputClasses}
           placeholder={t('messagePlaceholder')}
         />

@@ -33,11 +33,7 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
           availableLanguage: ['English', 'Russian', 'Uzbek'],
         })),
         email: COMPANY.emails.primary,
-        identifier: {
-          '@type': 'PropertyValue',
-          name: 'OGRN',
-          value: COMPANY.ogrn,
-        },
+        taxID: COMPANY.tin,
         areaServed: 'Worldwide',
         foundingLocation: {
           '@type': 'Place',
