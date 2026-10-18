@@ -266,7 +266,6 @@
     "address": "Address",
     "addressValue": "100077, Sayram Street, Passage 7, House 52, Tashkent, Republic of Uzbekistan",
     "company": "\"Nomad Agro\" Ltd",
-    "mapPlaceholder": "Map — Tashkent, Uzbekistan",
     "form": {
       "title": "Send an Inquiry",
       "name": "Your Name",
@@ -282,7 +281,8 @@
       "error": "Something went wrong. Please email us directly at info@nomadagro.uz.",
       "specMessage": "Please send me the specification sheet for: {product}"
     },
-    "registration": "TIN: 307 699 304"
+    "registration": "TIN: 307 699 304",
+    "openInMaps": "Open in Google Maps"
   },
   "footer": {
     "tagline": "Premium exports from Uzbekistan's finest growing regions.",

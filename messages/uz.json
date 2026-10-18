@@ -266,7 +266,6 @@
     "address": "Manzil",
     "addressValue": "100077, Oʻzbekiston Respublikasi, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy",
     "company": "\"Nomad Agro\" MChJ",
-    "mapPlaceholder": "Xarita — Toshkent, Oʻzbekiston",
     "form": {
       "title": "Soʻrov yuborish",
       "name": "Ismingiz",
@@ -282,7 +281,8 @@
       "error": "Xato yuz berdi. Iltimos, bizga toʻgʻridan-toʻgʻri info@nomadagro.uz manziliga yozing.",
       "specMessage": "Iltimos, quyidagi mahsulot uchun spetsifikatsiyani yuboring: {product}"
     },
-    "registration": "OGRN: 888409"
+    "registration": "OGRN: 888409",
+    "openInMaps": "Google Xaritada ochish"
   },
   "footer": {
     "tagline": "Oʻzbekistonning eng yaxshi qishloq xoʻjaligi hududlaridan premium eksport.",

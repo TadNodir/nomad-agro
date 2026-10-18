@@ -19,6 +19,8 @@ export const COMPANY = {
   whatsapp: 'https://wa.me/998909971615',
   telegram: 'https://t.me/+998909971615',
   website: 'https://nomadagro.uz',
+  // Sayram 7th passage, Mirzo Ulug'bek district, Tashkent (street-level; house 52 not geocoded)
+  coordinates: { lat: 41.33299, lng: 69.31952 },
 } as const
 
 export const LOCALES = ['en', 'ru', 'uz'] as const

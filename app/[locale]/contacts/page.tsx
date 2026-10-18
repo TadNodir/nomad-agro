@@ -42,6 +42,8 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'contact' })
 
+  const { lat, lng } = COMPANY.coordinates
+
   const directChannels = [
     {
       Icon: Mail,
@@ -194,13 +196,25 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                   </address>
                 </div>
 
-                {/* Map placeholder */}
-                <div className="rounded-2xl overflow-hidden bg-parchment border border-parchment h-48 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="w-8 h-8 text-brand-green mx-auto mb-2" />
-                    <p className="text-stone text-xs">{t('mapPlaceholder')}</p>
-                    {/* TODO: Replace with Google Maps iframe embed for Tashkent address */}
+                {/* Map */}
+                <div>
+                  <div className="rounded-2xl overflow-hidden border border-parchment h-64 bg-parchment">
+                    <iframe
+                      title={t('address')}
+                      src={`https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.003}%2C${lat - 0.0018}%2C${lng + 0.003}%2C${lat + 0.0018}&layer=mapnik&marker=${lat}%2C${lng}`}
+                      loading="lazy"
+                      className="w-full h-full border-0"
+                    />
                   </div>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green hover:text-brand-green-hover transition-colors"
+                  >
+                    <MapPin className="w-4 h-4" />
+                    {t('openInMaps')}
+                  </a>
                 </div>
               </div>
             </FadeInView>

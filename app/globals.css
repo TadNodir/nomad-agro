@@ -94,6 +94,8 @@
   .grain-overlay {
     position: relative;
     isolation: isolate;
+    /* the ::after texture is 200% wide; without clipping it widens the whole page */
+    overflow: hidden;
   }
 
   .grain-overlay::after {
