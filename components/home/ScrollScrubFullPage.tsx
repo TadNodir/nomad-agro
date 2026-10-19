@@ -301,8 +301,8 @@ export default function ScrollScrubFullPage() {
 
   /* ── translation data ───────────────────────────────────────────────── */
   const pillars = tWhyUs.raw('pillars') as Array<{ title: string; description: string }>
-  const reviews = tReviews.raw('items')  as Array<{
-    name: string; company: string; country: string; text: string
+  const customers = tReviews.raw('items') as Array<{
+    company: string; country: string; products: string; text: string
   }>
   const productCategories = [
     { href: `/${locale}/catalog#${tProducts('driedFruits.slug')}`, name: tProducts('driedFruits.name'), desc: tProducts('driedFruits.description') },
@@ -500,26 +500,17 @@ export default function ScrollScrubFullPage() {
                 [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                 {tReviews('title')}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-4xl mx-auto">
-                {reviews.map((review, i) => (
-                  <div key={i} className={`${glass} p-3 sm:p-5 text-left`}>
-                    {/* Stars */}
-                    <div className="flex gap-0.5 mb-2 sm:mb-3">
-                      {Array.from({ length: 5 }).map((_, j) => (
-                        <svg key={j} className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brand-lime fill-current"
-                          viewBox="0 0 20 20" aria-hidden="true">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <p className="text-white/85 text-xs sm:text-sm leading-relaxed italic mb-2 sm:mb-3">
-                      &ldquo;{review.text}&rdquo;
+              <div className="grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-3 max-w-4xl mx-auto sm:[&>*]:col-span-2 sm:[&>*:nth-child(4)]:col-start-2">
+                {customers.map((customer) => (
+                  <div key={customer.company} className={`${glass} p-3 sm:p-4 text-left`}>
+                    <p className="text-white/85 text-xs leading-relaxed italic mb-2 line-clamp-3 sm:line-clamp-5">
+                      &ldquo;{customer.text}&rdquo;
                     </p>
                     <p className="text-cream font-semibold text-xs sm:text-sm
                       [text-shadow:_0_1px_6px_rgba(0,0,0,0.4)]">
-                      {review.name}
+                      {customer.company}
                     </p>
-                    <p className="text-white/55 text-[10px] sm:text-xs">{review.company} · {review.country}</p>
+                    <p className="text-white/55 text-[10px] sm:text-xs">{customer.country}</p>
                   </div>
                 ))}
               </div>

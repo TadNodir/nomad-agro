@@ -107,7 +107,7 @@
     },
     "certifications": {
       "title": "Sifat va muvofiqlik",
-      "text": "Mahsulotlarimiz fitosanitar va eksport standartlariga muvofiq tayyorlanadi, bu esa manzil mamlakatda bojxona rasmiyatchiligini bemalol oʻtkazishni taʼminlaydi. Biz barcha zarur eksport hujjatlarini taqdim etamiz.",
+      "text": "Mahsulotlarimiz fitosanitar va eksport standartlariga muvofiq tayyorlanadi, bu esa manzil mamlakatda bojxona rasmiyatchiligini bemalol oʻtkazishni taʼminlaydi. Biz barcha zarur eksport hujjatlarini taqdim etamiz. Bizda HACCP sertifikati va FDA roʻyxatdan oʻtkazilishi ham mavjud, shuningdek Nomad Agro Xitoy bojxona xizmati tomonidan Xitoyga eksport qilishga ruxsat berilgan kompaniyalar roʻyxatiga kiritilgan.",
       "cardSubtitle": "Oziq-ovqat xavfsizligi boshqaruv tizimi",
       "issuerLabel": "Sertifikatlovchi organ",
       "numberLabel": "Sertifikat raqami",
@@ -145,25 +145,37 @@
     "eyebrow": "Hamkorlar sharhlari",
     "ctaTitle": "Hamkor boʻlishga tayyormisiz?",
     "ctaText": "Bizning oʻsib borayotgan ulgurji importchilar tarmogʻimizga qoʻshiling. Talablaringizni muhokama qilish uchun biz bilan bogʻlaning.",
-    "subtitle": "Yevropa, Rossiya, Buyuk Britaniya, AQSH, Ozarbayjon, Belarus, Xitoy va Gruziyadagi importchilar va ulgurji xaridorlar tomonidan ishoniladi.",
+    "subtitle": "Yevropa, Buyuk Britaniya, Kavkaz va Xitoydagi importchilar va ulgurji xaridorlar tomonidan ishoniladi.",
     "items": [
       {
-        "name": "Marko B.",
-        "company": "European Import Co.",
-        "country": "Germaniya",
-        "text": "Ajoyib sifatli quritilgan oʻriklar — barqaror oʻlcham, chiroyli rang va juda raqobatbardosh shartlar. Nomad Agro biz uchun ishonchli uzoq muddatli hamkor."
+        "company": "Georgia Global Gourmet LLC",
+        "country": "Gruziya",
+        "products": "Mayiz, quritilgan oʻrik, quritilgan olxoʻri",
+        "text": "Nomad Agrodan ajoyib quritilgan mevalar. Mayiz juda shirin, quritilgan oʻrik yumshoq va mazali, quritilgan olxoʻri esa boy, goʻshtdor va uzoq esda qoladigan taʼmga ega. Tavsiya qilaman!"
       },
       {
-        "name": "Asel M.",
-        "company": "Central Asia Trading",
-        "country": "Qozogʻiston",
-        "text": "Ularning moshi eksport standartlariga javob beradi va ideal saralanib yetib keldi. Muloqot va hujjatlar davomida professional darajada edi. Tavsiya etaman."
+        "company": "Laziz International Ltd",
+        "country": "Buyuk Britaniya",
+        "products": "Mayiz, yongʻoqlar",
+        "text": "Bir necha yildan beri mijozmiz va hamon juda mamnunmiz. Mazali mayiz va yongʻoqlar, yuqori sifat va tez yetkazib berish. Xaridorlarimizga yoqadi."
       },
       {
-        "name": "Chen V.",
-        "company": "Pacific Naturals Ltd",
+        "company": "Nussco B.V.",
+        "country": "Niderlandiya",
+        "products": "Quritilgan oʻrik, quritilgan olxoʻri",
+        "text": "Nomad Agroning Yevropadagi dastlabki mijozlaridan biri boʻlganmiz va hech qachon afsuslanmaganmiz. Quritilgan oʻrik ajoyib — bunga Oʻzbekistonning quyoshli iqlimi ham yordam beradi, quritilgan olxoʻri esa goʻshtdor va mazali. Bizga juda yoqadi!"
+      },
+      {
+        "company": "ООО «НОВРУЗОГЛУ.Р»",
+        "country": "Ozarbayjon",
+        "products": "Mayiz, quritilgan oʻrik, quritilgan olxoʻri",
+        "text": "Nomad Agrodan meva va quritilgan mevalar import qilishdan juda mamnunmiz. Mayiz, quritilgan oʻrik va olxoʻri mazali, xizmat esa tez. Doʻstona qoʻshni mamlakatdan ajoyib hamkor."
+      },
+      {
+        "company": "Koklam Commercial Firm",
         "country": "Xitoy",
-        "text": "Nomad Agrodan ikki yildan beri yongʻoq xarid qilyapmiz. Sifat, qadoqlash va hujjatlar har doim bizning standartlarimizga toʻliq javob bergan."
+        "products": "Mayiz, quritilgan olxoʻri",
+        "text": "Oʻzbekiston va Xitoy oʻrtasidagi savdo oʻsib borayotgani sababli Nomad Agrodan mayiz va quritilgan olxoʻri import qilishdan xursandmiz. Ajoyib mahsulot, tez xizmat va juda xushmuomala odamlar. Hamkorligimizni yanada rivojlantirishga umid qilamiz."
       }
     ]
   },
@@ -353,7 +365,7 @@
     },
     "reviews": {
       "title": "Hamkorlar sharhlari | Nomad Agro | Eksportchi",
-      "description": "Nomad Agroning xalqaro ulgurji hamkorlari va importchilaridan sharhlar."
+      "description": "Nomad Agroning ulgurji hamkorlari va importchilaridan sharhlar — Gruziya, Buyuk Britaniya, Niderlandiya, Ozarbayjon, Xitoy."
     },
     "catalog": {
       "title": "Mahsulotlar katalogi | Nomad Agro | Quritilgan mevalar, yongʻoqlar va mosh",

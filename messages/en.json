@@ -107,7 +107,7 @@
     },
     "certifications": {
       "title": "Quality & Compliance",
-      "text": "Our products are prepared in compliance with phytosanitary and export standards, ensuring smooth customs clearance in your destination market. We provide all required export documentation.",
+      "text": "Our products are prepared in compliance with phytosanitary and export standards, ensuring smooth customs clearance in your destination market. We provide all required export documentation. We also hold HACCP certification and an FDA registration, and Nomad Agro is listed as an approved exporter by Chinese Customs, which allows us to export to China.",
       "cardSubtitle": "Food Safety Management System",
       "issuerLabel": "Certified by",
       "numberLabel": "Certificate No.",
@@ -145,25 +145,37 @@
     "eyebrow": "Partner Reviews",
     "ctaTitle": "Ready to become a partner?",
     "ctaText": "Join our growing network of wholesale importers. Contact us to discuss your requirements.",
-    "subtitle": "Trusted by importers and wholesale buyers in Europe, Russia, the United Kingdom, the United States, Azerbaijan, Belarus, China, and Georgia.",
+    "subtitle": "Trusted by importers and wholesale buyers in Europe, the United Kingdom, the Caucasus, and China.",
     "items": [
       {
-        "name": "Marco B.",
-        "company": "European Import Co.",
-        "country": "Germany",
-        "text": "Excellent quality dried apricots — consistent sizing, beautiful colour, and very competitive terms. Nomad Agro is a reliable long-term partner for us."
+        "company": "Georgia Global Gourmet LLC",
+        "country": "Georgia",
+        "products": "Raisins, dried apricots, prunes",
+        "text": "Excellent dried fruit from Nomad Agro. The raisins are wonderfully sweet, the dried apricots are soft and delicious, and the prunes are rich and meaty with a flavor that lingers. Highly recommended!"
       },
       {
-        "name": "Asel M.",
-        "company": "Central Asia Trading",
-        "country": "Kazakhstan",
-        "text": "Their mung beans are export-grade and arrived perfectly sorted. The communication and documentation were professional throughout. Highly recommended."
+        "company": "Laziz International Ltd",
+        "country": "United Kingdom",
+        "products": "Raisins, nuts",
+        "text": "A couple of years as a customer, and we’re still very satisfied. Delicious raisins and nuts, top quality, and fast delivery. Our customers love them."
       },
       {
-        "name": "Chen W.",
-        "company": "Pacific Naturals Ltd",
+        "company": "Nussco B.V.",
+        "country": "Netherlands",
+        "products": "Dried apricots, prunes",
+        "text": "One of Nomad Agro’s first European customers, and we’ve never regretted it. The dried apricots are wonderful, helped by Uzbekistan’s sunny climate, and the prunes are meaty and delicious. We love them!"
+      },
+      {
+        "company": "Novruzoglu.R LLC",
+        "country": "Azerbaijan",
+        "products": "Raisins, dried apricots, prunes",
+        "text": "Very pleased to import fruits and dried fruits from Nomad Agro. The raisins, dried apricots, and prunes are delicious, and the service is fast. A great partner from a friendly neighbor country."
+      },
+      {
+        "company": "Koklam Commercial Firm",
         "country": "China",
-        "text": "We have been sourcing walnuts from Nomad Agro for two seasons now. Quality, packaging, and documentation have always met our standards precisely."
+        "products": "Raisins, prunes",
+        "text": "Glad to import raisins and prunes from Nomad Agro as trade between Uzbekistan and China keeps growing. Great product, fast service, and very friendly people. Hope to continue to grow our partnership further."
       }
     ]
   },
@@ -353,7 +365,7 @@
     },
     "reviews": {
       "title": "Partner Reviews | Nomad Agro Exporter | Uzbekistan",
-      "description": "Testimonials from Nomad Agro's international wholesale partners and importers — Europe, Russia, UK, USA, Azerbaijan, Belarus, China, Georgia."
+      "description": "Testimonials from Nomad Agro's wholesale partners and importers — Georgia, United Kingdom, Netherlands, Azerbaijan, China."
     },
     "catalog": {
       "title": "Product Catalog | Nomad Agro | Dried Fruits, Nuts & Mung Beans from Uzbekistan",

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { Star } from 'lucide-react'
+import { Package, Quote } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
@@ -25,19 +25,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   }
 }
 
-function Avatar({ name }: { name: string }) {
-  const initials = name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)
-  return (
-    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-green to-brand-forest flex items-center justify-center flex-shrink-0">
-      <span className="text-brand-lime text-base font-bold font-serif">{initials}</span>
-    </div>
-  )
-}
-
 export default async function ReviewsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'reviews' })
-  const items = t.raw('items') as Array<{ name: string; company: string; country: string; text: string }>
+  const items = t.raw('items') as Array<{ company: string; country: string; products: string; text: string }>
 
   return (
     <>
@@ -66,26 +57,22 @@ export default async function ReviewsPage({ params }: { params: Promise<{ locale
       {/* Reviews grid */}
       <Section>
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
-          {items.map((item, i) => (
+          {items.map((item) => (
             <blockquote
-              key={i}
-              className="bg-white rounded-2xl p-8 shadow-sm border border-parchment hover:shadow-md transition-shadow duration-200 flex flex-col"
+              key={item.company}
+              className="h-full bg-white rounded-2xl p-8 shadow-sm border border-parchment hover:shadow-md transition-shadow duration-200 flex flex-col"
             >
-              <div className="flex gap-0.5 mb-5">
-                {Array.from({ length: 5 }).map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-apricot text-apricot" />
-                ))}
-              </div>
+              <Quote className="w-7 h-7 text-brand-green/30 mb-4" aria-hidden="true" />
               <p className="text-bark text-base leading-relaxed italic flex-1 mb-6">
                 &ldquo;{item.text}&rdquo;
               </p>
-              <footer className="flex items-center gap-4 pt-4 border-t border-parchment">
-                <Avatar name={item.name} />
-                <div>
-                  <cite className="not-italic font-semibold text-soil">{item.name}</cite>
-                  <p className="text-stone text-sm mt-0.5">{item.company}</p>
-                  <p className="text-stone text-xs">{item.country}</p>
-                </div>
+              <footer className="pt-4 border-t border-parchment">
+                <cite className="not-italic font-semibold text-soil block">{item.company}</cite>
+                <p className="text-stone text-sm mt-0.5">{item.country}</p>
+                <p className="flex items-start gap-1.5 text-stone text-xs mt-2">
+                  <Package className="w-3.5 h-3.5 text-brand-green flex-shrink-0 mt-0.5" />
+                  {item.products}
+                </p>
               </footer>
             </blockquote>
           ))}
