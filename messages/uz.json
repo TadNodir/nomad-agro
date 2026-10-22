@@ -11,7 +11,7 @@
   },
   "hero": {
     "tagline": "Oʻzbekiston togʻ etaklarida yetishtirilgan",
-    "headline": "Premium quritilgan mevalar, yongʻoqlar va mosh",
+    "headline": "Premium quritilgan mevalar va yongʻoqlar",
     "subheadline": "Toza togʻ etagi fermalaridan sizning omboringizgacha — eksportga tayyor, hujjatlashtirilgan sifat bilan.",
     "cta": "Narx soʻrash",
     "ctaSecondary": "Katalogni koʻrish",
@@ -31,11 +31,6 @@
       "name": "Yongʻoqlar",
       "slug": "nuts",
       "description": "Tozalangan yongʻoq va yeryongʻoq — qobiqli, magʻiz va moylik navlar — Oʻzbekistondan."
-    },
-    "mungBeans": {
-      "name": "Mosh (mung loviya)",
-      "slug": "mung-beans",
-      "description": "Yashil mosh — tozalangan, saralangan, eksport sifatidagi, Oʻzbekistondan."
     },
     "viewAll": "Toʻliq katalog"
   },
@@ -189,44 +184,28 @@
     "finalCtaText": "Qaysi mahsulotlar va qancha miqdorda kerakligini ayting — biz bir ish kuni ichida joriy narxlar va yetkazib berish variantlarini taqdim etamiz.",
     "sections": {
       "driedFruits": "Quritilgan mevalar",
-      "nuts": "Yongʻoqlar",
-      "mungBeans": "Mosh (mung loviya)"
+      "nuts": "Yongʻoqlar"
     },
     "groups": {
       "raisins": "Mayiz",
       "apricots": "Quritilgan oʻrik",
       "prunes": "Quritilgan olxoʻri",
       "peanuts": "Yeryongʻoq",
-      "walnuts": "Yongʻoq",
-      "mungBeans": "Mosh (mung loviya)"
+      "walnuts": "Yongʻoq"
     },
     "specs": {
-      "grade": "Navi",
-      "moisture": "Namlik",
-      "size": "Oʻlcham",
-      "caliber": "Kalibr",
-      "sulphur": "Oltingugurt",
-      "splitBroken": "Singan / boʻlingan",
-      "damaged": "Shikastlangan",
-      "foreignMaterial": "Begona qoʻshimchalar",
-      "mold": "Mogʻor",
-      "admixture": "Aralashmalar",
+      "grade": "Nav / kalibr",
       "packaging": "Qadoqlash"
     },
     "values": {
-      "absent": "Yoʻq",
-      "notAllowed": "Ruxsat etilmaydi",
-      "highest": "Oliy",
       "firstGrade": "1-nav",
-      "secondGrade": "2-nav",
       "thirdIndustrial": "3-nav, sanoat",
-      "box10kg": "10 kg quti",
+      "box5or10": "5 yoki 10 kg qutilar",
       "pcs100": "{n} dona / 100 g",
+      "pcsKg": "{n} dona / kg",
       "perOunce": "1 untsiyada {n}",
-      "cm": "{n} sm",
-      "gKg": "{n} g/kg",
-      "noMoreThan": "{n} dan oshmasligi kerak",
-      "mixedForOil": "Aralash, moy ishlab chiqarish uchun"
+      "gradeACount": "A navi, soni {n}",
+      "mixedForOil": "3-nav, aralash (moy uchun)"
     },
     "items": {
       "raisinBlackRed": "Qora-qizil mayiz",
@@ -255,8 +234,7 @@
       "peanutKernelOil": "Yeryongʻoq magʻzi, 3-nav (moy uchun)",
       "walnutButterfly": "Tozalangan yongʻoq, «kapalak»",
       "walnutWhite": "Tozalangan yongʻoq, oq",
-      "walnutAmber": "Tozalangan yongʻoq, qahrabo rang",
-      "mungGreen": "Yashil mosh"
+      "walnutAmber": "Tozalangan yongʻoq, qahrabo rang"
     },
     "requestSpec": "Spetsifikatsiyani soʻrash"
   },
@@ -330,7 +308,7 @@
     "items": [
       {
         "question": "Nomad Agro mahsulotlari qayerda yetishtiriladi?",
-        "answer": "Bizning quritilgan mevalarimiz, yongʻoqlarimiz va moshimiz Oʻzbekistonning togʻ etagi hududlaridan — jumladan Fargʻona vodiysi, Surxondaryo va Samarqand viloyatlaridan — olinadi. Bu yerda dengiz sathidan balandlik, unumdor tuproq va kontinental iqlim istisnoli tabiiy sifatni taʼminlaydi."
+        "answer": "Bizning quritilgan mevalarimiz va yongʻoqlarimiz Oʻzbekistonning togʻ etagi hududlaridan — jumladan Fargʻona vodiysi, Surxondaryo va Samarqand viloyatlaridan — olinadi. Bu yerda dengiz sathidan balandlik, unumdor tuproq va kontinental iqlim istisnoli tabiiy sifatni taʼminlaydi."
       },
       {
         "question": "Nomad Agro xalqaro eksport qiladimi?",
@@ -356,20 +334,20 @@
   },
   "seo": {
     "home": {
-      "title": "Nomad Agro | Premium quritilgan mevalar, yongʻoqlar va mosh — Oʻzbekistondan eksport",
-      "description": "Nomad Agro Oʻzbekiston togʻ etaklaridan quritilgan mevalar, yongʻoqlar va moshni eksport qiladi. Dunyo boʻylab importchilar uchun B2B ulgurji yetkazuvchi."
+      "title": "Nomad Agro | Premium quritilgan mevalar va yongʻoqlar — Oʻzbekistondan eksport",
+      "description": "Nomad Agro Oʻzbekiston togʻ etaklaridan quritilgan mevalar va yongʻoqlarni eksport qiladi. Dunyo boʻylab importchilar uchun B2B ulgurji yetkazuvchi."
     },
     "about": {
       "title": "Nomad Agro haqida | Oʻzbekistondan eksportchi",
-      "description": "Nomad Agro — Oʻzbekiston togʻ etaklaridan quritilgan mevalar, yongʻoqlar va mosh eksportchisi. Tariximiz, yetishtirish hududlari va jarayonlarimiz."
+      "description": "Nomad Agro — Oʻzbekiston togʻ etaklaridan quritilgan mevalar va yongʻoqlar eksportchisi. Tariximiz, yetishtirish hududlari va jarayonlarimiz."
     },
     "reviews": {
       "title": "Hamkorlar sharhlari | Nomad Agro | Eksportchi",
       "description": "Nomad Agroning ulgurji hamkorlari va importchilaridan sharhlar — Gruziya, Buyuk Britaniya, Niderlandiya, Ozarbayjon, Xitoy."
     },
     "catalog": {
-      "title": "Mahsulotlar katalogi | Nomad Agro | Quritilgan mevalar, yongʻoqlar va mosh",
-      "description": "Nomad Agro katalogi — mayiz, quritilgan oʻrik, olxoʻri, yeryongʻoq, yongʻoq va mosh. Joriy narxlar uchun toʻgʻridan-toʻgʻri bizga murojaat qiling."
+      "title": "Mahsulotlar katalogi | Nomad Agro | Quritilgan mevalar va yongʻoqlar",
+      "description": "Nomad Agro katalogi — mayiz, quritilgan oʻrik, olxoʻri, yeryongʻoq va yongʻoq. Joriy narxlar uchun toʻgʻridan-toʻgʻri bizga murojaat qiling."
     },
     "contacts": {
       "title": "Nomad Agro bilan bogʻlaning | Ulgurji soʻrovlar va narx takliflari",

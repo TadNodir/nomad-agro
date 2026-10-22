@@ -118,7 +118,6 @@ export function ContactForm() {
           <option value="">Select a product…</option>
           <option value="dried-fruits">Dried Fruits</option>
           <option value="nuts">Nuts</option>
-          <option value="mung-beans">Mung Beans (Mash)</option>
           <option value="multiple">Multiple products</option>
         </select>
       </div>

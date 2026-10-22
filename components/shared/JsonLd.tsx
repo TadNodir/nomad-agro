@@ -17,7 +17,7 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
           height: 80,
         },
         description:
-          'Nomad Agro exports dried fruits, nuts, and mung beans from the foothill regions of Uzbekistan for B2B wholesale buyers worldwide.',
+          'Nomad Agro exports dried fruits and nuts from the foothill regions of Uzbekistan for B2B wholesale buyers worldwide.',
         address: {
           '@type': 'PostalAddress',
           streetAddress: 'Sayram Street, Passage 7, House 52',
@@ -39,7 +39,7 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
           '@type': 'Place',
           name: 'Tashkent, Uzbekistan',
         },
-        knowsAbout: ['Dried Fruits', 'Nuts Export', 'Mung Beans', 'Agricultural Export', 'Uzbekistan Agricultural Products'],
+        knowsAbout: ['Dried Fruits', 'Nuts Export', 'Agricultural Export', 'Uzbekistan Agricultural Products'],
         sameAs: [],
       },
       {

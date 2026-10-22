@@ -11,7 +11,7 @@
   },
   "hero": {
     "tagline": "Grown in the Foothills of Uzbekistan",
-    "headline": "Premium Dried Fruits, Nuts & Mung Beans",
+    "headline": "Premium Dried Fruits & Nuts",
     "subheadline": "From pristine foothill farms to your warehouse — export-ready, with documented quality, and delivered with care.",
     "cta": "Request a Quote",
     "ctaSecondary": "View Catalog",
@@ -31,11 +31,6 @@
       "name": "Nuts",
       "slug": "nuts",
       "description": "Peeled walnuts and peanuts — in shell, kernels, and oil grade — from Uzbekistan."
-    },
-    "mungBeans": {
-      "name": "Mung Beans (Mash)",
-      "slug": "mung-beans",
-      "description": "Green mung beans — cleaned, sorted, and export-grade, from Uzbekistan."
     },
     "viewAll": "View Full Catalog"
   },
@@ -189,44 +184,28 @@
     "finalCtaText": "Tell us which products and quantities you need — we will provide current pricing and shipping options within one business day.",
     "sections": {
       "driedFruits": "Dried Fruits",
-      "nuts": "Nuts",
-      "mungBeans": "Mung Beans (Mash)"
+      "nuts": "Nuts"
     },
     "groups": {
       "raisins": "Raisins",
       "apricots": "Dried Apricots",
       "prunes": "Prunes",
       "peanuts": "Peanuts",
-      "walnuts": "Walnuts",
-      "mungBeans": "Mung Beans (Mash)"
+      "walnuts": "Walnuts"
     },
     "specs": {
-      "grade": "Grade",
-      "moisture": "Moisture",
-      "size": "Size",
-      "caliber": "Caliber",
-      "sulphur": "Sulphur",
-      "splitBroken": "Split / broken",
-      "damaged": "Damaged",
-      "foreignMaterial": "Foreign material",
-      "mold": "Mold",
-      "admixture": "Admixture",
+      "grade": "Grade / caliber",
       "packaging": "Packaging"
     },
     "values": {
-      "absent": "Absent",
-      "notAllowed": "Not allowed",
-      "highest": "Highest",
       "firstGrade": "1st grade",
-      "secondGrade": "2nd grade",
       "thirdIndustrial": "3rd grade, industrial",
-      "box10kg": "10 kg box",
+      "box5or10": "5 or 10 kg boxes",
       "pcs100": "{n} pcs / 100 g",
+      "pcsKg": "{n} pcs / kg",
       "perOunce": "{n} per 1 ounce",
-      "cm": "{n} cm",
-      "gKg": "{n} g per kg",
-      "noMoreThan": "No more than {n}",
-      "mixedForOil": "Mixed, for oil production"
+      "gradeACount": "Grade A, count {n}",
+      "mixedForOil": "3rd grade, mixed (for oil)"
     },
     "items": {
       "raisinBlackRed": "Black-Red Raisins",
@@ -255,8 +234,7 @@
       "peanutKernelOil": "Peanut Kernels, 3rd Grade (for Oil)",
       "walnutButterfly": "Peeled Walnuts, Butterfly",
       "walnutWhite": "Peeled Walnuts, White",
-      "walnutAmber": "Peeled Walnuts, Amber",
-      "mungGreen": "Green Mung Beans"
+      "walnutAmber": "Peeled Walnuts, Amber"
     },
     "requestSpec": "Request spec sheet"
   },
@@ -330,7 +308,7 @@
     "items": [
       {
         "question": "Where are Nomad Agro's products grown?",
-        "answer": "Our dried fruits, nuts, and mung beans are grown and sourced from the foothill regions of Uzbekistan — including the Fergana Valley, Surkhandarya, and Samarkand areas — where altitude, fertile soil, and a continental climate produce exceptional natural quality."
+        "answer": "Our dried fruits and nuts are grown and sourced from the foothill regions of Uzbekistan — including the Fergana Valley, Surkhandarya, and Samarkand areas — where altitude, fertile soil, and a continental climate produce exceptional natural quality."
       },
       {
         "question": "Does Nomad Agro export internationally?",
@@ -356,20 +334,20 @@
   },
   "seo": {
     "home": {
-      "title": "Nomad Agro | Premium Dried Fruits, Nuts & Mung Beans — Export from Uzbekistan",
-      "description": "Nomad Agro exports dried fruits, nuts, and mung beans from Uzbekistan's foothill regions. B2B wholesale supplier for importers worldwide. Request a quote."
+      "title": "Nomad Agro | Premium Dried Fruits & Nuts — Export from Uzbekistan",
+      "description": "Nomad Agro exports dried fruits and nuts from Uzbekistan's foothill regions. B2B wholesale supplier for importers worldwide. Request a quote."
     },
     "about": {
       "title": "About Nomad Agro | B2B Exporter from Uzbekistan",
-      "description": "Learn about Nomad Agro — Tashkent-based exporter of dried fruits, nuts, and mung beans from Uzbekistan's foothill regions. Our story, growing regions, and processes."
+      "description": "Learn about Nomad Agro — Tashkent-based exporter of dried fruits and nuts from Uzbekistan's foothill regions. Our story, growing regions, and processes."
     },
     "reviews": {
       "title": "Partner Reviews | Nomad Agro Exporter | Uzbekistan",
       "description": "Testimonials from Nomad Agro's wholesale partners and importers — Georgia, United Kingdom, Netherlands, Azerbaijan, China."
     },
     "catalog": {
-      "title": "Product Catalog | Nomad Agro | Dried Fruits, Nuts & Mung Beans from Uzbekistan",
-      "description": "Browse Nomad Agro's full product catalog — raisins, dried apricots, prunes, peanuts, walnuts, and mung beans. Request current pricing by contacting us directly."
+      "title": "Product Catalog | Nomad Agro | Dried Fruits & Nuts from Uzbekistan",
+      "description": "Browse Nomad Agro's full product catalog — raisins, dried apricots, prunes, peanuts and walnuts. Request current pricing by contacting us directly."
     },
     "contacts": {
       "title": "Contact Nomad Agro | Wholesale Inquiries & Quote Requests",

@@ -1,36 +1,21 @@
-// Single source of truth for the product range: mirrors public/NOMAD_AGRO_PRODUCTS.pdf.
-// Product names live in messages/*.json under catalog.items.<id>; spec labels under
-// catalog.specs; worded spec values under catalog.values.
+// Single source of truth for the product range (mirrors public/NOMAD_AGRO_PRODUCTS.pdf).
+// Each card shows only two facts: grade / caliber and packaging.
+// Product names live in messages/*.json under catalog.items.<id>; labels under
+// catalog.specs; worded values under catalog.values.
 
-export type SpecLabel =
-  | 'grade'
-  | 'moisture'
-  | 'size'
-  | 'caliber'
-  | 'sulphur'
-  | 'splitBroken'
-  | 'damaged'
-  | 'foreignMaterial'
-  | 'mold'
-  | 'admixture'
-  | 'packaging'
+export type SpecLabel = 'grade' | 'packaging'
 
 export type ValueKey =
-  | 'absent'
-  | 'notAllowed'
-  | 'highest'
   | 'firstGrade'
-  | 'secondGrade'
   | 'thirdIndustrial'
-  | 'box10kg'
+  | 'box5or10'
   | 'pcs100'
+  | 'pcsKg'
   | 'perOunce'
-  | 'cm'
-  | 'gKg'
-  | 'noMoreThan'
+  | 'gradeACount'
   | 'mixedForOil'
 
-/** Plain text (numbers, ranges) or a translated value, optionally with a number `n`. */
+/** Plain text or a translated value, optionally with a number/range `n`. */
 export type SpecValue = string | { key: ValueKey; n?: string }
 
 export interface Product {
@@ -38,14 +23,14 @@ export interface Product {
   specs: Array<[SpecLabel, SpecValue]>
 }
 
-export type GroupId = 'raisins' | 'apricots' | 'prunes' | 'peanuts' | 'walnuts' | 'mungBeans'
+export type GroupId = 'raisins' | 'apricots' | 'prunes' | 'peanuts' | 'walnuts'
 
 export interface ProductGroup {
   id: GroupId
   products: Product[]
 }
 
-export type CategoryId = 'driedFruits' | 'nuts' | 'mungBeans'
+export type CategoryId = 'driedFruits' | 'nuts'
 
 export interface CatalogCategory {
   id: CategoryId
@@ -55,77 +40,46 @@ export interface CatalogCategory {
   groups: ProductGroup[]
 }
 
-const absent: SpecValue = { key: 'absent' }
-const notAllowed: SpecValue = { key: 'notAllowed' }
-const box10kg: SpecValue = { key: 'box10kg' }
-const pcs = (n: string): SpecValue => ({ key: 'pcs100', n })
-const cm = (n: string): SpecValue => ({ key: 'cm', n })
-const sulphur: SpecValue = { key: 'gKg', n: '1.7–2' }
-const noMoreThan = (n: string): SpecValue => ({ key: 'noMoreThan', n })
+const box: SpecValue = { key: 'box5or10' }
 
-const raisin = (
-  id: string,
-  grade: ValueKey,
-  moisture: string,
-  caliber?: string
-): Product => ({
+const product = (id: string, grade: SpecValue): Product => ({
   id,
   specs: [
-    ['grade', { key: grade }],
-    ['moisture', moisture],
-    ['foreignMaterial', absent],
-    ['packaging', box10kg],
-    ...(caliber ? ([['caliber', pcs(caliber)]] as Array<[SpecLabel, SpecValue]>) : []),
+    ['grade', grade],
+    ['packaging', box],
   ],
 })
 
-const apricot = (id: string, grade: ValueKey, size: string): Product => ({
-  id,
-  specs: [
-    ['grade', { key: grade }],
-    ['moisture', '16–24%'],
-    ['size', cm(size)],
-    ['sulphur', sulphur],
-    ['foreignMaterial', absent],
-  ],
-})
+const pcs100 = (n: string): SpecValue => ({ key: 'pcs100', n })
 
-const prune = (id: string): Product => ({
-  id,
-  specs: [
-    ['grade', { key: 'highest' }],
-    ['moisture', '18–26%'],
-    ['damaged', '0.5%'],
-    ['mold', absent],
-  ],
-})
+// Values below follow the product specification sheets where one exists
+// (Soyaki black, golden, sultana, apricots, prunes); other products use the catalog PDF.
+const SOYAKI = pcs100('160–200')
+const GOLDEN = pcs100('280–330')
+const SULTANA = pcs100('280–320')
+const APRICOT: SpecValue = { key: 'pcsKg', n: '100–220' }
+const PRUNE: SpecValue = { key: 'gradeACount', n: '70/80' }
 
-const peanutKernel = (id: string, caliber: SpecValue): Product => ({
-  id,
-  specs: [
-    ['caliber', caliber],
-    ['moisture', '7%'],
-    ['splitBroken', '1–2%'],
-    ['foreignMaterial', absent],
-    ['mold', absent],
-    ['admixture', '0.5%'],
-  ],
-})
+/** Products with a specification sheet available on request. */
+const SPEC_SHEET_IDS = new Set([
+  'raisinSoyakiSmall',
+  'raisinSoyakiMedium',
+  'raisinSoyakiLarge120',
+  'raisinSoyakiLarge100',
+  'raisinGolden150',
+  'raisinGolden120',
+  'raisinSultana',
+  'raisinSultanaCalibrated',
+  'apricotBakery',
+  'apricotSubhanaLarge',
+  'apricotSubhanaMedium',
+  'apricotHandak',
+  'pruneSpain',
+  'pruneHungarian',
+  'pruneBalonchik',
+])
 
-const walnut = (id: string, caliber: string): Product => ({
-  id,
-  specs: [
-    ['caliber', caliber],
-    ['mold', notAllowed],
-    ['admixture', notAllowed],
-  ],
-})
-
-/** Products with a downloadable-on-request specification sheet (prunes, apricots, golden and sultana raisins). */
-export const hasSpecSheet = (id: string) =>
-  id.startsWith('apricot') ||
-  id.startsWith('prune') ||
-  ['raisinGolden150', 'raisinGolden120', 'raisinSultana', 'raisinSultanaCalibrated'].includes(id)
+export const hasSpecSheet = (id: string) => SPEC_SHEET_IDS.has(id)
 
 export const CATALOG: CatalogCategory[] = [
   {
@@ -136,42 +90,33 @@ export const CATALOG: CatalogCategory[] = [
       {
         id: 'raisins',
         products: [
-          raisin('raisinBlackRed', 'thirdIndustrial', '8–15%'),
-          raisin('raisinBlackSun220', 'secondGrade', '10–15%', '220–240'),
-          raisin('raisinBlackSmall', 'secondGrade', '8–15%', '400–440'),
-          raisin('raisinBlackMedium', 'secondGrade', '8–15%', '300–400'),
-          raisin('raisinBlackSun200', 'secondGrade', '10–15%', '200–220'),
-          raisin('raisinSoyakiSmall', 'highest', '10–15%', '160–180'),
-          raisin('raisinSoyakiMedium', 'highest', '10–15%', '140–160'),
-          raisin('raisinSoyakiLarge120', 'highest', '10–15%', '120–130'),
-          raisin('raisinSoyakiLarge100', 'highest', '10–15%', '100–110'),
-          raisin('raisinSultana', 'firstGrade', '10–15%', '240–260'),
-          raisin('raisinGolden150', 'highest', '10–15%', '150–160'),
-          raisin('raisinGolden120', 'highest', '10–15%', '120–140'),
-          raisin('raisinSultanaCalibrated', 'highest', '10–15%', '220–240'),
+          product('raisinBlackRed', { key: 'thirdIndustrial' }),
+          product('raisinBlackSun220', pcs100('220–240')),
+          product('raisinBlackSmall', pcs100('400–440')),
+          product('raisinBlackMedium', pcs100('300–400')),
+          product('raisinBlackSun200', pcs100('200–220')),
+          product('raisinSoyakiSmall', SOYAKI),
+          product('raisinSoyakiMedium', SOYAKI),
+          product('raisinSoyakiLarge120', SOYAKI),
+          product('raisinSoyakiLarge100', SOYAKI),
+          product('raisinSultana', SULTANA),
+          product('raisinGolden150', GOLDEN),
+          product('raisinGolden120', GOLDEN),
+          product('raisinSultanaCalibrated', SULTANA),
         ],
       },
       {
         id: 'apricots',
         products: [
-          {
-            id: 'apricotBakery',
-            specs: [
-              ['grade', { key: 'highest' }],
-              ['moisture', '16–24%'],
-              ['size', cm('2.5–3.5')],
-              ['sulphur', sulphur],
-              ['foreignMaterial', absent],
-            ],
-          },
-          apricot('apricotSubhanaLarge', 'highest', '5.0–6.0'),
-          apricot('apricotSubhanaMedium', 'firstGrade', '4.0–4.5'),
-          apricot('apricotHandak', 'firstGrade', '4.0–4.5'),
+          product('apricotBakery', APRICOT),
+          product('apricotSubhanaLarge', APRICOT),
+          product('apricotSubhanaMedium', APRICOT),
+          product('apricotHandak', APRICOT),
         ],
       },
       {
         id: 'prunes',
-        products: [prune('pruneSpain'), prune('pruneHungarian'), prune('pruneBalonchik')],
+        products: [product('pruneSpain', PRUNE), product('pruneHungarian', PRUNE), product('pruneBalonchik', PRUNE)],
       },
     ],
   },
@@ -183,60 +128,18 @@ export const CATALOG: CatalogCategory[] = [
       {
         id: 'peanuts',
         products: [
-          {
-            id: 'peanutInShell',
-            specs: [
-              ['grade', { key: 'firstGrade' }],
-              ['moisture', '6–7%'],
-              ['splitBroken', '1–2%'],
-              ['foreignMaterial', absent],
-              ['mold', absent],
-            ],
-          },
-          peanutKernel('peanutKernel6070', { key: 'perOunce', n: '60/70' }),
-          peanutKernel('peanutKernel5060', { key: 'perOunce', n: '50/60' }),
-          {
-            id: 'peanutKernelOil',
-            specs: [
-              ['caliber', { key: 'mixedForOil' }],
-              ['moisture', '6–7%'],
-              ['splitBroken', '40–50%'],
-              ['foreignMaterial', absent],
-              ['mold', absent],
-              ['admixture', '1–5%'],
-            ],
-          },
+          product('peanutInShell', { key: 'firstGrade' }),
+          product('peanutKernel6070', { key: 'perOunce', n: '60/70' }),
+          product('peanutKernel5060', { key: 'perOunce', n: '50/60' }),
+          product('peanutKernelOil', { key: 'mixedForOil' }),
         ],
       },
       {
         id: 'walnuts',
         products: [
-          walnut('walnutButterfly', '100%'),
-          walnut('walnutWhite', '70% / 30%'),
-          walnut('walnutAmber', '60% / 40%'),
-        ],
-      },
-    ],
-  },
-  {
-    id: 'mungBeans',
-    slug: 'mung-beans',
-    gradient: 'from-brand-green to-brand-forest',
-    groups: [
-      {
-        id: 'mungBeans',
-        products: [
-          {
-            id: 'mungGreen',
-            specs: [
-              ['caliber', '3+'],
-              ['moisture', noMoreThan('13%')],
-              ['splitBroken', noMoreThan('2%')],
-              ['foreignMaterial', noMoreThan('1%')],
-              ['mold', notAllowed],
-              ['admixture', notAllowed],
-            ],
-          },
+          product('walnutButterfly', '100%'),
+          product('walnutWhite', '70% / 30%'),
+          product('walnutAmber', '60% / 40%'),
         ],
       },
     ],

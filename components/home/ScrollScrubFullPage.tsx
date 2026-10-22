@@ -307,7 +307,6 @@ export default function ScrollScrubFullPage() {
   const productCategories = [
     { href: `/${locale}/catalog#${tProducts('driedFruits.slug')}`, name: tProducts('driedFruits.name'), desc: tProducts('driedFruits.description') },
     { href: `/${locale}/catalog#${tProducts('nuts.slug')}`,        name: tProducts('nuts.name'),        desc: tProducts('nuts.description') },
-    { href: `/${locale}/catalog#${tProducts('mungBeans.slug')}`,   name: tProducts('mungBeans.name'),   desc: tProducts('mungBeans.description') },
   ]
 
   /* ── reduced-motion / slow-connection fallback ───────────────────────── */
@@ -316,7 +315,7 @@ export default function ScrollScrubFullPage() {
       <section className="relative h-screen w-full overflow-hidden"
         style={{ backgroundColor: frameSetRef.current.bg }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={frameSetRef.current.path(0)} alt="Nomad Agro dried fruits, nuts and mung beans"
+        <img src={frameSetRef.current.path(0)} alt="Nomad Agro dried fruits and nuts"
           className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full items-center">
@@ -417,7 +416,7 @@ export default function ScrollScrubFullPage() {
                 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
                 {tProducts('subtitle')}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto mb-4 sm:mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-w-2xl mx-auto mb-4 sm:mb-8">
                 {productCategories.map(({ href, name, desc }) => (
                   <Link key={href} href={href}
                     className={`group block ${glassInteractive} p-3 sm:p-5 text-left`}>

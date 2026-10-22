@@ -61,7 +61,7 @@ export async function generateMetadata({
           url: `${BASE_URL}/og-image.jpg`,
           width: 1200,
           height: 630,
-          alt: 'Nomad Agro — Premium Dried Fruits, Nuts & Mung Beans from Uzbekistan',
+          alt: 'Nomad Agro — Premium Dried Fruits & Nuts from Uzbekistan',
         },
       ],
     },
