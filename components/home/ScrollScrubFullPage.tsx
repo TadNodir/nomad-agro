@@ -499,8 +499,8 @@ export default function ScrollScrubFullPage() {
                 [text-shadow:_0_2px_14px_rgba(0,0,0,0.6)]">
                 {tReviews('title')}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-3 max-w-4xl mx-auto sm:[&>*]:col-span-2 sm:[&>*:nth-child(4)]:col-start-2">
-                {customers.map((customer) => (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-4xl mx-auto mb-4 sm:mb-8">
+                {customers.slice(0, 3).map((customer) => (
                   <div key={customer.company} className={`${glass} p-3 sm:p-4 text-left`}>
                     <p className="text-white/85 text-xs leading-relaxed italic mb-2 line-clamp-3 sm:line-clamp-5">
                       &ldquo;{customer.text}&rdquo;
@@ -513,6 +513,9 @@ export default function ScrollScrubFullPage() {
                   </div>
                 ))}
               </div>
+              <Button variant="ghost" size="md" href={`/${locale}/reviews`}>
+                {tReviews('viewAll')}
+              </Button>
             </div>
           </PanelLayer>
 

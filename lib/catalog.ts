@@ -60,27 +60,6 @@ const SULTANA = pcs100('280–320')
 const APRICOT: SpecValue = { key: 'pcsKg', n: '100–220' }
 const PRUNE: SpecValue = { key: 'gradeACount', n: '70/80' }
 
-/** Products with a specification sheet available on request. */
-const SPEC_SHEET_IDS = new Set([
-  'raisinSoyakiSmall',
-  'raisinSoyakiMedium',
-  'raisinSoyakiLarge120',
-  'raisinSoyakiLarge100',
-  'raisinGolden150',
-  'raisinGolden120',
-  'raisinSultana',
-  'raisinSultanaCalibrated',
-  'apricotBakery',
-  'apricotSubhanaLarge',
-  'apricotSubhanaMedium',
-  'apricotHandak',
-  'pruneSpain',
-  'pruneHungarian',
-  'pruneBalonchik',
-])
-
-export const hasSpecSheet = (id: string) => SPEC_SHEET_IDS.has(id)
-
 export const CATALOG: CatalogCategory[] = [
   {
     id: 'driedFruits',

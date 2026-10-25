@@ -9,7 +9,7 @@ import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
 import { BASE_URL } from '@/lib/constants'
-import { CATALOG, hasSpecSheet, type SpecValue } from '@/lib/catalog'
+import { CATALOG, type SpecValue } from '@/lib/catalog'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -151,15 +151,13 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                           </div>
                         ))}
                       </dl>
-                      {hasSpecSheet(product.id) && (
-                        <Link
-                          href={`/${locale}/contacts?spec=${product.id}#inquiry`}
-                          className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-green hover:text-brand-green-hover transition-colors"
-                        >
-                          <FileText className="w-3.5 h-3.5" />
-                          {t('requestSpec')}
-                        </Link>
-                      )}
+                      <Link
+                        href={`/${locale}/contacts?spec=${product.id}#inquiry`}
+                        className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-green hover:text-brand-green-hover transition-colors"
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                        {t('requestSpec')}
+                      </Link>
                     </div>
                   </div>
                 ))}
