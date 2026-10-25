@@ -1,5 +1,8 @@
 import { COMPANY, BASE_URL } from '@/lib/constants'
 
+// Escape '<' so a value can never close the <script> tag early.
+const toJsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c')
+
 export function OrganizationJsonLd({ locale }: { locale: string }) {
   const data = {
     '@context': 'https://schema.org',
@@ -56,7 +59,7 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
     />
   )
 }
@@ -80,7 +83,7 @@ export function BreadcrumbJsonLd({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
     />
   )
 }
@@ -106,7 +109,7 @@ export function FaqJsonLd({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
     />
   )
 }

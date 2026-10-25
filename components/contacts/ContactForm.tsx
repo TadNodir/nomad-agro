@@ -87,13 +87,13 @@ export function ContactForm() {
           <label htmlFor="name" className="block text-sm font-medium text-soil mb-1.5">
             {t('name')} *
           </label>
-          <input id="name" name="name" type="text" required className={inputClasses} placeholder="John Smith" />
+          <input id="name" name="name" type="text" required maxLength={100} className={inputClasses} placeholder="John Smith" />
         </div>
         <div>
           <label htmlFor="company" className="block text-sm font-medium text-soil mb-1.5">
             {t('company')}
           </label>
-          <input id="company" name="company" type="text" className={inputClasses} placeholder="ACME Imports Ltd" />
+          <input id="company" name="company" type="text" maxLength={150} className={inputClasses} placeholder="ACME Imports Ltd" />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -101,13 +101,13 @@ export function ContactForm() {
           <label htmlFor="email" className="block text-sm font-medium text-soil mb-1.5">
             {t('email')} *
           </label>
-          <input id="email" name="email" type="email" required className={inputClasses} placeholder="john@company.com" />
+          <input id="email" name="email" type="email" required maxLength={254} className={inputClasses} placeholder="john@company.com" />
         </div>
         <div>
           <label htmlFor="country" className="block text-sm font-medium text-soil mb-1.5">
             {t('country')}
           </label>
-          <input id="country" name="country" type="text" className={inputClasses} placeholder="Germany" />
+          <input id="country" name="country" type="text" maxLength={80} className={inputClasses} placeholder="Germany" />
         </div>
       </div>
       <div>
@@ -129,6 +129,7 @@ export function ContactForm() {
           id="message"
           name="message"
           rows={5}
+          maxLength={5000}
           defaultValue={defaultMessage}
           className={inputClasses}
           placeholder={t('messagePlaceholder')}

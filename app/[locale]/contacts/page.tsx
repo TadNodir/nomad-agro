@@ -203,6 +203,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                       title={t('address')}
                       src={`https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.003}%2C${lat - 0.0018}%2C${lng + 0.003}%2C${lat + 0.0018}&layer=mapnik&marker=${lat}%2C${lng}`}
                       loading="lazy"
+                      referrerPolicy="no-referrer"
                       className="w-full h-full border-0"
                     />
                   </div>
