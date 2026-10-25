@@ -278,7 +278,10 @@
       "submitting": "Yuborilmoqda…",
       "success": "Soʻrovingiz yuborildi. Biz bir ish kuni ichida siz bilan bogʻlanamiz.",
       "error": "Xato yuz berdi. Iltimos, bizga toʻgʻridan-toʻgʻri info@nomadagro.uz manziliga yozing.",
-      "specMessage": "Iltimos, quyidagi mahsulot uchun spetsifikatsiyani yuboring: {product}"
+      "specMessage": "Iltimos, quyidagi mahsulot uchun spetsifikatsiyani yuboring: {product}",
+      "productSelect": "Mahsulotni tanlang…",
+      "productMultiple": "Bir nechta mahsulot",
+      "privacyNotice": "Ushbu shaklni yuborish orqali siz soʻrovingizga javob berish uchun maʼlumotlaringizni qayta ishlashimizga rozilik bildirasiz. <link>Maxfiylik siyosati</link>ni koʻring."
     },
     "registration": "OGRN: 888409",
     "openInMaps": "Google Xaritada ochish"
@@ -293,7 +296,8 @@
     "noPrice": "Narxlar koʻrsatilmaydi — joriy narxlar uchun biz bilan bogʻlaning.",
     "privacyNote": "B2B Ulgurji Eksportchi · Toshkent, Oʻzbekiston",
     "registration": "OGRN: 888409",
-    "poweredBy": "Sayt IO Projects tomonidan ishlab chiqilgan"
+    "poweredBy": "Sayt IO Projects tomonidan ishlab chiqilgan",
+    "privacyLink": "Maxfiylik siyosati"
   },
   "cta": {
     "requestQuote": "Narx soʻrash",
@@ -362,6 +366,71 @@
     "contacts": {
       "title": "Nomad Agro bilan bogʻlaning | Ulgurji soʻrovlar va narx takliflari",
       "description": "B2B ulgurji narxlash, namunalar va eksport soʻrovlari uchun Nomad Agro bilan bogʻlaning. Elektron pochta, telefon, WhatsApp yoki Telegram."
+    },
+    "privacy": {
+      "title": "Maxfiylik siyosati | Nomad Agro",
+      "description": "Nomad Agro nomadagro.uz saytida shaxsiy maʼlumotlarni qanday yigʻadi va foydalanadi — aloqa shakli, xosting, xarita, cookie va sizning huquqlaringiz."
     }
+  },
+  "privacy": {
+    "title": "Maxfiylik siyosati",
+    "updated": "Oxirgi yangilanish: 2026-yil 25-oktabr",
+    "intro": "Ushbu siyosat ushbu sayt orqali qaysi shaxsiy maʼlumotlarni yigʻishimiz, ulardan nima uchun foydalanishimiz va sizning imkoniyatlaringizni tushuntiradi.",
+    "sections": [
+      {
+        "title": "Biz kimmiz",
+        "body": [
+          "Ushbu sayt “Nomad Agro Ltd” MChJga tegishli: 100077, Oʻzbekiston Respublikasi, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy (STIR 307 699 304). Maxfiylik boʻyicha savollar uchun info@nomadagro.uz manziliga yozing."
+        ]
+      },
+      {
+        "title": "Qanday maʼlumotlarni yigʻamiz",
+        "body": [
+          "Aloqa shakli: soʻrov yuborganingizda biz siz kiritgan maʼlumotlarni olamiz — ismingiz va elektron pochta manzilingiz, ixtiyoriy ravishda kompaniya, mamlakat, qiziqtirgan mahsulot va xabar.",
+          "Toʻgʻridan-toʻgʻri aloqa: elektron pochta, telefon, WhatsApp yoki Telegram orqali bogʻlanganingizda, suhbatda baham koʻrgan maʼlumotlaringizni olamiz. Bu xizmatlar maʼlumotlaringizni oʻz maxfiylik siyosatlariga muvofiq qayta ishlaydi.",
+          "Texnik maʼlumotlar: saytga kirganingizda xosting provayderimiz saytni koʻrsatish va uni suiisteʼmoldan himoya qilish uchun IP-manzil, brauzer turi va soʻralgan sahifalar kabi texnik maʼlumotlarni avtomatik qayta ishlaydi."
+        ]
+      },
+      {
+        "title": "Ulardan nima uchun foydalanamiz",
+        "body": [
+          "Soʻrov maʼlumotlaridan faqat soʻrovingizga javob berish, narx takliflari va spetsifikatsiyalarni tayyorlash hamda keyingi hamkorlik uchun foydalanamiz. Maʼlumotlaringizni sotmaymiz va reklama uchun ishlatmaymiz.",
+          "Agar sizga YeI yoki Buyuk Britaniyaning Maʼlumotlarni himoya qilish umumiy reglamenti (GDPR) tatbiq etilsa, soʻrov maʼlumotlarini shartnoma tuzishdan oldin sizning iltimosingiz boʻyicha harakatlarni amalga oshirish uchun (GDPR 6(1)(b)-modda), texnik maʼlumotlarni esa saytning xavfsiz ishlashidagi qonuniy manfaatimiz asosida (GDPR 6(1)(f)-modda) qayta ishlaymiz. Shuningdek, Oʻzbekiston Respublikasining “Shaxsga doir maʼlumotlar toʻgʻrisida”gi Qonuniga rioya qilamiz."
+        ]
+      },
+      {
+        "title": "Xizmat koʻrsatuvchilar",
+        "body": [
+          "Web3Forms (web3forms.com) aloqa shaklidagi soʻrovlarni qabul qilib, elektron pochtamizga yuboradi.",
+          "Vercel Inc. saytni xosting qiladi va yuqorida koʻrsatilgan texnik maʼlumotlarni qayta ishlaydi.",
+          "OpenStreetMap: aloqa sahifasidagi xarita OpenStreetMap serverlaridan yuklanadi va xarita koʻrsatilganda ular IP-manzilingizni oladi.",
+          "Bu provayderlar maʼlumotlarni sizning mamlakatingizdan tashqarida, jumladan AQSHda qayta ishlashi mumkin."
+        ]
+      },
+      {
+        "title": "Cookie fayllari",
+        "body": [
+          "Biz faqat bitta funksional cookie — NEXT_LOCALE dan foydalanamiz, u tanlagan tilingizni bir yilgacha eslab qoladi. Biz analitik, reklama yoki kuzatuv cookie fayllaridan foydalanmaymiz."
+        ]
+      },
+      {
+        "title": "Maʼlumotlarni qancha saqlaymiz",
+        "body": [
+          "Soʻrov maʼlumotlarini soʻrovingizni koʻrib chiqish va keyingi hamkorlik uchun kerak boʻlgan muddatda saqlaymiz, undan uzoqroq esa faqat qonun talab qilganda."
+        ]
+      },
+      {
+        "title": "Sizning huquqlaringiz",
+        "body": [
+          "Siz shaxsiy maʼlumotlaringizga kirish, ularni tuzatish yoki oʻchirish, qayta ishlashni cheklash yoki unga eʼtiroz bildirish hamda ularning nusxasini olishni soʻrashingiz mumkin. info@nomadagro.uz manziliga yozing. Agar sizga GDPR tatbiq etilsa, mahalliy maʼlumotlarni himoya qilish organiga shikoyat ham qilishingiz mumkin."
+        ]
+      },
+      {
+        "title": "Siyosatdagi oʻzgarishlar",
+        "body": [
+          "Biz ushbu siyosatni vaqti-vaqti bilan yangilashimiz mumkin. Sahifa yuqorisidagi sana uning oxirgi marta qachon oʻzgartirilganini koʻrsatadi."
+        ]
+      }
+    ]
   }
 }

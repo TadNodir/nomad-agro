@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { useTranslations, useLocale } from 'next-intl'
 import { Send } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/Button'
 import { CATALOG } from '@/lib/catalog'
 
@@ -16,6 +17,8 @@ const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 export function ContactForm() {
   const t = useTranslations('contact.form')
   const tItems = useTranslations('catalog.items')
+  const tProducts = useTranslations('products')
+  const locale = useLocale()
   const searchParams = useSearchParams()
 
   // Arriving from a catalog "Request spec sheet" link: prefill product and message.
@@ -115,10 +118,10 @@ export function ContactForm() {
           {t('product')}
         </label>
         <select id="product" name="product" defaultValue={defaultProduct} className={inputClasses}>
-          <option value="">Select a product…</option>
-          <option value="dried-fruits">Dried Fruits</option>
-          <option value="nuts">Nuts</option>
-          <option value="multiple">Multiple products</option>
+          <option value="">{t('productSelect')}</option>
+          <option value="dried-fruits">{tProducts('driedFruits.name')}</option>
+          <option value="nuts">{tProducts('nuts.name')}</option>
+          <option value="multiple">{t('productMultiple')}</option>
         </select>
       </div>
       <div>
@@ -158,6 +161,15 @@ export function ContactForm() {
         <Send className="w-4 h-4" />
         {status === 'submitting' ? t('submitting') : t('submit')}
       </Button>
+      <p className="text-xs text-stone text-center">
+        {t.rich('privacyNotice', {
+          link: (chunks) => (
+            <Link href={`/${locale}/privacy`} className="underline underline-offset-2 hover:text-brand-green">
+              {chunks}
+            </Link>
+          ),
+        })}
+      </p>
     </form>
   )
 }

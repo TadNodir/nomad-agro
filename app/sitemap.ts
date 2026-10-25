@@ -7,6 +7,7 @@ const pages = [
   { path: '/reviews', priority: 0.7, changeFrequency: 'monthly' as const },
   { path: '/catalog', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contacts', priority: 0.9, changeFrequency: 'monthly' as const },
+  { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const { path, priority, changeFrequency } of pages) {
     for (const locale of LOCALES) {
-      const languages: Record<string, string> = {}
+      const languages: Record<string, string> = { 'x-default': `${BASE_URL}/en${path}` }
       for (const loc of LOCALES) {
         languages[loc] = `${BASE_URL}/${loc}${path}`
       }

@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: {
       canonical: `${BASE_URL}/${locale}/contacts`,
       languages: {
+        'x-default': `${BASE_URL}/en/contacts`,
         en: `${BASE_URL}/en/contacts`,
         ru: `${BASE_URL}/ru/contacts`,
         uz: `${BASE_URL}/uz/contacts`,

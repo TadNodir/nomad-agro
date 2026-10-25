@@ -139,6 +139,9 @@ export default function Footer() {
           <div className="text-center sm:text-left space-y-1">
             <p className="text-stone text-xs">{t('copyright', { year })}</p>
             <p className="text-stone text-xs">{t('privacyNote')}</p>
+            <Link href={`/${locale}/privacy`} className="inline-block text-stone hover:text-cream text-xs underline underline-offset-2 transition-colors duration-150">
+              {t('privacyLink')}
+            </Link>
           </div>
           <a
             href="https://ioprojects.ai"

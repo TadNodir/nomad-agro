@@ -38,15 +38,13 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'seo.home' })
 
   return {
-    title: {
-      template: '%s | Nomad Agro',
-      default: t('title'),
-    },
+    title: t('title'),
     description: t('description'),
     metadataBase: new URL(BASE_URL),
     alternates: {
       canonical: `${BASE_URL}/${locale}`,
       languages: {
+        'x-default': `${BASE_URL}/en`,
         en: `${BASE_URL}/en`,
         ru: `${BASE_URL}/ru`,
         uz: `${BASE_URL}/uz`,
