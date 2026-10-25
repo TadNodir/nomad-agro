@@ -133,6 +133,15 @@
     ],
     "video": {
       "title": "Company Presentation"
+    },
+    "badges": {
+      "title": "Certifications & approvals",
+      "isoSub": "Food safety management",
+      "haccpSub": "Certified food safety",
+      "fda": "FDA Registered",
+      "fdaSub": "US food facility registration",
+      "china": "China Customs",
+      "chinaSub": "Approved exporter to China"
     }
   },
   "reviews": {

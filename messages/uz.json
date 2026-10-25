@@ -133,6 +133,15 @@
     ],
     "video": {
       "title": "Kompaniya taqdimoti"
+    },
+    "badges": {
+      "title": "Sertifikatlar va ruxsatnomalar",
+      "isoSub": "Oziq-ovqat xavfsizligi boshqaruvi",
+      "haccpSub": "Sertifikatlangan oziq-ovqat xavfsizligi",
+      "fda": "FDA roʻyxatidan oʻtgan",
+      "fdaSub": "AQSHda oziq-ovqat korxonasi roʻyxati",
+      "china": "Xitoy bojxonasi",
+      "chinaSub": "Xitoyga ruxsat etilgan eksportchi"
     }
   },
   "reviews": {

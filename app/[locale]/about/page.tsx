@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
-import { MapPin, Leaf, Award, TrendingUp, ExternalLink } from 'lucide-react'
+import { MapPin, Leaf, Award, TrendingUp, ExternalLink, ShieldCheck, Globe2 } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
@@ -81,6 +81,54 @@ export default async function AboutPage({
         </StaggerContainer>
       </Section>
 
+      {/* Certifications & approvals at a glance */}
+      <Section noPadding className="py-10">
+        <FadeInView>
+          <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-brand-green mb-6">
+            {t('badges.title')}
+          </p>
+          <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <li>
+              <a
+                href="#certifications"
+                className="h-full flex flex-col items-center text-center gap-2 bg-white rounded-2xl border border-parchment p-5 hover:shadow-md transition-shadow"
+              >
+                <ShieldCheck className="w-14 h-14 text-brand-green" aria-hidden="true" />
+                <span className="font-serif text-lg font-semibold text-soil">ISO 22000:2018</span>
+                <span className="text-xs text-bark">{t('badges.isoSub')}</span>
+              </a>
+            </li>
+            <li className="h-full flex flex-col items-center text-center gap-2 bg-white rounded-2xl border border-parchment p-5">
+              <Image
+                src="/images/haccp-certified.webp"
+                alt="HACCP certified — food safety"
+                width={400}
+                height={293}
+                className="h-14 w-auto"
+              />
+              <span className="font-serif text-lg font-semibold text-soil">HACCP</span>
+              <span className="text-xs text-bark">{t('badges.haccpSub')}</span>
+            </li>
+            <li className="h-full flex flex-col items-center text-center gap-2 bg-white rounded-2xl border border-parchment p-5">
+              <Image
+                src="/images/fda-registered.webp"
+                alt="FDA registered"
+                width={300}
+                height={300}
+                className="h-14 w-14"
+              />
+              <span className="font-serif text-lg font-semibold text-soil">{t('badges.fda')}</span>
+              <span className="text-xs text-bark">{t('badges.fdaSub')}</span>
+            </li>
+            <li className="h-full flex flex-col items-center text-center gap-2 bg-white rounded-2xl border border-parchment p-5">
+              <Globe2 className="w-14 h-14 text-brand-green" aria-hidden="true" />
+              <span className="font-serif text-lg font-semibold text-soil">{t('badges.china')}</span>
+              <span className="text-xs text-bark">{t('badges.chinaSub')}</span>
+            </li>
+          </ul>
+        </FadeInView>
+      </Section>
+
       {/* Story */}
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -149,7 +197,7 @@ export default async function AboutPage({
       </Section>
 
       {/* Certifications */}
-      <Section background="parchment">
+      <Section id="certifications" background="parchment" className="scroll-mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <FadeInView>
             <h2 className="font-serif text-display-sm font-semibold text-soil mb-4">{t('certifications.title')}</h2>
