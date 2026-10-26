@@ -18,6 +18,10 @@ export default function Navbar() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  // Entrance animation starts after mount: `initial={false}` skips mount animations,
+  // and a hidden `initial` would render inline opacity:0 into the static HTML.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const prefersReducedMotion = useReducedMotion()
 
   const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/`
@@ -48,8 +52,9 @@ export default function Navbar() {
             ? 'bg-transparent'
             : 'bg-cream/95 backdrop-blur-md border-b border-parchment'
         )}
-        initial={prefersReducedMotion ? {} : { y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        data-reveal="nav"
+        initial={false}
+        animate={!mounted ? {} : prefersReducedMotion ? { y: 0, opacity: 1 } : { y: [-80, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <div className="container-base">

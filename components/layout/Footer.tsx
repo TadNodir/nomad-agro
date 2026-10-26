@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
 
@@ -57,6 +57,15 @@ export default function Footer() {
                 aria-label="Telegram"
               >
                 <TelegramIcon />
+              </a>
+              <a
+                href={COMPANY.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-white/10 hover:bg-brand-lime hover:text-brand-forest text-stone transition-all duration-200 cursor-pointer"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
               </a>
               <a
                 href={`mailto:${COMPANY.emails.primary}`}

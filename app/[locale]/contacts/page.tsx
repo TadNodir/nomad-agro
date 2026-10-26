@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
-import { getTranslations } from 'next-intl/server'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { Mail, Phone, MapPin, ChevronDown, Linkedin } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
-import { Section } from '@/components/ui/Section'
-import { ContactForm } from '@/components/contacts/ContactForm'
-import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
+import { Section, SectionHeader } from '@/components/ui/Section'
+import { ContactForm, ContactFormWithSpec } from '@/components/contacts/ContactForm'
+import { BreadcrumbJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
 import { COMPANY } from '@/lib/constants'
 import { alternatesFor } from '@/lib/site'
 
@@ -34,7 +34,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ContactsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'contact' })
+  const tFaq = await getTranslations({ locale, namespace: 'faq' })
+  const faqItems = tFaq.raw('items') as Array<{ question: string; answer: string }>
 
   const { lat, lng } = COMPANY.coordinates
 
@@ -61,6 +64,13 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
       external: true,
     },
     {
+      Icon: Linkedin,
+      label: t('channels.linkedin'),
+      value: t('channels.linkedinLabel'),
+      href: COMPANY.linkedin,
+      external: true,
+    },
+    {
       Icon: Phone,
       label: t('channels.phone'),
       value: COMPANY.phones[0].display,
@@ -77,6 +87,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
           { name: 'Contacts', href: `/${locale}/contacts` },
         ]}
       />
+      <FaqJsonLd items={faqItems} />
 
       {/* Hero */}
       <section className="pt-32 pb-16 bg-brand-forest grain-overlay" aria-label="Contact hero">
@@ -95,7 +106,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
 
       {/* Channel cards */}
       <Section background="parchment" noPadding className="py-10">
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4" stagger={0.08}>
+        <StaggerContainer className="grid grid-cols-2 md:grid-cols-5 gap-4" stagger={0.08}>
           {directChannels.map(({ Icon, label, value, href, external }) => (
             <a
               key={label}
@@ -125,8 +136,8 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
               <h2 className="font-serif text-display-sm font-semibold text-soil mb-6">
                 {t('form.title')}
               </h2>
-              <Suspense>
-                <ContactForm />
+              <Suspense fallback={<ContactForm />}>
+                <ContactFormWithSpec />
               </Suspense>
             </FadeInView>
           </div>
@@ -214,6 +225,25 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
               </div>
             </FadeInView>
           </div>
+        </div>
+      </Section>
+
+      {/* FAQ — native <details> so every answer is in the raw HTML */}
+      <Section background="parchment" narrow id="faq">
+        <SectionHeader title={tFaq('title')} subtitle={tFaq('subtitle')} />
+        <div className="space-y-3">
+          {faqItems.map(({ question, answer }) => (
+            <details
+              key={question}
+              className="group bg-white rounded-2xl border border-parchment open:border-brand-green/30 open:shadow-md transition-all duration-200"
+            >
+              <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-semibold text-soil">
+                {question}
+                <ChevronDown className="w-5 h-5 flex-shrink-0 text-brand-green transition-transform duration-200 group-open:rotate-180" />
+              </summary>
+              <p className="px-5 pb-5 text-bark leading-relaxed">{answer}</p>
+            </details>
+          ))}
         </div>
       </Section>
     </>

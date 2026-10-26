@@ -3,8 +3,8 @@
 export const SITE = {
   origin: 'https://nomadagro.uz',
   name: 'Nomad Agro',
-  legalName: '"Nomad Agro Ltd" LLC',
-  alternateName: 'Nomad Agro Ltd',
+  legalName: '"NOMAD AGRO" LLC',
+  alternateName: '"NOMAD AGRO" Limited Liability Company',
   positioning: 'Dried Fruits and Nuts from Uzbekistan',
   description:
     'Nomad Agro exports dried fruits and nuts from the foothill regions of Uzbekistan for B2B wholesale buyers worldwide.',
@@ -15,7 +15,7 @@ export const SITE = {
     country: 'Uzbekistan',
     countryCode: 'UZ',
   },
-  phone: '+998909971615',
+  phone: '+998911929002',
   sameAs: ['https://www.linkedin.com/company/nomad-agro-ltd'],
   languages: [
     { code: 'en', name: 'English' },
@@ -33,11 +33,15 @@ export const localeUrl = (locale: string, path = '') => siteUrl(`/${locale}${pat
 
 export const fullAddress = `${SITE.address.postalCode}, ${SITE.address.street}, ${SITE.address.locality}, ${SITE.address.country}`
 
+// Unprefixed paths (`/`, `/about`) redirect per visitor language (307), so they
+// are the x-default: the URL for visitors whose language isn't matched.
+export const xDefaultUrl = (path = '') => siteUrl(path || '/')
+
 /** canonical + hreflang alternates for a page path ('' for home). */
 export const alternatesFor = (locale: string, path = '') => ({
   canonical: localeUrl(locale, path),
   languages: {
-    'x-default': localeUrl(SITE.defaultLocale, path),
+    'x-default': xDefaultUrl(path),
     ...Object.fromEntries(SITE.languages.map((l) => [l.code, localeUrl(l.code, path)])),
   },
 })

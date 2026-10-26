@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { MapPin, Leaf, Award, TrendingUp, ExternalLink, ShieldCheck, Globe2 } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
@@ -31,6 +31,7 @@ export default async function AboutPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'about' })
   const stats = t.raw('stats') as Array<{ value: string; label: string }>
   const regions = t.raw('regions.regionsList') as string[]

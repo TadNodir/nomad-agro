@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 import { Download, AlertCircle, FileText } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
-import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
@@ -23,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'catalog' })
   const tProducts = await getTranslations({ locale, namespace: 'products' })
   const tItems = await getTranslations({ locale, namespace: 'catalog.items' })
@@ -109,7 +109,8 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                 </h3>
               )}
 
-              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.05}>
+              {/* No per-card reveal animation: with 27 cards it made photos pop in after scrolling. */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {group.products.map((product) => (
                   <div
                     key={product.id}
@@ -121,6 +122,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                         alt={tItems(product.id)}
                         fill
                         sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw"
+                        loading="eager"
                         className="object-cover"
                       />
                       <div className="absolute top-2.5 right-2.5">
@@ -154,7 +156,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                     </div>
                   </div>
                 ))}
-              </StaggerContainer>
+              </div>
             </div>
           ))}
         </Section>

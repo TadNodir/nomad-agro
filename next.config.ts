@@ -5,9 +5,11 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 // Static (SSG) pages can't carry per-request nonces, so inline scripts are allowed;
 // everything else is locked to this origin plus the two third parties the site uses.
+const isDev = process.env.NODE_ENV === 'development'
+
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
@@ -18,7 +20,9 @@ const csp = [
   "form-action 'self' https://api.web3forms.com",
   "base-uri 'self'",
   "object-src 'none'",
-  'upgrade-insecure-requests',
+  // Production only: over plain http on a LAN IP (dev server) the browser would
+  // upgrade every /_next asset to https and load the page without CSS or JS.
+  ...(isDev ? [] : ['upgrade-insecure-requests']),
 ].join('; ')
 
 const securityHeaders = [

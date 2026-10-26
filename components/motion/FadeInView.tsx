@@ -14,11 +14,14 @@ interface FadeInViewProps {
   amount?: number
 }
 
-const directionMap = {
-  up: { y: 36 },
-  down: { y: -36 },
-  left: { x: 36 },
-  right: { x: -36 },
+// Keyframes, not `initial`: the server renders no inline opacity:0, so no-JS
+// clients see the content. Pre-animation hiding is done in CSS via
+// `.js [data-reveal]` (see globals.css), which only applies once JS runs.
+const keyframesMap = {
+  up: { y: [36, 0] },
+  down: { y: [-36, 0] },
+  left: { x: [36, 0] },
+  right: { x: [-36, 0] },
   none: {},
 }
 
@@ -42,8 +45,9 @@ export function FadeInView({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, ...directionMap[direction] }}
-      animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
+      data-reveal={direction}
+      initial={false}
+      animate={isInView ? { opacity: [0, 1], ...keyframesMap[direction] } : {}}
       transition={{
         duration,
         delay,

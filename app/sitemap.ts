@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { LOCALES } from '@/lib/constants'
-import { SITE, localeUrl } from '@/lib/site'
+import { localeUrl, xDefaultUrl } from '@/lib/site'
 
 const pages = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const { path, priority, changeFrequency } of pages) {
     for (const locale of LOCALES) {
-      const languages: Record<string, string> = { 'x-default': localeUrl(SITE.defaultLocale, path) }
+      const languages: Record<string, string> = { 'x-default': xDefaultUrl(path) }
       for (const loc of LOCALES) {
         languages[loc] = localeUrl(loc, path)
       }

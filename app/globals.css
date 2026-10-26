@@ -87,6 +87,19 @@
       scroll-behavior: auto !important;
     }
   }
+
+  /* Reveal-on-scroll start state. `.js` is set by an inline script in the
+     locale layout, so without JS (crawlers, no-JS renders) content is visible.
+     Motion overwrites these with inline styles once the element animates. */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] { opacity: 0; }
+    .js [data-reveal='up'] { transform: translateY(36px); }
+    .js [data-reveal='down'] { transform: translateY(-36px); }
+    .js [data-reveal='left'] { transform: translateX(36px); }
+    .js [data-reveal='right'] { transform: translateX(-36px); }
+    .js [data-reveal='stagger'] { transform: translateY(32px); }
+    .js [data-reveal='nav'] { transform: translateY(-80px); }
+  }
 }
 
 @layer utilities {

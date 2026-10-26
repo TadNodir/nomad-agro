@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Package, Quote } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ReviewsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations({ locale, namespace: 'reviews' })
   const items = t.raw('items') as Array<{ company: string; country: string; products: string; text: string }>
 

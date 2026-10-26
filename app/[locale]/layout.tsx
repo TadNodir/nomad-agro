@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Lora, Raleway } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, getTranslations } from 'next-intl/server'
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import LenisProvider from '@/components/providers/LenisProvider'
@@ -79,10 +79,15 @@ export default async function LocaleLayout({
     notFound()
   }
 
+  setRequestLocale(locale)
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${lora.variable} ${raleway.variable}`}>
+    // suppressHydrationWarning: the inline script below adds `js` to the class list before hydration.
+    <html lang={locale} className={`${lora.variable} ${raleway.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body>
         <NextIntlClientProvider messages={messages}>
           <LenisProvider>

@@ -258,13 +258,15 @@
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
       "whatsappLabel": "WhatsAppda yozing",
-      "telegramLabel": "Telegramda yozing"
+      "telegramLabel": "Telegramda yozing",
+      "linkedin": "LinkedIn",
+      "linkedinLabel": "Kompaniya sahifasi"
     },
     "allEmails": "Barcha elektron pochta manzillari",
     "allPhones": "Barcha telefon raqamlari",
     "address": "Manzil",
     "addressValue": "100077, Oʻzbekiston, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy",
-    "company": "\"Nomad Agro\" MChJ",
+    "company": "\"NOMAD AGRO\" MChJ",
     "form": {
       "title": "Soʻrov yuborish",
       "name": "Ismingiz",
@@ -290,9 +292,9 @@
     "tagline": "Oʻzbekistonning eng yaxshi qishloq xoʻjaligi hududlaridan premium eksport.",
     "nav": "Navigatsiya",
     "contactUs": "Aloqa",
-    "company": "\"Nomad Agro\" MChJ",
+    "company": "\"NOMAD AGRO\" MChJ",
     "address": "100077, Toshkent shahri,\nSayram koʻchasi, 7-tor koʻcha, 52-uy, Oʻzbekiston",
-    "copyright": "© {year} Nomad Agro Ltd. Barcha huquqlar himoyalangan.",
+    "copyright": "© {year} \"NOMAD AGRO\" MChJ. Barcha huquqlar himoyalangan.",
     "noPrice": "Narxlar koʻrsatilmaydi — joriy narxlar uchun biz bilan bogʻlaning.",
     "privacyNote": "B2B Ulgurji Eksportchi · Toshkent, Oʻzbekiston",
     "registration": "OGRN: 888409",
@@ -342,7 +344,7 @@
       },
       {
         "question": "Qanday qadoqlash variantlari mavjud?",
-        "answer": "Biz 25 kg va 50 kg birlamchi qoplarda ulgurji qadoqlash, shuningdek buyurtmaga asosida maxsus qadoqlashni taklif etamiz. Bozor va logistika talablaringiz uchun eng qulay variantni muhokama qilish uchun biz bilan bogʻlaning."
+        "answer": "Biz 5 kg va 10 kg qutilarda ulgurji qadoqlash, shuningdek buyurtmaga asosida maxsus qadoqlashni taklif etamiz. Bozor va logistika talablaringiz uchun eng qulay variantni muhokama qilish uchun biz bilan bogʻlaning."
       }
     ]
   },
@@ -380,7 +382,7 @@
       {
         "title": "Biz kimmiz",
         "body": [
-          "Ushbu sayt “Nomad Agro Ltd” MChJga tegishli: 100077, Oʻzbekiston, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy (STIR 307 699 304). Maxfiylik boʻyicha savollar uchun info@nomadagro.uz manziliga yozing."
+          "Ushbu sayt “NOMAD AGRO” MChJga tegishli: 100077, Oʻzbekiston, Toshkent shahri, Sayram koʻchasi, 7-tor koʻcha, 52-uy (STIR 307 699 304). Maxfiylik boʻyicha savollar uchun info@nomadagro.uz manziliga yozing."
         ]
       },
       {

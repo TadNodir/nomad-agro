@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useReducedMotion, type Variants } from 'motion/react'
-import { X, Mail, Phone } from 'lucide-react'
+import { X, Mail, Phone, Linkedin } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { COMPANY } from '@/lib/constants'
 
@@ -51,6 +51,15 @@ const channels = [
     href: COMPANY.telegram,
     color: 'hover:bg-sky-50 hover:border-sky-200 hover:text-sky-700',
     iconColor: 'text-sky-500',
+  },
+  {
+    key: 'linkedin',
+    Icon: Linkedin,
+    label: 'LinkedIn',
+    sublabel: 'nomad-agro-ltd',
+    href: COMPANY.linkedin,
+    color: 'hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700',
+    iconColor: 'text-blue-700',
   },
   {
     key: 'phone',

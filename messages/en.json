@@ -258,13 +258,15 @@
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
       "whatsappLabel": "Chat on WhatsApp",
-      "telegramLabel": "Message on Telegram"
+      "telegramLabel": "Message on Telegram",
+      "linkedin": "LinkedIn",
+      "linkedinLabel": "Company page"
     },
     "allEmails": "All Contact Emails",
     "allPhones": "All Phone Numbers",
     "address": "Address",
     "addressValue": "100077, Sayram Street, Passage 7, House 52, Tashkent, Uzbekistan",
-    "company": "\"Nomad Agro\" Ltd",
+    "company": "\"NOMAD AGRO\" LLC",
     "form": {
       "title": "Send an Inquiry",
       "name": "Your Name",
@@ -290,9 +292,9 @@
     "tagline": "Premium exports from Uzbekistan's finest growing regions.",
     "nav": "Navigation",
     "contactUs": "Contact",
-    "company": "\"Nomad Agro\" Ltd",
+    "company": "\"NOMAD AGRO\" LLC",
     "address": "100077, Sayram Street, Passage 7, House 52,\nTashkent, Uzbekistan",
-    "copyright": "© {year} Nomad Agro Ltd. All rights reserved.",
+    "copyright": "© {year} \"NOMAD AGRO\" LLC. All rights reserved.",
     "noPrice": "Prices are not displayed — contact us for current rates.",
     "privacyNote": "B2B Wholesale Exporter · Tashkent, Uzbekistan",
     "registration": "TIN: 307 699 304",
@@ -342,7 +344,7 @@
       },
       {
         "question": "What packaging options are available?",
-        "answer": "We offer various packaging options including 25kg and 50kg bulk bags, as well as custom packaging upon request. Contact us to discuss the best option for your market and logistics requirements."
+        "answer": "We offer various packaging options including 5 kg and 10 kg boxes, as well as custom packaging upon request. Contact us to discuss the best option for your market and logistics requirements."
       }
     ]
   },
@@ -380,7 +382,7 @@
       {
         "title": "Who we are",
         "body": [
-          "This website is operated by “Nomad Agro Ltd” LLC, 100077, Sayram Street, Passage 7, House 52, Tashkent, Uzbekistan (TIN 307 699 304). For any privacy question, email info@nomadagro.uz."
+          "This website is operated by “NOMAD AGRO” LLC, 100077, Sayram Street, Passage 7, House 52, Tashkent, Uzbekistan (TIN 307 699 304). For any privacy question, email info@nomadagro.uz."
         ]
       },
       {

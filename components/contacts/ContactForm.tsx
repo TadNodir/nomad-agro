@@ -14,15 +14,19 @@ import { CATALOG } from '@/lib/catalog'
 // the Web3Forms dashboard rather than secrecy.
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 
-export function ContactForm() {
+// Reads ?spec= (only possible client-side on a static page). Render inside
+// <Suspense fallback={<ContactForm />}> so the prerendered HTML has the full form.
+export function ContactFormWithSpec() {
+  return <ContactForm specId={useSearchParams().get('spec')} />
+}
+
+export function ContactForm({ specId = null }: { specId?: string | null }) {
   const t = useTranslations('contact.form')
   const tItems = useTranslations('catalog.items')
   const tProducts = useTranslations('products')
   const locale = useLocale()
-  const searchParams = useSearchParams()
 
   // Arriving from a catalog "Request spec sheet" link: prefill product and message.
-  const specId = searchParams.get('spec')
   const specCategory = CATALOG.find((c) => c.groups.some((g) => g.products.some((p) => p.id === specId)))
   const defaultProduct = specCategory?.slug ?? ''
   const defaultMessage = specCategory && specId ? t('specMessage', { product: tItems(specId) }) : ''

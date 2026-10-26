@@ -35,30 +35,34 @@ export function StaggerContainer({
     },
   }
 
+  // Keyframes instead of a hidden `initial` so the server renders no inline
+  // opacity:0; `.js [data-reveal]` in globals.css hides items until they animate.
   const itemVariants = {
-    hidden: prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: direction === 'up' ? 32 : 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
-      y: 0,
+      ...(prefersReducedMotion
+        ? { opacity: 1, y: 0 }
+        : { opacity: [0, 1], ...(direction === 'up' ? { y: [32, 0] } : {}) }),
       transition: { duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
     },
   }
+  const reveal = direction === 'up' ? 'stagger' : 'none'
 
   return (
     <motion.div
       ref={ref}
       variants={containerVariants}
-      initial="hidden"
+      initial={false}
       animate={isInView ? 'visible' : 'hidden'}
       className={cn(className)}
     >
       {Array.isArray(children)
         ? children.map((child, i) => (
-            <motion.div key={i} variants={itemVariants}>
+            <motion.div key={i} data-reveal={reveal} variants={itemVariants}>
               {child}
             </motion.div>
           ))
-        : <motion.div variants={itemVariants}>{children}</motion.div>}
+        : <motion.div data-reveal={reveal} variants={itemVariants}>{children}</motion.div>}
     </motion.div>
   )
 }

@@ -10,7 +10,7 @@ import {
   type MotionValue,
 } from 'motion/react'
 import { useTranslations, useLocale } from 'next-intl'
-import { Mail, Phone } from 'lucide-react'
+import { Mail, Phone, Linkedin } from 'lucide-react'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { Button } from '@/components/ui/Button'
 import { COMPANY } from '@/lib/constants'
@@ -547,6 +547,10 @@ export default function ScrollScrubFullPage() {
                 <a href={COMPANY.telegram} target="_blank" rel="noopener noreferrer"
                   className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
                   <TelegramIcon />Telegram
+                </a>
+                <a href={COMPANY.linkedin} target="_blank" rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
+                  <Linkedin className="w-4 h-4" />LinkedIn
                 </a>
                 <a href={`tel:${COMPANY.phones[0].number}`}
                   className={`inline-flex items-center gap-2 ${glassInteractive} text-cream text-xs sm:text-sm font-medium px-4 sm:px-5 py-2.5 sm:py-3`}>
