@@ -7,7 +7,7 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { OrganizationJsonLd, BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { BASE_URL } from '@/lib/constants'
+import { alternatesFor } from '@/lib/site'
 
 export async function generateMetadata({
   params,
@@ -19,15 +19,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/about`,
-      languages: {
-        'x-default': `${BASE_URL}/en/about`,
-        en: `${BASE_URL}/en/about`,
-        ru: `${BASE_URL}/ru/about`,
-        uz: `${BASE_URL}/uz/about`,
-      },
-    },
+    alternates: alternatesFor(locale, '/about'),
   }
 }
 

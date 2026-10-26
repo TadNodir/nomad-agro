@@ -9,7 +9,7 @@ import LenisProvider from '@/components/providers/LenisProvider'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import '@/app/globals.css'
-import { BASE_URL } from '@/lib/constants'
+import { SITE, siteUrl, alternatesFor } from '@/lib/site'
 
 const lora = Lora({
   subsets: ['latin', 'cyrillic'],
@@ -40,26 +40,18 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    metadataBase: new URL(BASE_URL),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}`,
-      languages: {
-        'x-default': `${BASE_URL}/en`,
-        en: `${BASE_URL}/en`,
-        ru: `${BASE_URL}/ru`,
-        uz: `${BASE_URL}/uz`,
-      },
-    },
+    metadataBase: new URL(SITE.origin),
+    alternates: alternatesFor(locale),
     openGraph: {
-      siteName: 'Nomad Agro',
+      siteName: SITE.name,
       type: 'website',
       locale: locale === 'ru' ? 'ru_RU' : locale === 'uz' ? 'uz_UZ' : 'en_US',
       images: [
         {
-          url: `${BASE_URL}/og-image.jpg`,
+          url: siteUrl('/og-image.jpg'),
           width: 1200,
           height: 630,
-          alt: 'Nomad Agro — Premium Dried Fruits & Nuts from Uzbekistan',
+          alt: `${SITE.name} — ${SITE.positioning}`,
         },
       ],
     },

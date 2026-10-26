@@ -1,4 +1,5 @@
-import { COMPANY, BASE_URL } from '@/lib/constants'
+import { COMPANY } from '@/lib/constants'
+import { SITE, siteUrl } from '@/lib/site'
 
 // Escape '<' so a value can never close the <script> tag early.
 const toJsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c')
@@ -9,49 +10,49 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
     '@graph': [
       {
         '@type': ['Organization', 'Corporation'],
-        '@id': `${BASE_URL}/#organization`,
-        name: 'Nomad Agro Ltd',
-        alternateName: '"Nomad Agro" Ltd',
-        url: BASE_URL,
+        '@id': siteUrl('/#organization'),
+        name: SITE.name,
+        legalName: SITE.legalName,
+        alternateName: SITE.alternateName,
+        url: SITE.origin,
         logo: {
           '@type': 'ImageObject',
-          url: `${BASE_URL}/logotype1.webp`,
+          url: siteUrl('/logotype1.webp'),
           width: 280,
           height: 80,
         },
-        description:
-          'Nomad Agro exports dried fruits and nuts from the foothill regions of Uzbekistan for B2B wholesale buyers worldwide.',
+        description: SITE.description,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Sayram Street, Passage 7, House 52',
-          addressLocality: 'Tashkent',
-          postalCode: '100077',
-          addressCountry: 'UZ',
+          streetAddress: SITE.address.street,
+          addressLocality: SITE.address.locality,
+          postalCode: SITE.address.postalCode,
+          addressCountry: SITE.address.countryCode,
         },
         contactPoint: COMPANY.phones.map((phone) => ({
           '@type': 'ContactPoint',
           telephone: phone.number,
           contactType: 'sales',
           email: COMPANY.emails.primary,
-          availableLanguage: ['English', 'Russian', 'Uzbek'],
+          availableLanguage: SITE.languages.map((l) => l.name),
         })),
         email: COMPANY.emails.primary,
         taxID: COMPANY.tin,
         areaServed: 'Worldwide',
         foundingLocation: {
           '@type': 'Place',
-          name: 'Tashkent, Uzbekistan',
+          name: `${SITE.address.locality}, ${SITE.address.country}`,
         },
         knowsAbout: ['Dried Fruits', 'Nuts Export', 'Agricultural Export', 'Uzbekistan Agricultural Products'],
-        sameAs: [],
+        sameAs: SITE.sameAs,
       },
       {
         '@type': 'WebSite',
-        '@id': `${BASE_URL}/#website`,
-        name: 'Nomad Agro',
-        url: BASE_URL,
-        inLanguage: ['en', 'ru', 'uz'],
-        publisher: { '@id': `${BASE_URL}/#organization` },
+        '@id': siteUrl('/#website'),
+        name: SITE.name,
+        url: SITE.origin,
+        inLanguage: SITE.languages.map((l) => l.code),
+        publisher: { '@id': siteUrl('/#organization') },
       },
     ],
   }
@@ -76,7 +77,7 @@ export function BreadcrumbJsonLd({
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: `${BASE_URL}${item.href}`,
+      item: siteUrl(item.href),
     })),
   }
 

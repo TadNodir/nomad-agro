@@ -9,7 +9,7 @@ import ScrollScrubFullPage from '@/components/home/ScrollScrubFullPage'
 // import Testimonials from '@/components/home/Testimonials'           // folded into ScrollScrubFullPage
 // import ContactSection from '@/components/home/ContactSection'       // folded into ScrollScrubFullPage
 import { OrganizationJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
-import { BASE_URL } from '@/lib/constants'
+import { alternatesFor } from '@/lib/site'
 
 export async function generateMetadata({
   params,
@@ -22,10 +22,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}`,
-      languages: { 'x-default': `${BASE_URL}/en`, en: `${BASE_URL}/en`, ru: `${BASE_URL}/ru`, uz: `${BASE_URL}/uz` },
-    },
+    alternates: alternatesFor(locale),
   }
 }
 

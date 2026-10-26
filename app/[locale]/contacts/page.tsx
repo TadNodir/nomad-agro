@@ -7,7 +7,8 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section } from '@/components/ui/Section'
 import { ContactForm } from '@/components/contacts/ContactForm'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { BASE_URL, COMPANY } from '@/lib/constants'
+import { COMPANY } from '@/lib/constants'
+import { alternatesFor } from '@/lib/site'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
@@ -27,15 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/contacts`,
-      languages: {
-        'x-default': `${BASE_URL}/en/contacts`,
-        en: `${BASE_URL}/en/contacts`,
-        ru: `${BASE_URL}/ru/contacts`,
-        uz: `${BASE_URL}/uz/contacts`,
-      },
-    },
+    alternates: alternatesFor(locale, '/contacts'),
   }
 }
 

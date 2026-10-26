@@ -8,7 +8,7 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { BASE_URL } from '@/lib/constants'
+import { alternatesFor } from '@/lib/site'
 import { CATALOG, type SpecValue } from '@/lib/catalog'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -17,15 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/catalog`,
-      languages: {
-        'x-default': `${BASE_URL}/en/catalog`,
-        en: `${BASE_URL}/en/catalog`,
-        ru: `${BASE_URL}/ru/catalog`,
-        uz: `${BASE_URL}/uz/catalog`,
-      },
-    },
+    alternates: alternatesFor(locale, '/catalog'),
   }
 }
 

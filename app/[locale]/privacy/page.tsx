@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Section } from '@/components/ui/Section'
-import { BASE_URL } from '@/lib/constants'
+import { alternatesFor } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -9,15 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/privacy`,
-      languages: {
-        'x-default': `${BASE_URL}/en/privacy`,
-        en: `${BASE_URL}/en/privacy`,
-        ru: `${BASE_URL}/ru/privacy`,
-        uz: `${BASE_URL}/uz/privacy`,
-      },
-    },
+    alternates: alternatesFor(locale, '/privacy'),
   }
 }
 

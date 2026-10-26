@@ -6,7 +6,7 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { BASE_URL } from '@/lib/constants'
+import { alternatesFor } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -14,15 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
-    alternates: {
-      canonical: `${BASE_URL}/${locale}/reviews`,
-      languages: {
-        'x-default': `${BASE_URL}/en/reviews`,
-        en: `${BASE_URL}/en/reviews`,
-        ru: `${BASE_URL}/ru/reviews`,
-        uz: `${BASE_URL}/uz/reviews`,
-      },
-    },
+    alternates: alternatesFor(locale, '/reviews'),
   }
 }
 
