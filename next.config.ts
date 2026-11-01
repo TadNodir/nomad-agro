@@ -53,6 +53,24 @@ const nextConfig: NextConfig = {
       { source: '/:locale(en|ru|uz)/products/nuts', destination: '/:locale/catalog#nuts', permanent: true },
       { source: '/:locale(en|ru|uz)/products/mung-beans', destination: '/:locale/catalog', permanent: true },
       { source: '/:locale(en|ru|uz)/products', destination: '/:locale/catalog', permanent: true },
+
+      // Old Russian site (pre-2026, from the Wayback Machine). Point each old page at its
+      // closest new Russian page. TODO when product pages exist: izyum -> /ru/catalog/raisins,
+      // kuraga -> /ru/catalog/dried-apricots, orehi -> /ru/catalog/walnuts (keep one hop).
+      // '/' and '/about' are left to the locale middleware (they are x-default URLs).
+      { source: '/izyum', destination: '/ru/catalog#dried-fruits', permanent: true },
+      { source: '/kuraga', destination: '/ru/catalog#dried-fruits', permanent: true },
+      { source: '/suhofrukty', destination: '/ru/catalog#dried-fruits', permanent: true },
+      { source: '/orehi', destination: '/ru/catalog#nuts', permanent: true },
+      { source: '/mash', destination: '/ru/catalog', permanent: true },
+      { source: '/produkciya', destination: '/ru/catalog', permanent: true },
+      { source: '/kontakty', destination: '/ru/contacts', permanent: true },
+      { source: '/napishite-nam', destination: '/ru/contacts', permanent: true },
+      { source: '/otzyvy-o-nas', destination: '/ru/reviews', permanent: true },
+      { source: '/karta-sayta', destination: '/ru', permanent: true },
+      { source: '/search', destination: '/ru', permanent: true },
+      { source: '/user/agreement', destination: '/ru/privacy', permanent: true },
+      { source: '/user', destination: '/ru', permanent: true },
     ]
   },
   experimental: {
