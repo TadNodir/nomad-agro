@@ -14,6 +14,7 @@ import { Mail, Phone, Linkedin } from 'lucide-react'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { Button } from '@/components/ui/Button'
 import { COMPANY } from '@/lib/constants'
+import { localePath } from '@/lib/site'
 
 /* ─────────────────────────────────────────────────────────────────────────
    Frame sets
@@ -305,8 +306,8 @@ export default function ScrollScrubFullPage() {
     company: string; country: string; products: string; text: string
   }>
   const productCategories = [
-    { href: `/${locale}/catalog#${tProducts('driedFruits.slug')}`, name: tProducts('driedFruits.name'), desc: tProducts('driedFruits.description') },
-    { href: `/${locale}/catalog#${tProducts('nuts.slug')}`,        name: tProducts('nuts.name'),        desc: tProducts('nuts.description') },
+    { href: localePath(locale, `/catalog#${tProducts('driedFruits.slug')}`), name: tProducts('driedFruits.name'), desc: tProducts('driedFruits.description') },
+    { href: localePath(locale, `/catalog#${tProducts('nuts.slug')}`),        name: tProducts('nuts.name'),        desc: tProducts('nuts.description') },
   ]
 
   /* ── reduced-motion / slow-connection fallback ───────────────────────── */
@@ -325,7 +326,7 @@ export default function ScrollScrubFullPage() {
             <p className="text-lg text-white/75 leading-relaxed mb-10 max-w-xl">{tHero('subheadline')}</p>
             <div className="flex flex-wrap items-center gap-4">
               <ContactCTA variant="lime" size="lg" label={tHero('cta')} />
-              <Button variant="ghost" size="lg" href={`/${locale}/catalog`}>{tHero('ctaSecondary')}</Button>
+              <Button variant="ghost" size="lg" href={localePath(locale, `/catalog`)}>{tHero('ctaSecondary')}</Button>
             </div>
           </div>
         </div>
@@ -390,7 +391,7 @@ export default function ScrollScrubFullPage() {
                 </p>
                 <div className="flex flex-wrap items-center gap-4">
                   <ContactCTA variant="lime" size="lg" label={tHero('cta')} />
-                  <Button variant="ghost" size="lg" href={`/${locale}/catalog`}>
+                  <Button variant="ghost" size="lg" href={localePath(locale, `/catalog`)}>
                     {tHero('ctaSecondary')}
                   </Button>
                 </div>
@@ -432,7 +433,7 @@ export default function ScrollScrubFullPage() {
                   </Link>
                 ))}
               </div>
-              <Button variant="ghost" size="md" href={`/${locale}/catalog`}>
+              <Button variant="ghost" size="md" href={localePath(locale, `/catalog`)}>
                 {tProducts('viewAll')}
               </Button>
             </div>
@@ -480,7 +481,7 @@ export default function ScrollScrubFullPage() {
                   [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
                   {tAbout('teaser.text')}
                 </p>
-                <Button variant="ghost" size="md" href={`/${locale}/about`}>
+                <Button variant="ghost" size="md" href={localePath(locale, `/about`)}>
                   {tAbout('teaser.cta')}
                 </Button>
               </div>
@@ -513,7 +514,7 @@ export default function ScrollScrubFullPage() {
                   </div>
                 ))}
               </div>
-              <Button variant="ghost" size="md" href={`/${locale}/reviews`}>
+              <Button variant="ghost" size="md" href={localePath(locale, `/reviews`)}>
                 {tReviews('viewAll')}
               </Button>
             </div>
@@ -559,7 +560,7 @@ export default function ScrollScrubFullPage() {
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
                 <ContactCTA variant="lime" size="lg" label={tCta('contactUs')} />
-                <Button variant="ghost" size="lg" href={`/${locale}/contacts`}>
+                <Button variant="ghost" size="lg" href={localePath(locale, `/contacts`)}>
                   {tCta('sendInquiry')}
                 </Button>
               </div>

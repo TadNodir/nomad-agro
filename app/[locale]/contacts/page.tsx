@@ -8,7 +8,7 @@ import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactForm, ContactFormWithSpec } from '@/components/contacts/ContactForm'
 import { BreadcrumbJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
 import { COMPANY } from '@/lib/constants'
-import { alternatesFor } from '@/lib/site'
+import { alternatesFor, localePath } from '@/lib/site'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
@@ -83,8 +83,8 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', href: `/${locale}` },
-          { name: 'Contacts', href: `/${locale}/contacts` },
+          { name: 'Home', href: localePath(locale) },
+          { name: 'Contacts', href: localePath(locale, `/contacts`) },
         ]}
       />
       <FaqJsonLd items={faqItems} />

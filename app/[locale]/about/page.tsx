@@ -7,7 +7,7 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { OrganizationJsonLd, BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { alternatesFor } from '@/lib/site'
+import { alternatesFor, localePath } from '@/lib/site'
 
 export async function generateMetadata({
   params,
@@ -42,8 +42,8 @@ export default async function AboutPage({
       <OrganizationJsonLd locale={locale} />
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', href: `/${locale}` },
-          { name: 'About', href: `/${locale}/about` },
+          { name: 'Home', href: localePath(locale) },
+          { name: 'About', href: localePath(locale, `/about`) },
         ]}
       />
 

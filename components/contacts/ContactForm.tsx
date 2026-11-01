@@ -7,6 +7,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { CATALOG } from '@/lib/catalog'
+import { localePath } from '@/lib/site'
 
 // Web3Forms only accepts submissions made directly from the browser (their
 // free plan rejects server-proxied requests), so this key is submitted
@@ -168,7 +169,7 @@ export function ContactForm({ specId = null }: { specId?: string | null }) {
       <p className="text-xs text-stone text-center">
         {t.rich('privacyNotice', {
           link: (chunks) => (
-            <Link href={`/${locale}/privacy`} className="underline underline-offset-2 hover:text-brand-green">
+            <Link href={localePath(locale, `/privacy`)} className="underline underline-offset-2 hover:text-brand-green">
               {chunks}
             </Link>
           ),

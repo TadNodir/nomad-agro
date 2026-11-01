@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Mail, Phone, MapPin, Linkedin } from 'lucide-react'
 import { useTranslations, useLocale } from 'next-intl'
 import { COMPANY, NAV_LINKS } from '@/lib/constants'
+import { localePath } from '@/lib/site'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
@@ -28,7 +29,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link href={`/${locale}`} className="inline-block mb-4" aria-label="Nomad Agro">
+            <Link href={localePath(locale)} className="inline-block mb-4" aria-label="Nomad Agro">
               <Image
                 src="/logotype1.webp"
                 alt="Nomad Agro"
@@ -86,7 +87,7 @@ export default function Footer() {
               {NAV_LINKS.map(({ href, key }) => (
                 <li key={key}>
                   <Link
-                    href={`/${locale}${href}`}
+                    href={localePath(locale, href)}
                     className="text-stone hover:text-cream text-sm transition-colors duration-150"
                   >
                     {tNav(key as 'home' | 'about' | 'reviews' | 'catalog' | 'contact')}
@@ -148,7 +149,7 @@ export default function Footer() {
           <div className="text-center sm:text-left space-y-1">
             <p className="text-stone text-xs">{t('copyright', { year })}</p>
             <p className="text-stone text-xs">{t('privacyNote')}</p>
-            <Link href={`/${locale}/privacy`} className="inline-block text-stone hover:text-cream text-xs underline underline-offset-2 transition-colors duration-150">
+            <Link href={localePath(locale, `/privacy`)} className="inline-block text-stone hover:text-cream text-xs underline underline-offset-2 transition-colors duration-150">
               {t('privacyLink')}
             </Link>
           </div>

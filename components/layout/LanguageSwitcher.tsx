@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { ChevronDown, Globe } from 'lucide-react'
 import { routing } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
+import { localePath } from '@/lib/site'
 
 const labels: Record<string, string> = {
   en: 'EN',
@@ -42,10 +43,11 @@ export function LanguageSwitcher({ light = false }: LanguageSwitcherProps) {
   }, [])
 
   function switchLocale(next: string) {
-    // Replace the current locale prefix in the pathname
-    const segments = pathname.split('/')
-    segments[1] = next
-    router.push(segments.join('/') || `/${next}`)
+    // Strip the current locale prefix (English has none), then add the target one.
+    const prefix = `/${locale}`
+    const rest =
+      pathname === prefix ? '' : pathname.startsWith(`${prefix}/`) ? pathname.slice(prefix.length) : pathname
+    router.push(localePath(next, rest === '/' ? '' : rest))
     setOpen(false)
   }
 

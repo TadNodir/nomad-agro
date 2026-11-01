@@ -29,13 +29,18 @@ export type SiteLocale = (typeof SITE.languages)[number]['code']
 
 export const siteUrl = (path = '') => `${SITE.origin}${path}`
 
-export const localeUrl = (locale: string, path = '') => siteUrl(`/${locale}${path}`)
+/** Site-relative path of a page in a locale. English (default) has no prefix: '/', '/catalog'. */
+export const localePath = (locale: string, path = '') => {
+  const p = path === '/' ? '' : path
+  return locale === SITE.defaultLocale ? p || '/' : `/${locale}${p}`
+}
+
+export const localeUrl = (locale: string, path = '') => siteUrl(localePath(locale, path))
 
 export const fullAddress = `${SITE.address.postalCode}, ${SITE.address.street}, ${SITE.address.locality}, ${SITE.address.country}`
 
-// Unprefixed paths (`/`, `/about`) redirect per visitor language (307), so they
-// are the x-default: the URL for visitors whose language isn't matched.
-export const xDefaultUrl = (path = '') => siteUrl(path || '/')
+// x-default = the English page, which lives at the unprefixed URL.
+export const xDefaultUrl = (path = '') => localeUrl(SITE.defaultLocale, path)
 
 /** canonical + hreflang alternates for a page path ('' for home). */
 export const alternatesFor = (locale: string, path = '') => ({

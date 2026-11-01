@@ -49,15 +49,24 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: '/:locale(en|ru|uz)/products/dried-fruits', destination: '/:locale/catalog#dried-fruits', permanent: true },
-      { source: '/:locale(en|ru|uz)/products/nuts', destination: '/:locale/catalog#nuts', permanent: true },
-      { source: '/:locale(en|ru|uz)/products/mung-beans', destination: '/:locale/catalog', permanent: true },
-      { source: '/:locale(en|ru|uz)/products', destination: '/:locale/catalog', permanent: true },
+      // /en is gone: English lives at the root. Permanent, so old /en links keep working.
+      { source: '/en', destination: '/', permanent: true },
+      { source: '/en/products/dried-fruits', destination: '/catalog#dried-fruits', permanent: true },
+      { source: '/en/products/nuts', destination: '/catalog#nuts', permanent: true },
+      { source: '/en/products/:rest*', destination: '/catalog', permanent: true },
+      { source: '/en/:path*', destination: '/:path*', permanent: true },
+
+      { source: '/products/dried-fruits', destination: '/catalog#dried-fruits', permanent: true },
+      { source: '/products/nuts', destination: '/catalog#nuts', permanent: true },
+      { source: '/products/:rest*', destination: '/catalog', permanent: true },
+      { source: '/:locale(ru|uz)/products/dried-fruits', destination: '/:locale/catalog#dried-fruits', permanent: true },
+      { source: '/:locale(ru|uz)/products/nuts', destination: '/:locale/catalog#nuts', permanent: true },
+      { source: '/:locale(ru|uz)/products/:rest*', destination: '/:locale/catalog', permanent: true },
 
       // Old Russian site (pre-2026, from the Wayback Machine). Point each old page at its
       // closest new Russian page. TODO when product pages exist: izyum -> /ru/catalog/raisins,
       // kuraga -> /ru/catalog/dried-apricots, orehi -> /ru/catalog/walnuts (keep one hop).
-      // '/' and '/about' are left to the locale middleware (they are x-default URLs).
+      // '/' and '/about' are the English pages now, so they are not redirected.
       { source: '/izyum', destination: '/ru/catalog#dried-fruits', permanent: true },
       { source: '/kuraga', destination: '/ru/catalog#dried-fruits', permanent: true },
       { source: '/suhofrukty', destination: '/ru/catalog#dried-fruits', permanent: true },

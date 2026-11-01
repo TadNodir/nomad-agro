@@ -1,5 +1,6 @@
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/Button'
+import { localePath } from '@/lib/site'
 
 export default async function NotFound() {
   const locale = await getLocale()
@@ -12,7 +13,7 @@ export default async function NotFound() {
         <p className="font-serif text-display-lg text-brand-green font-semibold mb-4">404</p>
         <h1 className="font-serif text-display-sm font-semibold text-soil mb-3">{t('title')}</h1>
         <p className="text-bark text-lg max-w-md mx-auto mb-8">{t('text')}</p>
-        <Button href={`/${locale}`}>{tCommon('backToHome')}</Button>
+        <Button href={localePath(locale)}>{tCommon('backToHome')}</Button>
       </div>
     </section>
   )

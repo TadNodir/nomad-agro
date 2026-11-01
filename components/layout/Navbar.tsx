@@ -11,6 +11,7 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS } from '@/lib/constants'
+import { localePath } from '@/lib/site'
 
 export default function Navbar() {
   const t = useTranslations('nav')
@@ -24,7 +25,7 @@ export default function Navbar() {
   useEffect(() => setMounted(true), [])
   const prefersReducedMotion = useReducedMotion()
 
-  const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/`
+  const isHomePage = pathname === localePath(locale) || pathname === localePath(locale, `/`)
 
   useEffect(() => {
     function onScroll() {
@@ -61,7 +62,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link
-              href={`/${locale}`}
+              href={localePath(locale)}
               className="flex-shrink-0 focus-visible:outline-brand-green rounded-lg"
               aria-label="Nomad Agro — Home"
             >
@@ -78,7 +79,7 @@ export default function Navbar() {
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
               {NAV_LINKS.map(({ href, key }) => {
-                const fullHref = `/${locale}${href}`
+                const fullHref = localePath(locale, href)
                 const isActive =
                   pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
                 return (
@@ -154,7 +155,7 @@ export default function Navbar() {
           >
             <nav className="flex flex-col gap-1 mb-8" aria-label="Mobile navigation">
               {NAV_LINKS.map(({ href, key }, i) => {
-                const fullHref = `/${locale}${href}`
+                const fullHref = localePath(locale, href)
                 const isActive =
                   pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
                 return (

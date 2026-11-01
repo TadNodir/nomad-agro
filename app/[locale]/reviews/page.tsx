@@ -6,7 +6,7 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { alternatesFor } from '@/lib/site'
+import { alternatesFor, localePath } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -28,8 +28,8 @@ export default async function ReviewsPage({ params }: { params: Promise<{ locale
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', href: `/${locale}` },
-          { name: 'Reviews', href: `/${locale}/reviews` },
+          { name: 'Home', href: localePath(locale) },
+          { name: 'Reviews', href: localePath(locale, `/reviews`) },
         ]}
       />
 
