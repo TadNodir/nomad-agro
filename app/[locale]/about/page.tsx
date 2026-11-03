@@ -7,7 +7,8 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { OrganizationJsonLd, BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { alternatesFor, localePath } from '@/lib/site'
+import { localePath } from '@/lib/site'
+import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -16,11 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo.about' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: alternatesFor(locale, '/about'),
-  }
+  return pageMetadata({ locale, path: '/about', title: t('title'), description: t('description') })
 }
 
 const processIcons = [Leaf, Award, TrendingUp]

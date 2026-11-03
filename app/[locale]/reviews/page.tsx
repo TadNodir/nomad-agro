@@ -6,16 +6,13 @@ import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { alternatesFor, localePath } from '@/lib/site'
+import { localePath } from '@/lib/site'
+import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo.reviews' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: alternatesFor(locale, '/reviews'),
-  }
+  return pageMetadata({ locale, path: '/reviews', title: t('title'), description: t('description') })
 }
 
 export default async function ReviewsPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -7,17 +7,14 @@ import { FadeInView } from '@/components/motion/FadeInView'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
-import { alternatesFor, localePath } from '@/lib/site'
+import { localePath } from '@/lib/site'
 import { CATALOG, type SpecValue } from '@/lib/catalog'
+import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo.catalog' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: alternatesFor(locale, '/catalog'),
-  }
+  return pageMetadata({ locale, path: '/catalog', title: t('title'), description: t('description') })
 }
 
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {

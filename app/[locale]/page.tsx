@@ -9,7 +9,8 @@ import ScrollScrubFullPage from '@/components/home/ScrollScrubFullPage'
 // import Testimonials from '@/components/home/Testimonials'           // folded into ScrollScrubFullPage
 // import ContactSection from '@/components/home/ContactSection'       // folded into ScrollScrubFullPage
 import { OrganizationJsonLd } from '@/components/shared/JsonLd'
-import { alternatesFor } from '@/lib/site'
+import { pageMetadata } from '@/lib/seo'
+
 
 export async function generateMetadata({
   params,
@@ -19,11 +20,7 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo.home' })
 
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: alternatesFor(locale),
-  }
+  return pageMetadata({ locale, title: t('title'), description: t('description') })
 }
 
 export default async function HomePage({

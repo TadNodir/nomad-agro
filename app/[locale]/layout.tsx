@@ -9,7 +9,8 @@ import LenisProvider from '@/components/providers/LenisProvider'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import '@/app/globals.css'
-import { SITE, siteUrl, alternatesFor } from '@/lib/site'
+import { SITE, alternatesFor } from '@/lib/site'
+import { ogImage, ogLocale } from '@/lib/seo'
 
 const lora = Lora({
   subsets: ['latin', 'cyrillic'],
@@ -37,6 +38,7 @@ export async function generateMetadata({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo.home' })
 
+  // Fallback for routes without their own metadata (e.g. 404); pages use pageMetadata().
   return {
     title: t('title'),
     description: t('description'),
@@ -45,15 +47,8 @@ export async function generateMetadata({
     openGraph: {
       siteName: SITE.name,
       type: 'website',
-      locale: locale === 'ru' ? 'ru_RU' : locale === 'uz' ? 'uz_UZ' : 'en_US',
-      images: [
-        {
-          url: siteUrl('/og-image.jpg'),
-          width: 1200,
-          height: 630,
-          alt: `${SITE.name} — ${SITE.positioning}`,
-        },
-      ],
+      locale: ogLocale(locale),
+      images: [ogImage],
     },
     twitter: {
       card: 'summary_large_image',

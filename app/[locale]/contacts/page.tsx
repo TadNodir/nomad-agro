@@ -8,7 +8,8 @@ import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactForm, ContactFormWithSpec } from '@/components/contacts/ContactForm'
 import { BreadcrumbJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
 import { COMPANY } from '@/lib/constants'
-import { alternatesFor, localePath } from '@/lib/site'
+import { localePath } from '@/lib/site'
+import { pageMetadata } from '@/lib/seo'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
@@ -25,11 +26,7 @@ const TelegramIcon = () => (
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seo.contacts' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: alternatesFor(locale, '/contacts'),
-  }
+  return pageMetadata({ locale, path: '/contacts', title: t('title'), description: t('description') })
 }
 
 export default async function ContactsPage({ params }: { params: Promise<{ locale: string }> }) {
