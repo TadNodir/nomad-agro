@@ -35,6 +35,16 @@ const securityHeaders = [
   { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
 ]
 
+// Paths from the old English site (en.nomadagro.uz) that Google still shows, from Search Console.
+const OLD_ENGLISH_PAGES: [string, string][] = [
+  ['about-company', '/about'],
+  ['reviews-about-us', '/reviews'],
+  ['product-catalog', '/catalog'],
+  ['dried-fruits', '/catalog#dried-fruits'],
+  ['nuts', '/catalog#nuts'],
+  ['mung-beans-mash', '/catalog'],
+]
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
@@ -54,6 +64,12 @@ const nextConfig: NextConfig = {
       { source: '/en/products/dried-fruits', destination: '/catalog#dried-fruits', permanent: true },
       { source: '/en/products/nuts', destination: '/catalog#nuts', permanent: true },
       { source: '/en/products/:rest*', destination: '/catalog', permanent: true },
+      // Old English site (en.nomadagro.uz). Vercel sends en.nomadagro.uz/x to /en/x, and these
+      // paths don't exist on the new site, so map each one to its closest new page.
+      ...OLD_ENGLISH_PAGES.flatMap(([oldPath, destination]) => [
+        { source: `/en/${oldPath}`, destination, permanent: true },
+        { source: `/${oldPath}`, destination, permanent: true },
+      ]),
       { source: '/en/:path*', destination: '/:path*', permanent: true },
 
       { source: '/products/dried-fruits', destination: '/catalog#dried-fruits', permanent: true },

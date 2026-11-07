@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TEMPORARY: old URLs that now redirect. Lets Google re-crawl them and see the redirects.
+     Remove this file (and the sitemap in Search Console) in February 2027. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nomadagro.uz/izyum</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/kuraga</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/suhofrukty</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/orehi</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/mash</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/produkciya</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/kontakty</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/napishite-nam</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/otzyvy-o-nas</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/en</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/en/about</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/en/catalog</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/en/contacts</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://nomadagro.uz/en/reviews</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/about-company</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/reviews-about-us</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/product-catalog</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/dried-fruits</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/nuts</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/mung-beans-mash</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/products</loc><lastmod>2026-11-07</lastmod></url>
+  <url><loc>https://en.nomadagro.uz/contacts</loc><lastmod>2026-11-07</lastmod></url>
+</urlset>
