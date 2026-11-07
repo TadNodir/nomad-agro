@@ -8,6 +8,7 @@ import ScrollScrubFullPage from '@/components/home/ScrollScrubFullPage'
 // import AboutTeaser from '@/components/home/AboutTeaser'             // folded into ScrollScrubFullPage
 // import Testimonials from '@/components/home/Testimonials'           // folded into ScrollScrubFullPage
 // import ContactSection from '@/components/home/ContactSection'       // folded into ScrollScrubFullPage
+import { FactsStrip } from '@/components/home/FactsStrip'
 import { OrganizationJsonLd } from '@/components/shared/JsonLd'
 import { pageMetadata } from '@/lib/seo'
 
@@ -40,6 +41,7 @@ export default async function HomePage({
         Sections: Hero → Products → Why Us → About → Reviews → Contact
       */}
       <ScrollScrubFullPage />
+      <FactsStrip locale={locale} />
     </>
   )
 }

@@ -19,9 +19,9 @@
     "badge": "B2B Ulgurji Eksportchi"
   },
   "products": {
-    "title": "Bizning mahsulotlarimiz",
+    "title": "Eksport qilinadigan quritilgan meva va yongʻoqlarimiz",
     "eyebrow": "Eksport assortimenti",
-    "subtitle": "Oʻzbekiston togʻ etaklaridan olingan uchta premium kategoriya.",
+    "subtitle": "Oʻzbekiston togʻ etaklaridan olingan beshta premium kategoriya.",
     "driedFruits": {
       "name": "Quritilgan mevalar",
       "slug": "dried-fruits",
@@ -49,7 +49,7 @@
       },
       {
         "title": "Eksport tajribasi",
-        "description": "Xalqaro B2B savdoda koʻp yillik tajriba. Biz import hujjatlari, yorliqlar va logistika talablarini yaxshi bilamiz."
+        "description": "2020-yildan beri eksport qilamiz. Biz import hujjatlari, yorliqlar va logistika talablarini yaxshi bilamiz."
       },
       {
         "title": "Ishonchli yetkazib berish",
@@ -115,7 +115,7 @@
     },
     "stats": [
       {
-        "value": "3+",
+        "value": "5",
         "label": "Mahsulot kategoriyalari"
       },
       {
@@ -193,8 +193,8 @@
     "finalCtaTitle": "Individual taklif soʻrash",
     "finalCtaText": "Qaysi mahsulotlar va qancha miqdorda kerakligini ayting — biz bir ish kuni ichida joriy narxlar va yetkazib berish variantlarini taqdim etamiz.",
     "sections": {
-      "driedFruits": "Quritilgan mevalar",
-      "nuts": "Yongʻoqlar"
+      "driedFruits": "Quritilgan mevalar: mayiz, quritilgan oʻrik, quritilgan olxoʻri",
+      "nuts": "Yongʻoqlar: yongʻoq va yeryongʻoq magʻzi"
     },
     "groups": {
       "raisins": "Mayiz",

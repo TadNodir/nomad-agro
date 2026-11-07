@@ -8,6 +8,7 @@ import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { OrganizationJsonLd, BreadcrumbJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
+import { ISO_CERT } from '@/lib/constants'
 import { pageMetadata } from '@/lib/seo'
 
 export async function generateMetadata({
@@ -218,15 +219,15 @@ export default async function AboutPage({
                   <dl className="space-y-2 text-sm">
                     <div>
                       <dt className="text-stone text-xs">{t('certifications.issuerLabel')}</dt>
-                      <dd className="text-soil font-medium">First Quality Certification (FQC)</dd>
+                      <dd className="text-soil font-medium">{ISO_CERT.issuer}</dd>
                     </div>
                     <div>
                       <dt className="text-stone text-xs">{t('certifications.numberLabel')}</dt>
-                      <dd className="text-soil font-medium break-all">12.25.77812.99182.I</dd>
+                      <dd className="text-soil font-medium break-all">{ISO_CERT.number}</dd>
                     </div>
                     <div>
                       <dt className="text-stone text-xs">{t('certifications.issuedLabel')}</dt>
-                      <dd className="text-soil font-medium">29.08.2025</dd>
+                      <dd className="text-soil font-medium">{ISO_CERT.issued}</dd>
                     </div>
                     <div>
                       <dt className="text-stone text-xs">{t('certifications.scopeLabel')}</dt>

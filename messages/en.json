@@ -19,9 +19,9 @@
     "badge": "B2B Export Supplier"
   },
   "products": {
-    "title": "Our Products",
+    "title": "Dried Fruits & Nuts We Export",
     "eyebrow": "Export Range",
-    "subtitle": "Three premium categories sourced from Uzbekistan's foothill regions.",
+    "subtitle": "Five premium categories sourced from Uzbekistan's foothill regions.",
     "driedFruits": {
       "name": "Dried Fruits",
       "slug": "dried-fruits",
@@ -49,7 +49,7 @@
       },
       {
         "title": "Export Experience",
-        "description": "Years of experience in international B2B trade. We understand your import documentation, labelling, and logistics requirements."
+        "description": "Exporting since 2020. We understand your import documentation, labelling, and logistics requirements."
       },
       {
         "title": "Reliable Supply",
@@ -115,7 +115,7 @@
     },
     "stats": [
       {
-        "value": "3+",
+        "value": "5",
         "label": "Product Categories"
       },
       {
@@ -193,8 +193,8 @@
     "finalCtaTitle": "Request a Custom Quote",
     "finalCtaText": "Tell us which products and quantities you need — we will provide current pricing and shipping options within one business day.",
     "sections": {
-      "driedFruits": "Dried Fruits",
-      "nuts": "Nuts"
+      "driedFruits": "Dried Fruits: Raisins, Sultanas, Dried Apricots, Prunes",
+      "nuts": "Nuts: Walnut and Peanut Kernels"
     },
     "groups": {
       "raisins": "Raisins",

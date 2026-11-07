@@ -1,4 +1,4 @@
-import { COMPANY } from '@/lib/constants'
+import { COMPANY, ISO_CERT } from '@/lib/constants'
 import { SITE, siteUrl } from '@/lib/site'
 
 // Escape '<' so a value can never close the <script> tag early.
@@ -39,11 +39,18 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
         email: COMPANY.emails.primary,
         taxID: COMPANY.tin,
         areaServed: 'Worldwide',
+        foundingDate: '2020',
         foundingLocation: {
           '@type': 'Place',
           name: `${SITE.address.locality}, ${SITE.address.country}`,
         },
         knowsAbout: ['Dried Fruits', 'Nuts Export', 'Agricultural Export', 'Uzbekistan Agricultural Products'],
+        hasCertification: {
+          '@type': 'Certification',
+          name: ISO_CERT.name,
+          issuedBy: { '@type': 'Organization', name: ISO_CERT.issuer },
+          certificationIdentification: ISO_CERT.number,
+        },
         sameAs: SITE.sameAs,
       },
       {

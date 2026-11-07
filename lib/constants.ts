@@ -25,6 +25,14 @@ export const COMPANY = {
   coordinates: { lat: 41.33299, lng: 69.31952 },
 } as const
 
+// Shown on the About certificate card and in the Organization JSON-LD.
+export const ISO_CERT = {
+  name: 'ISO 22000:2018',
+  issuer: 'First Quality Certification (FQC)',
+  number: '12.25.77812.99182.I',
+  issued: '29.08.2025',
+} as const
+
 export const LOCALES = SITE.languages.map((l) => l.code)
 export const DEFAULT_LOCALE = SITE.defaultLocale
 
