@@ -144,7 +144,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                         ))}
                       </dl>
                       <Link
-                        href={localePath(locale, `/contacts?spec=${product.id}#inquiry`)}
+                        href={localePath(locale, `/contacts#spec-${product.id}`)}
                         className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-green hover:text-brand-green-hover transition-colors"
                       >
                         <FileText className="w-3.5 h-3.5" />

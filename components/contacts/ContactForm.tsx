@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useTranslations, useLocale } from 'next-intl'
@@ -15,10 +15,31 @@ import { localePath } from '@/lib/site'
 // the Web3Forms dashboard rather than secrecy.
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 
-// Reads ?spec= (only possible client-side on a static page). Render inside
-// <Suspense fallback={<ContactForm />}> so the prerendered HTML has the full form.
+// The catalog links here as /contacts#spec-<productId>. A hash, not ?spec=, so
+// crawlers see one /contacts URL instead of one duplicate per product. Old
+// ?spec= links still work. Render inside <Suspense fallback={<ContactForm />}>
+// so the prerendered HTML has the full form.
+export const SPEC_HASH_PREFIX = '#spec-'
+
 export function ContactFormWithSpec() {
-  return <ContactForm specId={useSearchParams().get('spec')} />
+  const querySpec = useSearchParams().get('spec')
+  const [hashSpec, setHashSpec] = useState<string | null>(null)
+
+  useEffect(() => {
+    const read = () => {
+      const { hash } = window.location
+      if (!hash.startsWith(SPEC_HASH_PREFIX)) return
+      setHashSpec(decodeURIComponent(hash.slice(SPEC_HASH_PREFIX.length)))
+      document.getElementById('inquiry')?.scrollIntoView()
+    }
+    read()
+    window.addEventListener('hashchange', read)
+    return () => window.removeEventListener('hashchange', read)
+  }, [])
+
+  const specId = hashSpec ?? querySpec
+  // key: remount so the form's default product and message pick up the spec.
+  return <ContactForm key={specId ?? ''} specId={specId} />
 }
 
 export function ContactForm({ specId = null }: { specId?: string | null }) {
