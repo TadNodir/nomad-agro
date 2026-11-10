@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { LOCALES } from '@/lib/constants'
 import { localeUrl, xDefaultUrl } from '@/lib/site'
+import { PRODUCT_PAGES } from '@/lib/productPages'
 
 // Date each page's visible content last changed (all three languages share it).
 // Update the date when you change a page's text, so search engines recrawl it;
@@ -9,9 +10,10 @@ const LAST_MODIFIED: Record<string, string> = {
   '': '2026-11-01',
   '/about': '2026-11-01',
   '/reviews': '2026-11-01',
-  '/catalog': '2026-11-01',
+  '/catalog': '2026-11-11',
   '/contacts': '2026-11-01',
   '/privacy': '2026-11-01',
+  ...Object.fromEntries(PRODUCT_PAGES.map((p) => [`/catalog/${p.slug}`, '2026-11-11'])),
 }
 
 const pages = [
@@ -19,6 +21,7 @@ const pages = [
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/reviews', priority: 0.7, changeFrequency: 'monthly' as const },
   { path: '/catalog', priority: 0.8, changeFrequency: 'monthly' as const },
+  ...PRODUCT_PAGES.map((p) => ({ path: `/catalog/${p.slug}`, priority: 0.9, changeFrequency: 'monthly' as const })),
   { path: '/contacts', priority: 0.9, changeFrequency: 'monthly' as const },
   { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
 ]

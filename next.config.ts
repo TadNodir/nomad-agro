@@ -80,11 +80,11 @@ const nextConfig: NextConfig = {
       { source: '/:locale(ru|uz)/products/:rest*', destination: '/:locale/catalog', permanent: true },
 
       // Old Russian site (pre-2026, from the Wayback Machine). Point each old page at its
-      // closest new Russian page. TODO when product pages exist: izyum -> /ru/catalog/raisins,
-      // kuraga -> /ru/catalog/dried-apricots, orehi -> /ru/catalog/walnuts (keep one hop).
+      // closest new Russian page, in one hop. /orehi and /suhofrukty were category pages
+      // (several products), so they go to the catalog sections, not to one product.
       // '/' and '/about' are the English pages now, so they are not redirected.
-      { source: '/izyum', destination: '/ru/catalog#dried-fruits', permanent: true },
-      { source: '/kuraga', destination: '/ru/catalog#dried-fruits', permanent: true },
+      { source: '/izyum', destination: '/ru/catalog/raisins', permanent: true },
+      { source: '/kuraga', destination: '/ru/catalog/dried-apricots', permanent: true },
       { source: '/suhofrukty', destination: '/ru/catalog#dried-fruits', permanent: true },
       { source: '/orehi', destination: '/ru/catalog#nuts', permanent: true },
       { source: '/mash', destination: '/ru/catalog', permanent: true },

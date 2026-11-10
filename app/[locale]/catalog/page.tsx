@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
-import { Download, AlertCircle, FileText } from 'lucide-react'
+import { Download, AlertCircle, ArrowRight, FileText } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
@@ -10,6 +10,7 @@ import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
 import { CATALOG, type SpecValue } from '@/lib/catalog'
 import { pageMetadata } from '@/lib/seo'
+import { productPageSlug } from '@/lib/productPages'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -102,7 +103,13 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
             <div key={group.id} className="mb-12 last:mb-0">
               {groups.length > 1 && (
                 <h3 className="font-serif text-xl font-semibold text-brand-green mb-5">
-                  {tGroups(group.id)}
+                  <Link
+                    href={localePath(locale, `/catalog/${productPageSlug(group.id)}`)}
+                    className="inline-flex items-center gap-2 hover:text-brand-green-hover"
+                  >
+                    {tGroups(group.id)}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </h3>
               )}
 

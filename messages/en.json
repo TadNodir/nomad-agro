@@ -434,5 +434,124 @@
         ]
       }
     ]
+  },
+  "productPages": {
+    "shared": {
+      "eyebrow": "Wholesale from Uzbekistan",
+      "home": "Home",
+      "catalog": "Catalog",
+      "specTitle": "Grades and specifications",
+      "columns": {
+        "product": "Product",
+        "quality": "Quality grade",
+        "moisture": "Moisture",
+        "sulphur": "Sulphur",
+        "damaged": "Damaged fruit",
+        "splitBroken": "Split / broken",
+        "admixture": "Admixture"
+      },
+      "values": {
+        "highest": "Highest",
+        "first": "1st grade",
+        "second": "2nd grade",
+        "thirdIndustrial": "3rd grade, industrial",
+        "gPerKg": "{n} g/kg"
+      },
+      "priceNote": "We do not publish prices: rates change with crop availability. Send an inquiry and we reply with a current quote within one business day.",
+      "qualityTitle": "Quality and certificates",
+      "qualityText": "Nomad Agro works under an ISO 22000:2018 certified food safety management system and HACCP. The facility is FDA registered, and the company is an approved exporter to China by China Customs. Every batch is inspected for grade, cleanliness and moisture before shipment.",
+      "isoLink": "View the ISO 22000:2018 certificate (PDF)",
+      "shippingTitle": "Shipping and documents",
+      "shippingText": "We ship in bulk to importers in Europe, the United Kingdom, the United States, Russia, Azerbaijan, Belarus, China and Georgia. Each shipment comes with a phytosanitary certificate, and we handle export documentation and logistics coordination.",
+      "faqTitle": "Frequently asked questions",
+      "faq": [
+        {
+          "question": "Where are your products grown?",
+          "answer": "In the foothill regions of Uzbekistan, including the Fergana Valley, Surkhandarya and Samarkand areas."
+        },
+        {
+          "question": "Which countries do you export to?",
+          "answer": "Europe, the United Kingdom, the United States, Russia, Azerbaijan, Belarus, China and Georgia."
+        },
+        {
+          "question": "How do I get a price?",
+          "answer": "We do not publish prices, because rates change with crop availability. Send an inquiry with the product and quantity, and we reply with a current quote within one business day."
+        }
+      ],
+      "related": "Other products",
+      "backToCatalog": "Full catalog",
+      "about": "About Nomad Agro"
+    },
+    "groups": {
+      "raisins": {
+        "title": "Bulk Raisins & Sultanas Wholesale – Uzbekistan | Nomad Agro",
+        "description": "Buy raisins in bulk from Uzbekistan: golden, sultana, black and Soyaki raisins in 13 grades and sizes, packed in 5 or 10 kg boxes. Request a wholesale quote.",
+        "h1": "Raisins & Sultanas Wholesale from Uzbekistan",
+        "intro": "Nomad Agro exports raisins and sultanas from Uzbekistan in bulk. The range covers 13 grades and sizes: golden raisins, sultana raisins, black sun-dried raisins and Soyaki raisins, from industrial grade to the highest grade. All are packed in 5 or 10 kg boxes for importers, wholesalers and food manufacturers.",
+        "specNote": "Foreign material: absent in all grades.",
+        "extra": {
+          "title": "Raisins, sultanas and golden raisins: what's the difference?",
+          "text": "All three are dried grapes; the names differ by market. In the United Kingdom, light seedless raisins are usually sold as sultanas, while in the United States similar fruit is sold as golden raisins. In our range, Golden is the light raisin; Sultana, Black and Soyaki are darker varieties. The grade and size of each one is in the table above."
+        },
+        "faq": [
+          {
+            "question": "Which raisin varieties does Nomad Agro supply?",
+            "answer": "Thirteen grades: black-red industrial raisins, black raisins in four sizes, Soyaki raisins in four sizes, sultana raisins (standard and calibrated) and golden raisins in two sizes."
+          }
+        ]
+      },
+      "apricots": {
+        "title": "Bulk Dried Apricots Wholesale – Uzbekistan | Nomad Agro",
+        "description": "Wholesale dried apricots from Uzbekistan in bulk: Subhana and Handak varieties and a confectionery grade, in highest and 1st grade. Request a wholesale quote.",
+        "h1": "Dried Apricots Wholesale from Uzbekistan",
+        "intro": "Nomad Agro exports dried apricots from Uzbekistan in bulk. We supply Subhana apricots in two sizes, Handak apricots and a grade for confectionery and bakery use, in highest and 1st grade. Moisture is 16–24%.",
+        "specNote": "Foreign material: absent in all grades.",
+        "faq": [
+          {
+            "question": "Are your dried apricots sulphured?",
+            "answer": "Yes. The grades in our catalog contain sulphur at 1.7–2 g per kg."
+          }
+        ]
+      },
+      "prunes": {
+        "title": "Bulk Prunes Wholesale from Uzbekistan | Nomad Agro",
+        "description": "Buy prunes in bulk from Uzbekistan: Spain type, Hungarian type and Balonchik, highest grade, 18–26% moisture. Request a wholesale quote and spec sheet.",
+        "h1": "Prunes Wholesale from Uzbekistan",
+        "intro": "Nomad Agro exports prunes from Uzbekistan in bulk. We supply three types, Spain, Hungarian and Balonchik, all in the highest grade with 18–26% moisture, for wholesalers and food manufacturers.",
+        "specNote": "Mould: absent in all types.",
+        "faq": [
+          {
+            "question": "Which types of prunes do you supply?",
+            "answer": "Three: Spain type, Hungarian type and Balonchik. All are highest grade, with 18–26% moisture and 0.5% damaged fruit."
+          }
+        ]
+      },
+      "walnuts": {
+        "title": "Walnut Kernels Wholesale from Uzbekistan | Nomad Agro",
+        "description": "Wholesale walnut kernels from Uzbekistan in bulk: butterfly, white and amber peeled walnuts. Request a wholesale quote and specification sheet.",
+        "h1": "Walnut Kernels Wholesale from Uzbekistan",
+        "intro": "Nomad Agro exports walnut kernels from Uzbekistan in bulk. We supply peeled walnuts in three grades: butterfly, white and amber.",
+        "specNote": "Mould and admixture: not allowed in any grade.",
+        "faq": [
+          {
+            "question": "Which walnut kernel grades do you supply?",
+            "answer": "Three: butterfly (100%), white (70% / 30%) and amber (60% / 40%)."
+          }
+        ]
+      },
+      "peanuts": {
+        "title": "Peanut Kernels Wholesale from Uzbekistan | Nomad Agro",
+        "description": "Wholesale peanuts from Uzbekistan in bulk: in-shell peanuts, peanut kernels 50/60 and 60/70, and an oil grade. Request a wholesale quote and spec sheet.",
+        "h1": "Peanuts & Peanut Kernels Wholesale from Uzbekistan",
+        "intro": "Nomad Agro exports peanuts from Uzbekistan in bulk. We supply in-shell peanuts, peanut kernels in counts 50/60 and 60/70 per ounce, and a 3rd-grade mixed kernel for oil production. Moisture is 6–7%.",
+        "specNote": "Foreign material and mould: absent in all grades.",
+        "faq": [
+          {
+            "question": "What peanut sizes do you supply?",
+            "answer": "In-shell peanuts (1st grade), kernels in counts 50/60 and 60/70 per ounce, and a 3rd-grade mixed kernel for oil production."
+          }
+        ]
+      }
+    }
   }
 }

@@ -434,5 +434,124 @@
         ]
       }
     ]
+  },
+  "productPages": {
+    "shared": {
+      "eyebrow": "Oʻzbekistondan ulgurji",
+      "home": "Bosh sahifa",
+      "catalog": "Katalog",
+      "specTitle": "Navlar va xususiyatlar",
+      "columns": {
+        "product": "Mahsulot",
+        "quality": "Sifat navi",
+        "moisture": "Namlik",
+        "sulphur": "Oltingugurt",
+        "damaged": "Shikastlangan mevalar",
+        "splitBroken": "Yorilgan / singan",
+        "admixture": "Aralashma"
+      },
+      "values": {
+        "highest": "Oliy",
+        "first": "1-nav",
+        "second": "2-nav",
+        "thirdIndustrial": "3-nav, sanoat",
+        "gPerKg": "{n} g/kg"
+      },
+      "priceNote": "Biz narxlarni eʼlon qilmaymiz: ular hosil va mavjudlikka qarab oʻzgaradi. Soʻrov yuboring — bir ish kuni ichida joriy taklifni yuboramiz.",
+      "qualityTitle": "Sifat va sertifikatlar",
+      "qualityText": "Nomad Agro ISO 22000:2018 boʻyicha sertifikatlangan oziq-ovqat xavfsizligi boshqaruv tizimi va HACCP asosida ishlaydi. Korxona FDA (AQSH) roʻyxatidan oʻtgan, kompaniya Xitoyga tasdiqlangan eksportchilar roʻyxatiga kiritilgan. Har bir partiya joʻnatishdan oldin nav, tozalik va namlik boʻyicha tekshiriladi.",
+      "isoLink": "ISO 22000:2018 sertifikati (PDF)",
+      "shippingTitle": "Yetkazib berish va hujjatlar",
+      "shippingText": "Biz mahsulotni katta hajmda Yevropa, Buyuk Britaniya, AQSH, Rossiya, Ozarbayjon, Belarus, Xitoy va Gruziyadagi importchilarga yetkazib beramiz. Har bir partiya fitosanitariya sertifikati bilan joʻnatiladi; eksport hujjatlari va logistikani oʻzimiz tashkil qilamiz.",
+      "faqTitle": "Koʻp beriladigan savollar",
+      "faq": [
+        {
+          "question": "Mahsulotlaringiz qayerda yetishtiriladi?",
+          "answer": "Oʻzbekistonning togʻ etaklaridagi hududlarida — Fargʻona vodiysi, Surxondaryo va Samarqand viloyatida."
+        },
+        {
+          "question": "Qaysi davlatlarga eksport qilasiz?",
+          "answer": "Yevropa davlatlari, Buyuk Britaniya, AQSH, Rossiya, Ozarbayjon, Belarus, Xitoy va Gruziyaga."
+        },
+        {
+          "question": "Narxni qanday bilsam boʻladi?",
+          "answer": "Biz narxlarni eʼlon qilmaymiz, chunki ular hosil va mavjudlikka qarab oʻzgaradi. Mahsulot nomi va hajmini koʻrsatib soʻrov yuboring — bir ish kuni ichida joriy taklifni yuboramiz."
+        }
+      ],
+      "related": "Boshqa mahsulotlar",
+      "backToCatalog": "Toʻliq katalog",
+      "about": "Kompaniya haqida"
+    },
+    "groups": {
+      "raisins": {
+        "title": "Mayiz ulgurji, Oʻzbekistondan eksport | Nomad Agro",
+        "description": "Oʻzbekistondan ulgurji mayiz: oltin, sultana, qora va soyaki — 13 nav va kalibr, 5 yoki 10 kg qutilarda. Ulgurji narxni soʻrang.",
+        "h1": "Oʻzbekistondan ulgurji mayiz",
+        "intro": "Nomad Agro Oʻzbekistondan mayizni katta hajmda eksport qiladi. Assortimentda 13 nav va kalibr bor: oltin mayiz, sultana, quyoshda quritilgan qora mayiz va soyaki — sanoat navidan oliy navgacha. Mayiz importchilar, ulgurji kompaniyalar va oziq-ovqat ishlab chiqaruvchilar uchun 5 yoki 10 kg qutilarga qadoqlanadi.",
+        "specNote": "Begona aralashmalar: barcha navlarda yoʻq.",
+        "extra": {
+          "title": "Mayiz, sultana va oltin mayiz: farqi nimada?",
+          "text": "Bularning barchasi quritilgan uzum, nomlar esa bozorga qarab farq qiladi. Buyuk Britaniyada och rangli urugʻsiz mayiz odatda sultana deb ataladi, AQSHda shunga oʻxshash mahsulot oltin mayiz nomi bilan sotiladi. Bizning assortimentda oltin mayiz — och rangli nav; sultana, qora mayiz va soyaki — toʻqroq navlar. Har birining navi va kalibri yuqoridagi jadvalda keltirilgan."
+        },
+        "faq": [
+          {
+            "question": "Nomad Agro qaysi mayiz navlarini yetkazib beradi?",
+            "answer": "Oʻn uch xil: qora-qizil sanoat mayizi, toʻrt kalibrdagi qora mayiz, toʻrt kalibrdagi soyaki, sultana (oddiy va kalibrlangan) va ikki kalibrdagi oltin mayiz."
+          }
+        ]
+      },
+      "apricots": {
+        "title": "Quritilgan oʻrik ulgurji, Oʻzbekistondan | Nomad Agro",
+        "description": "Oʻzbekistondan ulgurji quritilgan oʻrik: Subhana va Handak navlari, qandolat sanoati uchun oʻrik. Oliy va 1-nav. Ulgurji narxni soʻrang.",
+        "h1": "Oʻzbekistondan ulgurji quritilgan oʻrik",
+        "intro": "Nomad Agro Oʻzbekistondan quritilgan oʻrikni katta hajmda eksport qiladi. Biz ikki oʻlchamdagi Subhana, Handak hamda qandolat va non sanoati uchun quritilgan oʻrikni oliy va 1-navda yetkazib beramiz. Namlik — 16–24%.",
+        "specNote": "Begona aralashmalar: barcha navlarda yoʻq.",
+        "faq": [
+          {
+            "question": "Quritilgan oʻrikka oltingugurt bilan ishlov berilganmi?",
+            "answer": "Ha. Katalogimizdagi navlarda oltingugurt miqdori — 1 kg ga 1.7–2 g."
+          }
+        ]
+      },
+      "prunes": {
+        "title": "Quritilgan olxoʻri ulgurji, Oʻzbekistondan | Nomad Agro",
+        "description": "Oʻzbekistondan ulgurji quritilgan olxoʻri: ispan va venger turi, «Balonchik». Oliy nav, namlik 18–26%. Ulgurji narxni soʻrang.",
+        "h1": "Oʻzbekistondan ulgurji quritilgan olxoʻri",
+        "intro": "Nomad Agro Oʻzbekistondan quritilgan olxoʻrini katta hajmda eksport qiladi. Biz uch turni — ispan, venger va «Balonchik»ni — oliy navda, 18–26% namlik bilan ulgurji kompaniyalar va oziq-ovqat ishlab chiqaruvchilarga yetkazib beramiz.",
+        "specNote": "Mogʻor: barcha turlarda yoʻq.",
+        "faq": [
+          {
+            "question": "Qaysi turdagi quritilgan olxoʻrini yetkazib berasiz?",
+            "answer": "Uch tur: ispan turi, venger turi va «Balonchik». Barchasi oliy nav, namlik 18–26%, shikastlangan mevalar — 0.5%."
+          }
+        ]
+      },
+      "walnuts": {
+        "title": "Yongʻoq magʻzi ulgurji, Oʻzbekistondan | Nomad Agro",
+        "description": "Oʻzbekistondan ulgurji tozalangan yongʻoq: «kapalak», oq va qahrabo rang magʻiz. Ulgurji narx va spetsifikatsiyani soʻrang.",
+        "h1": "Oʻzbekistondan ulgurji yongʻoq magʻzi",
+        "intro": "Nomad Agro Oʻzbekistondan yongʻoq magʻzini katta hajmda eksport qiladi. Biz tozalangan yongʻoqni uch navda yetkazib beramiz: «kapalak», oq va qahrabo rang.",
+        "specNote": "Mogʻor va aralashmalar: hech bir navda yoʻl qoʻyilmaydi.",
+        "faq": [
+          {
+            "question": "Yongʻoq magʻzining qaysi navlarini yetkazib berasiz?",
+            "answer": "Uch nav: «kapalak» (100%), oq (70% / 30%) va qahrabo rang (60% / 40%)."
+          }
+        ]
+      },
+      "peanuts": {
+        "title": "Yeryongʻoq ulgurji, Oʻzbekistondan | Nomad Agro",
+        "description": "Oʻzbekistondan ulgurji yeryongʻoq: qobiqli, magʻiz 50/60 va 60/70, moy uchun yeryongʻoq. Ulgurji narx va spetsifikatsiyani soʻrang.",
+        "h1": "Oʻzbekistondan ulgurji yeryongʻoq",
+        "intro": "Nomad Agro Oʻzbekistondan yeryongʻoqni katta hajmda eksport qiladi. Biz qobiqli yeryongʻoq, 1 untsiyada 50/60 va 60/70 kalibrli magʻiz hamda moy ishlab chiqarish uchun 3-nav magʻizni yetkazib beramiz. Namlik — 6–7%.",
+        "specNote": "Begona aralashmalar va mogʻor: barcha navlarda yoʻq.",
+        "faq": [
+          {
+            "question": "Qaysi kalibrdagi yeryongʻoqni yetkazib berasiz?",
+            "answer": "Qobiqli yeryongʻoq (1-nav), 1 untsiyada 50/60 va 60/70 magʻiz hamda moy ishlab chiqarish uchun 3-nav aralash magʻiz."
+          }
+        ]
+      }
+    }
   }
 }
