@@ -1,7 +1,9 @@
 // One page per product group at /catalog/<slug> (all locales).
 // Grade / caliber and packaging come from lib/catalog.ts, the same values the catalog cards show.
-// The extra columns below (quality grade, moisture, sulphur, ...) are copied from the product
-// catalog PDF (public/NOMAD_AGRO_PRODUCTS.pdf). Do not add a number here without a source.
+// Source for the extra columns: the company's product specification sheets where one exists
+// (Soyaki, golden and sultana raisins, dried apricots, prunes). The catalog PDF is used only for
+// products without a spec sheet (other black raisins, peanuts, walnuts) and for quality grades;
+// where the two disagree, the spec sheet wins. Do not add a number here without a source.
 import { CATALOG, type GroupId, type Product } from '@/lib/catalog'
 
 export type ExtraColumn = 'quality' | 'moisture' | 'sulphur' | 'damaged' | 'splitBroken' | 'admixture'
@@ -28,6 +30,8 @@ export interface ProductPage {
 const HIGHEST: Cell = { key: 'highest' }
 const FIRST: Cell = { key: 'first' }
 const SECOND: Cell = { key: 'second' }
+const SOYAKI_MOISTURE = '15–18%'
+const MAX_16 = '≤ 16%'
 
 export const PRODUCT_PAGES: ProductPage[] = [
   {
@@ -41,7 +45,14 @@ export const PRODUCT_PAGES: ProductPage[] = [
       raisinBlackSmall: { quality: SECOND, moisture: '8–15%' },
       raisinBlackMedium: { quality: SECOND, moisture: '8–15%' },
       raisinBlackSun200: { quality: SECOND },
-      raisinSultana: { quality: FIRST },
+      raisinSoyakiSmall: { moisture: SOYAKI_MOISTURE },
+      raisinSoyakiMedium: { moisture: SOYAKI_MOISTURE },
+      raisinSoyakiLarge120: { moisture: SOYAKI_MOISTURE },
+      raisinSoyakiLarge100: { moisture: SOYAKI_MOISTURE },
+      raisinSultana: { quality: FIRST, moisture: MAX_16 },
+      raisinGolden150: { moisture: MAX_16 },
+      raisinGolden120: { moisture: MAX_16 },
+      raisinSultanaCalibrated: { moisture: MAX_16 },
     },
     hasExtra: true,
   },
@@ -49,7 +60,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     slug: 'dried-apricots',
     group: 'apricots',
     columns: ['quality', 'moisture', 'sulphur'],
-    defaults: { quality: HIGHEST, moisture: '16–24%', sulphur: { key: 'gPerKg', n: '1.7–2' } },
+    defaults: { quality: HIGHEST, moisture: '17–24%', sulphur: '< 2000 ppm' },
     rows: {
       apricotSubhanaMedium: { quality: FIRST },
       apricotHandak: { quality: FIRST },
@@ -58,8 +69,8 @@ export const PRODUCT_PAGES: ProductPage[] = [
   {
     slug: 'prunes',
     group: 'prunes',
-    columns: ['quality', 'moisture', 'damaged'],
-    defaults: { quality: HIGHEST, moisture: '18–26%', damaged: '0.5%' },
+    columns: ['moisture'],
+    defaults: { moisture: '≤ 24%' },
     rows: {},
   },
   {
