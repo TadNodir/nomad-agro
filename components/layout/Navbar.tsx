@@ -6,15 +6,17 @@ import Link from 'next/link'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { useTranslations, useLocale } from 'next-intl'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS } from '@/lib/constants'
 import { localePath } from '@/lib/site'
+import { PRODUCT_PAGES } from '@/lib/productPages'
 
 export default function Navbar() {
   const t = useTranslations('nav')
+  const tGroups = useTranslations('catalog.groups')
   const locale = useLocale()
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
@@ -82,7 +84,7 @@ export default function Navbar() {
                 const fullHref = localePath(locale, href)
                 const isActive =
                   pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
-                return (
+                const link = (
                   <Link
                     key={key}
                     href={fullHref}
@@ -100,6 +102,7 @@ export default function Navbar() {
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {t(key as 'home' | 'about' | 'reviews' | 'catalog' | 'contact')}
+                    {key === 'catalog' && <ChevronDown className="inline w-3.5 h-3.5 ml-1 -mt-0.5" aria-hidden="true" />}
                     {isActive && (
                       <motion.span
                         layoutId="nav-underline"
@@ -110,6 +113,38 @@ export default function Navbar() {
                       />
                     )}
                   </Link>
+                )
+                if (key !== 'catalog') return link
+                // Product pages. Always in the HTML (shown on hover / keyboard focus by CSS),
+                // so crawlers find the links without running JavaScript.
+                return (
+                  <div key={key} className="relative group">
+                    {link}
+                    <div className="absolute left-0 top-full pt-2 invisible opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                      <ul className="min-w-[220px] rounded-xl border border-parchment bg-cream p-2 shadow-lg">
+                        {PRODUCT_PAGES.map((p) => {
+                          const productHref = localePath(locale, `/catalog/${p.slug}`)
+                          return (
+                            <li key={p.slug}>
+                              <Link
+                                href={productHref}
+                                className={cn(
+                                  'block rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150',
+                                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green',
+                                  pathname === productHref
+                                    ? 'text-brand-green bg-parchment'
+                                    : 'text-bark hover:text-soil hover:bg-parchment'
+                                )}
+                                aria-current={pathname === productHref ? 'page' : undefined}
+                              >
+                                {tGroups(p.group)}
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  </div>
                 )
               })}
             </nav>
@@ -177,6 +212,29 @@ export default function Navbar() {
                     >
                       {t(key as 'home' | 'about' | 'reviews' | 'catalog' | 'contact')}
                     </Link>
+                    {key === 'catalog' && (
+                      <ul className="ml-4 mt-1 mb-2 border-l border-parchment pl-3">
+                        {PRODUCT_PAGES.map((p) => {
+                          const productHref = localePath(locale, `/catalog/${p.slug}`)
+                          return (
+                            <li key={p.slug}>
+                              <Link
+                                href={productHref}
+                                className={cn(
+                                  'block px-4 py-2.5 rounded-xl text-base transition-colors duration-150',
+                                  pathname === productHref
+                                    ? 'text-brand-green font-semibold'
+                                    : 'text-bark hover:text-soil hover:bg-parchment'
+                                )}
+                                aria-current={pathname === productHref ? 'page' : undefined}
+                              >
+                                {tGroups(p.group)}
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    )}
                   </motion.div>
                 )
               })}
