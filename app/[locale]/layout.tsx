@@ -4,6 +4,7 @@ import { Lora, Raleway } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { Analytics } from '@vercel/analytics/next'
 import { routing } from '@/i18n/routing'
 import LenisProvider from '@/components/providers/LenisProvider'
 import Navbar from '@/components/layout/Navbar'
@@ -91,6 +92,8 @@ export default async function LocaleLayout({
             <Footer />
           </LenisProvider>
         </NextIntlClientProvider>
+        {/* Cookieless visitor stats, served from this domain (/_vercel/insights), so the CSP allows it. */}
+        <Analytics />
       </body>
     </html>
   )

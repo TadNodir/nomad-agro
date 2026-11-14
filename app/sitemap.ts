@@ -12,7 +12,7 @@ const LAST_MODIFIED: Record<string, string> = {
   '/reviews': '2026-11-01',
   '/catalog': '2026-11-11',
   '/contacts': '2026-11-01',
-  '/privacy': '2026-11-01',
+  '/privacy': '2026-11-14',
   ...Object.fromEntries(PRODUCT_PAGES.map((p) => [`/catalog/${p.slug}`, '2026-11-11'])),
 }
 

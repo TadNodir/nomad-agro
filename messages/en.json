@@ -376,7 +376,7 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "updated": "Last updated: 25 October 2026",
+    "updated": "Last updated: 14 November 2026",
     "intro": "This policy explains what personal data we collect through this website, why we use it, and the choices you have.",
     "sections": [
       {
@@ -404,7 +404,7 @@
         "title": "Service providers",
         "body": [
           "Web3Forms (web3forms.com) receives contact form submissions and forwards them to our email inbox.",
-          "Vercel Inc. hosts this website and processes the technical data described above.",
+          "Vercel Inc. hosts this website and processes the technical data described above. Vercel Web Analytics also counts page views for us; it works without cookies, does not identify individual visitors and gives us only totals (for example, which pages were visited and from which websites visitors came).",
           "OpenStreetMap: the map on our contacts page is loaded from OpenStreetMap servers, which receive your IP address when the map is shown.",
           "These providers may process data outside your country, including in the United States."
         ]
@@ -412,7 +412,7 @@
       {
         "title": "Cookies",
         "body": [
-          "We use a single functional cookie, NEXT_LOCALE, which remembers your language choice for up to one year. We do not use analytics, advertising or tracking cookies."
+          "We use a single functional cookie, NEXT_LOCALE, which remembers your language choice for up to one year. We do not use analytics, advertising or tracking cookies; our visitor statistics work without cookies."
         ]
       },
       {

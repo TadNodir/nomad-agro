@@ -121,3 +121,25 @@ export function FaqJsonLd({
     />
   )
 }
+
+/** The product pages listed on /catalog, so search engines and AI see the range as one list. */
+export function ItemListJsonLd({ name, items }: { name: string; items: Array<{ name: string; href: string }> }) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: siteUrl(item.href),
+    })),
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: toJsonLd(data) }}
+    />
+  )
+}

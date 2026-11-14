@@ -16,7 +16,10 @@ export const SITE = {
     countryCode: 'UZ',
   },
   phone: '+998911929002',
-  sameAs: ['https://www.linkedin.com/company/nomad-agro-ltd'],
+  sameAs: [
+    'https://www.linkedin.com/company/nomad-agro-ltd',
+    'https://eye.tridge.com/trade-hub/companies/onpsQwaBbDpNeRNDVVztb6gtRWknnKiXbcNZkB',
+  ],
   languages: [
     { code: 'en', name: 'English' },
     { code: 'ru', name: 'Russian' },

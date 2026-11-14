@@ -376,7 +376,7 @@
   },
   "privacy": {
     "title": "Maxfiylik siyosati",
-    "updated": "Oxirgi yangilanish: 2026-yil 25-oktabr",
+    "updated": "Oxirgi yangilanish: 2026-yil 14-noyabr",
     "intro": "Ushbu siyosat ushbu sayt orqali qaysi shaxsiy maʼlumotlarni yigʻishimiz, ulardan nima uchun foydalanishimiz va sizning imkoniyatlaringizni tushuntiradi.",
     "sections": [
       {
@@ -404,7 +404,7 @@
         "title": "Xizmat koʻrsatuvchilar",
         "body": [
           "Web3Forms (web3forms.com) aloqa shaklidagi soʻrovlarni qabul qilib, elektron pochtamizga yuboradi.",
-          "Vercel Inc. saytni xosting qiladi va yuqorida koʻrsatilgan texnik maʼlumotlarni qayta ishlaydi.",
+          "Vercel Inc. saytni xosting qiladi va yuqorida koʻrsatilgan texnik maʼlumotlarni qayta ishlaydi. Vercel Web Analytics xizmati biz uchun sahifalar koʻrilishini ham hisoblaydi: u cookie fayllarisiz ishlaydi, alohida tashrif buyuruvchilarni aniqlamaydi va bizga faqat umumiy raqamlarni koʻrsatadi (masalan, qaysi sahifalar koʻrilgani va tashrif buyuruvchilar qaysi saytlardan kelgani).",
           "OpenStreetMap: aloqa sahifasidagi xarita OpenStreetMap serverlaridan yuklanadi va xarita koʻrsatilganda ular IP-manzilingizni oladi.",
           "Bu provayderlar maʼlumotlarni sizning mamlakatingizdan tashqarida, jumladan AQSHda qayta ishlashi mumkin."
         ]
@@ -412,7 +412,7 @@
       {
         "title": "Cookie fayllari",
         "body": [
-          "Biz faqat bitta funksional cookie — NEXT_LOCALE dan foydalanamiz, u tanlagan tilingizni bir yilgacha eslab qoladi. Biz analitik, reklama yoki kuzatuv cookie fayllaridan foydalanmaymiz."
+          "Biz faqat bitta funksional cookie — NEXT_LOCALE dan foydalanamiz, u tanlagan tilingizni bir yilgacha eslab qoladi. Biz analitik, reklama yoki kuzatuv cookie fayllaridan foydalanmaymiz; tashriflar statistikasi cookie fayllarisiz ishlaydi."
         ]
       },
       {

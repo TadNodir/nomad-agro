@@ -6,11 +6,11 @@ import { Download, AlertCircle, ArrowRight, FileText } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
-import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
+import { BreadcrumbJsonLd, ItemListJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
 import { CATALOG, type SpecValue } from '@/lib/catalog'
 import { pageMetadata } from '@/lib/seo'
-import { productPageSlug } from '@/lib/productPages'
+import { PRODUCT_PAGES, productPageSlug } from '@/lib/productPages'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -40,6 +40,13 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
           { name: 'Home', href: localePath(locale) },
           { name: 'Catalog', href: localePath(locale, `/catalog`) },
         ]}
+      />
+      <ItemListJsonLd
+        name={t('title')}
+        items={PRODUCT_PAGES.map((p) => ({
+          name: tGroups(p.group),
+          href: localePath(locale, `/catalog/${p.slug}`),
+        }))}
       />
 
       {/* Hero */}
