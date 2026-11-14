@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Lenis from 'lenis'
+import { setLenis } from '@/lib/lenis'
 
 export default function LenisProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -11,6 +12,7 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       touchMultiplier: 2,
       infinite: false,
     })
+    setLenis(lenis)
 
     let rafId: number
 
@@ -23,6 +25,7 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
 
     return () => {
       cancelAnimationFrame(rafId)
+      setLenis(null)
       lenis.destroy()
     }
   }, [])

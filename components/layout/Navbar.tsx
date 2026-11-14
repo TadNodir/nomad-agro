@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils'
 import { NAV_LINKS } from '@/lib/constants'
 import { localePath } from '@/lib/site'
 import { PRODUCT_PAGES } from '@/lib/productPages'
+import { lockPageScroll } from '@/lib/lenis'
 
 export default function Navbar() {
   const t = useTranslations('nav')
@@ -21,6 +22,9 @@ export default function Navbar() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  // Set after a product is picked, so the hover dropdown closes even though the mouse
+  // is still over it; cleared when the mouse leaves the Catalog item.
+  const [catalogMenuClosed, setCatalogMenuClosed] = useState(false)
   // Entrance animation starts after mount: `initial={false}` skips mount animations,
   // and a hidden `initial` would render inline opacity:0 into the static HTML.
   const [mounted, setMounted] = useState(false)
@@ -41,6 +45,12 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false)
   }, [pathname])
+
+  // Keep the page behind the full-screen mobile menu from scrolling.
+  useEffect(() => {
+    if (!mobileOpen) return
+    return lockPageScroll()
+  }, [mobileOpen])
 
   const isLight = isHomePage && !scrolled && !mobileOpen
 
@@ -118,9 +128,15 @@ export default function Navbar() {
                 // Product pages. Always in the HTML (shown on hover / keyboard focus by CSS),
                 // so crawlers find the links without running JavaScript.
                 return (
-                  <div key={key} className="relative group">
+                  <div key={key} className="relative group" onMouseLeave={() => setCatalogMenuClosed(false)}>
                     {link}
-                    <div className="absolute left-0 top-full pt-2 invisible opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <div
+                      className={cn(
+                        'absolute left-0 top-full pt-2 invisible opacity-0 transition-opacity duration-150',
+                        !catalogMenuClosed &&
+                          'group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100'
+                      )}
+                    >
                       <ul className="min-w-[220px] rounded-xl border border-parchment bg-cream p-2 shadow-lg">
                         {PRODUCT_PAGES.map((p) => {
                           const productHref = localePath(locale, `/catalog/${p.slug}`)
@@ -136,6 +152,10 @@ export default function Navbar() {
                                     : 'text-bark hover:text-soil hover:bg-parchment'
                                 )}
                                 aria-current={pathname === productHref ? 'page' : undefined}
+                                onClick={(e) => {
+                                  setCatalogMenuClosed(true)
+                                  e.currentTarget.blur()
+                                }}
                               >
                                 {tGroups(p.group)}
                               </Link>
@@ -183,6 +203,7 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div
             className="fixed inset-0 z-30 bg-cream pt-20 pb-8 px-4 flex flex-col overflow-y-auto lg:hidden"
+            data-lenis-prevent
             initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: '100%' }}

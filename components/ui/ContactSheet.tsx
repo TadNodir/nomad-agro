@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useReducedMotion, type Variants } from 'motion
 import { X, Mail, Phone, Linkedin } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { COMPANY } from '@/lib/constants'
+import { lockPageScroll } from '@/lib/lenis'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" aria-hidden="true">
@@ -78,15 +79,11 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
 
+  // The page uses Lenis smooth scrolling, which listens to the mouse wheel on the whole
+  // window; overflow:hidden alone did not stop it, so the page scrolled behind the sheet.
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
+    if (!isOpen) return
+    return lockPageScroll()
   }, [isOpen])
 
   useEffect(() => {
@@ -133,6 +130,7 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
           <motion.div
             role="dialog"
             aria-modal="true"
+            data-lenis-prevent
             aria-label={t('channels.title')}
             className="pointer-events-auto w-full bg-cream rounded-t-3xl shadow-2xl max-h-[90dvh] overflow-y-auto md:rounded-3xl md:max-w-md"
             variants={sheetVariants}
