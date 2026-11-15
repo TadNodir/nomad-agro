@@ -130,16 +130,15 @@ export default async function AboutPage({
           </FadeInView>
           <FadeInView direction="right" delay={0.1}>
             <div className="aspect-[848/464] rounded-3xl overflow-hidden bg-black shadow-xl">
-              <video
-                controls
-                playsInline
-                preload="none"
-                poster="/images/about-video-poster.webp"
-                aria-label={t('video.title')}
-                className="w-full h-full"
-              >
-                <source src="/video_presentation.mp4" type="video/mp4" />
-              </video>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/te6HeSJnTQo?rel=0"
+                title={t('video.title')}
+                loading="lazy"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+                className="w-full h-full border-0"
+              />
             </div>
           </FadeInView>
         </div>

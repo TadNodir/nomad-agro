@@ -4,7 +4,7 @@ import type { NextConfig } from 'next'
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 // Static (SSG) pages can't carry per-request nonces, so inline scripts are allowed;
-// everything else is locked to this origin plus the two third parties the site uses.
+// everything else is locked to this origin plus the third parties the site uses (Web3Forms, OpenStreetMap, YouTube).
 const isDev = process.env.NODE_ENV === 'development'
 
 const csp = [
@@ -15,7 +15,7 @@ const csp = [
   "font-src 'self'",
   "media-src 'self'",
   "connect-src 'self' https://api.web3forms.com",
-  'frame-src https://www.openstreetmap.org',
+  'frame-src https://www.openstreetmap.org https://www.youtube-nocookie.com',
   "frame-ancestors 'none'",
   "form-action 'self' https://api.web3forms.com",
   "base-uri 'self'",
