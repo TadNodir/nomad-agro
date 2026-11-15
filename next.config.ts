@@ -70,6 +70,7 @@ const nextConfig: NextConfig = {
         { source: `/en/${oldPath}`, destination, permanent: true },
         { source: `/${oldPath}`, destination, permanent: true },
       ]),
+      { source: '/en/f/:file*', destination: '/NOMAD_AGRO_PRODUCTS.pdf', permanent: true },
       { source: '/en/:path*', destination: '/:path*', permanent: true },
 
       { source: '/products/dried-fruits', destination: '/catalog#dried-fruits', permanent: true },
@@ -96,6 +97,8 @@ const nextConfig: NextConfig = {
       { source: '/search', destination: '/ru', permanent: true },
       { source: '/user/agreement', destination: '/ru/privacy', permanent: true },
       { source: '/user', destination: '/ru', permanent: true },
+      // Old catalog PDFs (en.nomadagro.uz/f/...) -> the current catalog PDF.
+      { source: '/f/:file*', destination: '/NOMAD_AGRO_PRODUCTS.pdf', permanent: true },
     ]
   },
   experimental: {

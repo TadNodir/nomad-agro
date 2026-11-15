@@ -19,6 +19,8 @@ export const SITE = {
   sameAs: [
     'https://www.linkedin.com/company/nomad-agro-ltd',
     'https://eye.tridge.com/trade-hub/companies/onpsQwaBbDpNeRNDVVztb6gtRWknnKiXbcNZkB',
+    'https://www.goldenpages.uz/en/company/?Id=99169',
+    'https://www.yellowpages.uz/en/company/nomad-agro-ltd-llc',
   ],
   languages: [
     { code: 'en', name: 'English' },
