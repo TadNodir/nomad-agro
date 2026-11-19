@@ -359,10 +359,12 @@ export default function ScrollScrubFullPage() {
             'rgba(0,0,0,0.65) 100%)'    /* bottom CTAs */
           }} />
 
-        {/* Loading screen — shown only once JS runs (`.js` on <html>), so
-            no-JS clients and crawlers see the hero instead of an opaque overlay */}
+        {/* Loading screen — hidden for no-JS clients via <noscript> so they see
+            the hero. Not keyed on `.js` on <html>: hydration resets that class
+            mid-load, which hid the loader and exposed the empty canvas. */}
+        <noscript><style>{'[data-hero-loader]{display:none}'}</style></noscript>
         {!ready && (
-          <div className="absolute inset-0 z-30 hidden [.js_&]:flex flex-col items-center justify-center bg-neutral-900 text-white">
+          <div data-hero-loader className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-neutral-900 text-white">
             <div className="h-1 w-48 overflow-hidden rounded-full bg-white/20">
               <div className="h-full bg-[#5CE65C] transition-[width] duration-150"
                 style={{ width: `${Math.round(progress * 100)}%` }} />
