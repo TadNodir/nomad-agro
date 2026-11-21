@@ -21,17 +21,20 @@ import { localePath } from '@/lib/site'
    desktop  — landscape cinemascope 1600×600  (hero-source.mp4)
    mobile   — portrait  9:16       750×1274   (hero-source-mobile.mp4)
    Both use cover fit; the matching bg colour fills any sub-pixel gaps.
+   WebP, every 2nd source frame (scripts/encode-hero-frames.mjs): ~2.2–2.5 MB
+   per set instead of 7.4–8.2 MB of JPEG. /frames is cached immutably, so a
+   new encode goes in a new folder (-v3, …).
    ───────────────────────────────────────────────────────────────────────── */
 type FrameSet = { count: number; w: number; h: number; bg: string; path: (i: number) => string }
 
 const FRAME_SETS: Record<'desktop' | 'mobile', FrameSet> = {
   desktop: {
-    count: 192, w: 1600, h: 600, bg: '#CEBB9D',
-    path: (i) => `/frames/hero/frame_${String(i + 1).padStart(4, '0')}.jpg`,
+    count: 96, w: 1600, h: 600, bg: '#CEBB9D',
+    path: (i) => `/frames/hero-v2/frame_${String(i + 1).padStart(4, '0')}.webp`,
   },
   mobile: {
-    count: 187, w: 750, h: 1274, bg: '#C8B499',
-    path: (i) => `/frames/hero-mobile/frame_${String(i + 1).padStart(4, '0')}.jpg`,
+    count: 94, w: 750, h: 1274, bg: '#C8B499',
+    path: (i) => `/frames/hero-mobile-v2/frame_${String(i + 1).padStart(4, '0')}.webp`,
   },
 }
 
@@ -154,15 +157,15 @@ export default function ScrollScrubFullPage() {
 
   const containerRef  = useRef<HTMLDivElement>(null)
   const canvasRef     = useRef<HTMLCanvasElement>(null)
-  const imagesRef     = useRef<HTMLImageElement[]>([])
+  // Sparse: frames stream in coarse-to-fine, so some slots are still empty.
+  const imagesRef     = useRef<(HTMLImageElement | undefined)[]>([])
+  // Index of the frame actually on the canvas (may be a nearby stand-in).
   const lastDrawnIdx  = useRef<number>(-1)
   // Holds the active frame set config; updated synchronously in the
   // matchMedia handler so paintFrame always reads the correct dimensions.
   const frameSetRef   = useRef<FrameSet>(FRAME_SETS.desktop)
 
   const [isPortrait, setIsPortrait] = useState(false)
-  const [progress,   setProgress]   = useState(0)
-  const [ready,      setReady]      = useState(false)
   const [isSlowConnection, setIsSlowConnection] = useState(false)
 
   const { scrollYProgress } = useScroll({
@@ -215,11 +218,17 @@ export default function ScrollScrubFullPage() {
   const paintFrame = (progress: number) => {
     const set = frameSetRef.current
     // Map 0→1 progress to the frame set's frame count
-    const idx = Math.max(0, Math.min(set.count - 1, Math.round(progress * (set.count - 1))))
-    if (idx === lastDrawnIdx.current) return   // nothing changed, skip work
+    const target = Math.max(0, Math.min(set.count - 1, Math.round(progress * (set.count - 1))))
 
-    const img = imagesRef.current[idx]
-    if (!img?.complete) return
+    // Nearest frame that has loaded; until the target arrives, a neighbour stands in.
+    const imgs = imagesRef.current
+    let idx = -1
+    for (let d = 0; d < set.count && idx < 0; d++) {
+      if (imgs[target - d]) idx = target - d
+      else if (imgs[target + d]) idx = target + d
+    }
+    if (idx < 0 || idx === lastDrawnIdx.current) return   // nothing loaded / unchanged
+    const img = imgs[idx]!
 
     const canvas = canvasRef.current
     const ctx    = canvas?.getContext('2d')
@@ -251,43 +260,50 @@ export default function ScrollScrubFullPage() {
     lastDrawnIdx.current = idx
   }
 
-  /* ── preload frames for the current orientation ─────────────────────── */
-  // Re-runs whenever isPortrait flips (phone rotated) — clears the old
-  // frame set, resets ready, and loads the new one.
+  /* ── stream frames for the current orientation ──────────────────────── */
+  // No blocking loader: the poster <img> (frame 1, in the server HTML) shows at
+  // once, and frames load in passes (first frame, then every 16th, 8th, 4th,
+  // 2nd, then the rest), so scrubbing works early and sharpens as they arrive.
+  // Re-runs whenever isPortrait flips (phone rotated).
   useEffect(() => {
-    if (skipHeroAnimation) { setReady(true); return }
-    setReady(false)
-    setProgress(0)
+    if (skipHeroAnimation) return
     lastDrawnIdx.current = -1
-    imagesRef.current = []
-
     const set = frameSetRef.current
-    let loaded = 0, cancelled = false
-    const imgs: HTMLImageElement[] = new Array(set.count)
-
-    for (let i = 0; i < set.count; i++) {
-      const img = new Image()
-      img.src = set.path(i)
-      img.onload = img.onerror = () => {
-        if (cancelled) return
-        loaded++
-        setProgress(loaded / set.count)
-        if (loaded === set.count) { setReady(true); paintFrame(scrollYProgress.get()) }
-      }
-      imgs[i] = img
-    }
+    const imgs: (HTMLImageElement | undefined)[] = new Array(set.count)
     imagesRef.current = imgs
+
+    const order: number[] = []
+    const queued = new Set<number>()
+    for (const stride of [set.count, 16, 8, 4, 2, 1]) {
+      for (let i = 0; i < set.count; i += stride) {
+        if (!queued.has(i)) { queued.add(i); order.push(i) }
+      }
+    }
+
+    let next = 0, cancelled = false
+    const loadNext = () => {
+      if (cancelled || next >= order.length) return
+      const i = order[next++]
+      const img = new Image()
+      img.decoding = 'async'
+      img.onload = () => {
+        if (cancelled) return
+        imgs[i] = img
+        paintFrame(scrollYProgress.get())
+        loadNext()
+      }
+      img.onerror = () => { if (!cancelled) loadNext() }
+      img.src = set.path(i)
+    }
+    for (let k = 0; k < 6; k++) loadNext()   // 6 requests in flight
     return () => { cancelled = true; imagesRef.current = [] }
   }, [isPortrait, skipHeroAnimation]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  /* ── continuous RAF loop ────────────────────────────────────────────── */
+  /* ── paint on scroll (no permanent rAF loop) ───────────────────────── */
   useEffect(() => {
-    if (!ready || skipHeroAnimation) return
-    let rafId: number
-    const tick = () => { paintFrame(scrollYProgress.get()); rafId = requestAnimationFrame(tick) }
-    rafId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafId)
-  }, [ready, scrollYProgress, skipHeroAnimation]) // eslint-disable-line react-hooks/exhaustive-deps
+    if (skipHeroAnimation) return
+    return scrollYProgress.on('change', paintFrame)
+  }, [scrollYProgress, skipHeroAnimation]) // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── redraw on resize ───────────────────────────────────────────────── */
   useEffect(() => {
@@ -344,6 +360,19 @@ export default function ScrollScrubFullPage() {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
+        {/* Poster: frame 1, in the server HTML so the hero paints before any JS or
+            frame download. The canvas covers it once its first frame is drawn. */}
+        <picture>
+          <source media="(orientation: portrait)" srcSet={FRAME_SETS.mobile.path(0)} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={FRAME_SETS.desktop.path(0)}
+            alt=""
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
+
         {/* Video canvas */}
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 
@@ -358,20 +387,6 @@ export default function ScrollScrubFullPage() {
             'rgba(0,0,0,0.45) 75%,' +   /* lower mid */
             'rgba(0,0,0,0.65) 100%)'    /* bottom CTAs */
           }} />
-
-        {/* Loading screen — hidden for no-JS clients via <noscript> so they see
-            the hero. Not keyed on `.js` on <html>: hydration resets that class
-            mid-load, which hid the loader and exposed the empty canvas. */}
-        <noscript><style>{'[data-hero-loader]{display:none}'}</style></noscript>
-        {!ready && (
-          <div data-hero-loader className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-neutral-900 text-white">
-            <div className="h-1 w-48 overflow-hidden rounded-full bg-white/20">
-              <div className="h-full bg-[#5CE65C] transition-[width] duration-150"
-                style={{ width: `${Math.round(progress * 100)}%` }} />
-            </div>
-            <p className="mt-3 text-sm tracking-wide text-white/70">{Math.round(progress * 100)}%</p>
-          </div>
-        )}
 
         {/* ── Panel layers ─────────────────────────────────────────────── */}
         <div className="absolute inset-0 z-10">

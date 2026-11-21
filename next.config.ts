@@ -55,7 +55,18 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2678400,
   },
   async headers() {
-    return [{ source: '/:path*', headers: securityHeaders }]
+    // Files in public/ have no content hash, so Vercel serves them with max-age=0 and every
+    // repeat visit revalidated ~190 hero frames. Frames never change in place (a new set gets
+    // a new folder), so cache them for a year; other images can change under the same name,
+    // so cache them for a week and refresh in the background.
+    const longCache = [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }]
+    const weekCache = [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=2592000' }]
+    return [
+      { source: '/:path*', headers: securityHeaders },
+      { source: '/frames/:path*', headers: longCache },
+      { source: '/images/:path*', headers: weekCache },
+      { source: '/:file(logotype1.webp|og-image.jpg|favicon.ico)', headers: weekCache },
+    ]
   },
   async redirects() {
     return [
