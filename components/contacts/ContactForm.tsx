@@ -165,16 +165,19 @@ export function ContactForm({ specId = null }: { specId?: string | null }) {
         />
       </div>
 
-      {status === 'success' && (
-        <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl p-4 text-sm">
-          {t('success')}
-        </div>
-      )}
-      {status === 'error' && (
-        <div className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 text-sm">
-          {t('error')}
-        </div>
-      )}
+      {/* Always-present live region, so screen readers and agents are told the outcome. */}
+      <div aria-live="polite" role="status">
+        {status === 'success' && (
+          <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl p-4 text-sm">
+            {t('success')}
+          </div>
+        )}
+        {status === 'error' && (
+          <div role="alert" className="bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 text-sm">
+            {t('error')}
+          </div>
+        )}
+      </div>
 
       <Button
         type="submit"

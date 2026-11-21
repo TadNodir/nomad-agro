@@ -24,8 +24,10 @@ export function ContactCTA({ variant = 'primary', size = 'md', label, className 
         size={size}
         className={className}
         onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+        aria-expanded={open}
       >
-        <MessageCircle className="w-4 h-4" />
+        <MessageCircle className="w-4 h-4" aria-hidden="true" />
         {label ?? t('requestQuote')}
       </Button>
       <ContactSheet isOpen={open} onClose={() => setOpen(false)} />

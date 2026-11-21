@@ -260,7 +260,9 @@
       "whatsappLabel": "Написать в WhatsApp",
       "telegramLabel": "Написать в Telegram",
       "linkedin": "LinkedIn",
-      "linkedinLabel": "Страница компании"
+      "linkedinLabel": "Страница компании",
+      "formHint": "Продукт, объём и страна назначения",
+      "close": "Закрыть"
     },
     "allEmails": "Все адреса электронной почты",
     "allPhones": "Все номера телефонов",

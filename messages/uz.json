@@ -260,7 +260,9 @@
       "whatsappLabel": "WhatsAppda yozing",
       "telegramLabel": "Telegramda yozing",
       "linkedin": "LinkedIn",
-      "linkedinLabel": "Kompaniya sahifasi"
+      "linkedinLabel": "Kompaniya sahifasi",
+      "formHint": "Mahsulot, hajm va manzil",
+      "close": "Yopish"
     },
     "allEmails": "Barcha elektron pochta manzillari",
     "allPhones": "Barcha telefon raqamlari",

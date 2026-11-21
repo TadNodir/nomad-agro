@@ -260,7 +260,9 @@
       "whatsappLabel": "Chat on WhatsApp",
       "telegramLabel": "Message on Telegram",
       "linkedin": "LinkedIn",
-      "linkedinLabel": "Company page"
+      "linkedinLabel": "Company page",
+      "formHint": "Product, volume and destination",
+      "close": "Close"
     },
     "allEmails": "All Contact Emails",
     "allPhones": "All Phone Numbers",

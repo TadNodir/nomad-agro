@@ -1,12 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import Link from 'next/link'
 import { motion, AnimatePresence, useReducedMotion, type Variants } from 'motion/react'
-import { X, Mail, Phone, Linkedin } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { X, Mail, Phone, Linkedin, ClipboardList } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { COMPANY } from '@/lib/constants'
 import { lockPageScroll } from '@/lib/lenis'
+import { localePath } from '@/lib/site'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" aria-hidden="true">
@@ -57,7 +59,7 @@ const channels = [
     key: 'linkedin',
     Icon: Linkedin,
     label: 'LinkedIn',
-    sublabel: 'nomad-agro-ltd',
+    sublabel: 'nomadagro',
     href: COMPANY.linkedin,
     color: 'hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700',
     iconColor: 'text-blue-700',
@@ -75,9 +77,34 @@ const channels = [
 
 export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
   const t = useTranslations('contact')
+  const locale = useLocale()
   const prefersReducedMotion = useReducedMotion()
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  // Focus moves into the dialog on open, stays inside while open (Tab wraps), and returns
+  // to the button that opened it on close.
+  useEffect(() => {
+    if (!isOpen) return
+    const opener = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
+    function onTab(e: KeyboardEvent) {
+      if (e.key !== 'Tab' || !dialogRef.current) return
+      const items = dialogRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+      if (!items.length) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+    document.addEventListener('keydown', onTab)
+    return () => {
+      document.removeEventListener('keydown', onTab)
+      opener?.focus?.({ preventScroll: true })
+    }
+  }, [isOpen])
 
   // The page uses Lenis smooth scrolling, which listens to the mouse wheel on the whole
   // window; overflow:hidden alone did not stop it, so the page scrolled behind the sheet.
@@ -128,6 +155,7 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
               framer-motion's inline transform would override Tailwind translate centring. */}
           <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center pointer-events-none">
           <motion.div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             data-lenis-prevent
@@ -153,16 +181,35 @@ export function ContactSheet({ isOpen, onClose }: ContactSheetProps) {
                   <p className="text-sm text-bark mt-1">{t('subtitle')}</p>
                 </div>
                 <button
+                  ref={closeRef}
+                  type="button"
                   onClick={onClose}
                   className="p-2 rounded-xl hover:bg-parchment transition-colors duration-150 cursor-pointer text-stone hover:text-soil"
-                  aria-label="Close"
+                  aria-label={t('channels.close')}
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
-              {/* Channels */}
+              {/* Channels. The inquiry form comes first: "Request a Quote" should lead to it. */}
               <div className="grid grid-cols-1 gap-3">
+                <Link
+                  href={`${localePath(locale, '/contacts')}#inquiry`}
+                  onClick={onClose}
+                  className="flex items-center gap-4 p-4 rounded-2xl border-2 border-brand-green/30 bg-white
+                    transition-all duration-200 cursor-pointer group hover:border-brand-green hover:bg-parchment/40"
+                >
+                  <span className="flex-shrink-0 text-brand-green">
+                    <ClipboardList className="w-6 h-6" aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-soil text-sm">{t('form.title')}</div>
+                    <div className="text-bark text-sm truncate">{t('channels.formHint')}</div>
+                  </div>
+                  <span className="ml-auto text-stone group-hover:translate-x-1 transition-transform duration-150" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
                 {channels.map(({ key, Icon, label, sublabel, href, color, iconColor }) => (
                   <a
                     key={key}
