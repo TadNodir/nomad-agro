@@ -11,7 +11,7 @@ import { LanguageSwitcher } from './LanguageSwitcher'
 import { ContactCTA } from '@/components/ui/ContactCTA'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS } from '@/lib/constants'
-import { localePath } from '@/lib/site'
+import { localePath, stripLocale } from '@/lib/site'
 import { PRODUCT_PAGES } from '@/lib/productPages'
 import { lockPageScroll } from '@/lib/lenis'
 
@@ -31,7 +31,9 @@ export default function Navbar() {
   useEffect(() => setMounted(true), [])
   const prefersReducedMotion = useReducedMotion()
 
-  const isHomePage = pathname === localePath(locale) || pathname === localePath(locale, `/`)
+  // Compare locale-free paths: identical on the server (/en/...) and in the browser (/...).
+  const path = stripLocale(pathname)
+  const isHomePage = path === '/'
 
   useEffect(() => {
     function onScroll() {
@@ -92,8 +94,7 @@ export default function Navbar() {
             <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
               {NAV_LINKS.map(({ href, key }) => {
                 const fullHref = localePath(locale, href)
-                const isActive =
-                  pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
+                const isActive = path === href || (href !== '/' && path.startsWith(`${href}/`))
                 const link = (
                   <Link
                     key={key}
@@ -140,6 +141,7 @@ export default function Navbar() {
                       <ul className="min-w-[220px] rounded-xl border border-parchment bg-cream p-2 shadow-lg">
                         {PRODUCT_PAGES.map((p) => {
                           const productHref = localePath(locale, `/catalog/${p.slug}`)
+                          const isCurrent = path === `/catalog/${p.slug}`
                           return (
                             <li key={p.slug}>
                               <Link
@@ -147,11 +149,11 @@ export default function Navbar() {
                                 className={cn(
                                   'block rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150',
                                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green',
-                                  pathname === productHref
+                                  isCurrent
                                     ? 'text-brand-green bg-parchment'
                                     : 'text-bark hover:text-soil hover:bg-parchment'
                                 )}
-                                aria-current={pathname === productHref ? 'page' : undefined}
+                                aria-current={isCurrent ? 'page' : undefined}
                                 onClick={(e) => {
                                   setCatalogMenuClosed(true)
                                   e.currentTarget.blur()
@@ -212,8 +214,7 @@ export default function Navbar() {
             <nav className="flex flex-col gap-1 mb-8" aria-label="Mobile navigation">
               {NAV_LINKS.map(({ href, key }, i) => {
                 const fullHref = localePath(locale, href)
-                const isActive =
-                  pathname === fullHref || (href !== '/' && pathname.startsWith(`${fullHref}/`))
+                const isActive = path === href || (href !== '/' && path.startsWith(`${href}/`))
                 return (
                   <motion.div
                     key={key}
@@ -237,17 +238,18 @@ export default function Navbar() {
                       <ul className="ml-4 mt-1 mb-2 border-l border-parchment pl-3">
                         {PRODUCT_PAGES.map((p) => {
                           const productHref = localePath(locale, `/catalog/${p.slug}`)
+                          const isCurrent = path === `/catalog/${p.slug}`
                           return (
                             <li key={p.slug}>
                               <Link
                                 href={productHref}
                                 className={cn(
                                   'block px-4 py-2.5 rounded-xl text-base transition-colors duration-150',
-                                  pathname === productHref
+                                  isCurrent
                                     ? 'text-brand-green font-semibold'
                                     : 'text-bark hover:text-soil hover:bg-parchment'
                                 )}
-                                aria-current={pathname === productHref ? 'page' : undefined}
+                                aria-current={isCurrent ? 'page' : undefined}
                               >
                                 {tGroups(p.group)}
                               </Link>

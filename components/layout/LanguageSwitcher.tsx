@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { useState, useRef, useEffect, useId } from 'react'
+import Link from 'next/link'
 import { useLocale } from 'next-intl'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { ChevronDown, Globe } from 'lucide-react'
 import { routing } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
-import { localePath } from '@/lib/site'
+import { localePath, stripLocale } from '@/lib/site'
 
 const labels: Record<string, string> = {
   en: 'EN',
@@ -18,7 +18,7 @@ const labels: Record<string, string> = {
 const fullLabels: Record<string, string> = {
   en: 'English',
   ru: 'Русский',
-  uz: "O'zbek",
+  uz: 'Oʻzbek',
 }
 
 interface LanguageSwitcherProps {
@@ -27,37 +27,34 @@ interface LanguageSwitcherProps {
 
 export function LanguageSwitcher({ light = false }: LanguageSwitcherProps) {
   const locale = useLocale()
-  const pathname = usePathname()
-  const router = useRouter()
+  // Locale-free, so the server (/en/...) and browser (/...) render the same hrefs.
+  const path = stripLocale(usePathname())
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const listId = useId()
 
   useEffect(() => {
+    if (!open) return
     function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
+    document.addEventListener('keydown', handleKey)
+    return () => {
+      document.removeEventListener('mousedown', handleClick)
+      document.removeEventListener('keydown', handleKey)
+    }
+  }, [open])
 
-  function switchLocale(next: string) {
-    // Strip the current locale prefix (English has none), then add the target one.
-    const prefix = `/${locale}`
-    const rest =
-      pathname === prefix ? '' : pathname.startsWith(`${prefix}/`) ? pathname.slice(prefix.length) : pathname
-    router.push(localePath(next, rest === '/' ? '' : rest))
-    setOpen(false)
-  }
-
-  const textClasses = light
-    ? 'text-cream/80 hover:text-cream'
-    : 'text-bark hover:text-soil'
+  const textClasses = light ? 'text-cream/80 hover:text-cream' : 'text-bark hover:text-soil'
 
   return (
     <div ref={ref} className="relative">
       <button
+        type="button"
         onClick={() => setOpen((v) => !v)}
         className={cn(
           'flex items-center gap-1.5 text-sm font-semibold cursor-pointer',
@@ -65,50 +62,50 @@ export function LanguageSwitcher({ light = false }: LanguageSwitcherProps) {
           light ? 'hover:bg-white/10' : 'hover:bg-parchment',
           textClasses
         )}
-        aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Switch language"
+        aria-controls={listId}
+        aria-label={`Language: ${fullLabels[locale]}`}
       >
-        <Globe className="w-4 h-4" />
+        <Globe className="w-4 h-4" aria-hidden="true" />
         <span>{labels[locale]}</span>
-        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronDown className="w-3 h-3" />
-        </motion.span>
+        <ChevronDown
+          className={cn('w-3 h-3 transition-transform duration-200', open && 'rotate-180')}
+          aria-hidden="true"
+        />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.ul
-            role="listbox"
-            aria-label="Select language"
-            className="absolute right-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-parchment overflow-hidden min-w-[140px] z-50"
-            initial={{ opacity: 0, y: -8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
-          >
-            {routing.locales.map((loc) => (
-              <li key={loc}>
-                <button
-                  role="option"
-                  aria-selected={loc === locale}
-                  onClick={() => switchLocale(loc)}
-                  className={cn(
-                    'w-full text-left px-4 py-3 text-sm transition-colors duration-150 cursor-pointer',
-                    'flex items-center justify-between gap-3',
-                    loc === locale
-                      ? 'bg-parchment text-brand-green font-semibold'
-                      : 'text-bark hover:bg-cream hover:text-soil'
-                  )}
-                >
-                  <span>{fullLabels[loc]}</span>
-                  <span className="text-xs font-bold text-stone">{labels[loc]}</span>
-                </button>
-              </li>
-            ))}
-          </motion.ul>
+      {/* Always in the HTML as real links (hidden until opened), so crawlers can follow
+          the language versions of every page, not only hreflang and the sitemap. */}
+      <ul
+        id={listId}
+        className={cn(
+          'absolute right-0 top-full mt-2 bg-white rounded-xl shadow-xl border border-parchment overflow-hidden min-w-[140px] z-50',
+          'transition-[opacity,transform,visibility] duration-150',
+          open ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-2'
         )}
-      </AnimatePresence>
+      >
+        {routing.locales.map((loc) => (
+          <li key={loc}>
+            <Link
+              href={localePath(loc, path)}
+              hrefLang={loc}
+              lang={loc}
+              aria-current={loc === locale ? 'true' : undefined}
+              onClick={() => setOpen(false)}
+              className={cn(
+                'w-full px-4 py-3 text-sm transition-colors duration-150',
+                'flex items-center justify-between gap-3',
+                loc === locale
+                  ? 'bg-parchment text-brand-green font-semibold'
+                  : 'text-bark hover:bg-cream hover:text-soil'
+              )}
+            >
+              <span>{fullLabels[loc]}</span>
+              <span className="text-xs font-bold text-stone">{labels[loc]}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

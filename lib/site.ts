@@ -46,6 +46,15 @@ export const localePath = (locale: string, path = '') => {
 
 export const localeUrl = (locale: string, path = '') => siteUrl(localePath(locale, path))
 
+const LOCALE_PREFIX = new RegExp(`^/(${SITE.languages.map((l) => l.code).join('|')})(?=/|$)`)
+
+/**
+ * Locale-free path ('/', '/catalog/raisins') from a usePathname() value. English pages are
+ * prerendered under /en/... but served at /..., so the server sees '/en/catalog' while the
+ * browser sees '/catalog'; comparing raw pathnames made the HTML differ (React error #418).
+ */
+export const stripLocale = (pathname: string) => pathname.replace(LOCALE_PREFIX, '') || '/'
+
 export const fullAddress = `${SITE.address.postalCode}, ${SITE.address.street}, ${SITE.address.locality}, ${SITE.address.country}`
 
 // x-default = the English page, which lives at the unprefixed URL.
