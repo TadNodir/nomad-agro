@@ -6,9 +6,9 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ArrowRight, FileText } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
-import { BreadcrumbJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
+import { PageJsonLd, ProductJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
-import type { SpecValue } from '@/lib/catalog'
+import { CATALOG, type SpecValue } from '@/lib/catalog'
 import { PRODUCT_PAGES, productPage, groupProducts, cellFor, type Cell } from '@/lib/productPages'
 import { pageMetadata } from '@/lib/seo'
 
@@ -48,6 +48,7 @@ export default async function ProductGroupPage({ params }: { params: Params }) {
   const tSpecs = await getTranslations({ locale, namespace: 'catalog.specs' })
   const tValues = await getTranslations({ locale, namespace: 'catalog.values' })
   const tGroups = await getTranslations({ locale, namespace: 'catalog.groups' })
+  const tProducts = await getTranslations({ locale, namespace: 'products' })
 
   const products = groupProducts(page.group)
   const specText = (value: SpecValue) =>
@@ -56,6 +57,8 @@ export default async function ProductGroupPage({ params }: { params: Params }) {
     typeof cell === 'string' ? cell : tShared(`values.${cell.key}`, 'n' in cell ? { n: cell.n } : undefined)
 
   const faqs: Faq[] = [...(t.raw('faq') as Faq[]), ...(tShared.raw('faq') as Faq[])]
+  const href = localePath(locale, `/catalog/${page.slug}`)
+  const section = CATALOG.find((c) => c.groups.some((g) => g.id === page.group))!
   const others = PRODUCT_PAGES.filter((p) => p.slug !== page.slug)
   const hasQuality = page.columns.includes('quality')
   const th = 'px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-bark'
@@ -63,12 +66,22 @@ export default async function ProductGroupPage({ params }: { params: Params }) {
 
   return (
     <>
-      <BreadcrumbJsonLd
-        items={[
+      <PageJsonLd
+        type="ItemPage"
+        name={t('title')}
+        locale={locale}
+        breadcrumbs={[
           { name: tShared('home'), href: localePath(locale) },
           { name: tShared('catalog'), href: localePath(locale, '/catalog') },
-          { name: tGroups(page.group), href: localePath(locale, `/catalog/${page.slug}`) },
+          { name: tGroups(page.group), href },
         ]}
+      />
+      <ProductJsonLd
+        name={tGroups(page.group)}
+        description={t('description')}
+        href={href}
+        category={tProducts(`${section.id}.name`)}
+        images={products.map((p) => `/images/catalog/${p.id}.webp`)}
       />
       <FaqJsonLd items={faqs} />
 

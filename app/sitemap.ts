@@ -7,29 +7,22 @@ import { PRODUCT_PAGES } from '@/lib/productPages'
 // Update the date when you change a page's text, so search engines recrawl it;
 // never use the build time, or Google learns to ignore lastmod.
 const LAST_MODIFIED: Record<string, string> = {
-  '': '2026-11-01',
-  '/about': '2026-11-01',
-  '/reviews': '2026-11-01',
-  '/catalog': '2026-11-11',
-  '/contacts': '2026-11-01',
+  '': '2026-11-21',
+  '/about': '2026-11-21',
+  '/reviews': '2026-11-19',
+  '/catalog': '2026-11-21',
+  '/contacts': '2026-11-21',
   '/privacy': '2026-11-14',
-  ...Object.fromEntries(PRODUCT_PAGES.map((p) => [`/catalog/${p.slug}`, '2026-11-11'])),
+  ...Object.fromEntries(PRODUCT_PAGES.map((p) => [`/catalog/${p.slug}`, '2026-11-21'])),
 }
 
-const pages = [
-  { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
-  { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
-  { path: '/reviews', priority: 0.7, changeFrequency: 'monthly' as const },
-  { path: '/catalog', priority: 0.8, changeFrequency: 'monthly' as const },
-  ...PRODUCT_PAGES.map((p) => ({ path: `/catalog/${p.slug}`, priority: 0.9, changeFrequency: 'monthly' as const })),
-  { path: '/contacts', priority: 0.9, changeFrequency: 'monthly' as const },
-  { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
-]
+// No changefreq/priority: Google ignores both.
+const pages = ['', '/about', '/reviews', '/catalog', ...PRODUCT_PAGES.map((p) => `/catalog/${p.slug}`), '/contacts', '/privacy']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
 
-  for (const { path, priority, changeFrequency } of pages) {
+  for (const path of pages) {
     for (const locale of LOCALES) {
       const languages: Record<string, string> = { 'x-default': xDefaultUrl(path) }
       for (const loc of LOCALES) {
@@ -39,8 +32,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       entries.push({
         url: localeUrl(locale, path),
         lastModified: LAST_MODIFIED[path],
-        changeFrequency,
-        priority,
         alternates: { languages },
       })
     }

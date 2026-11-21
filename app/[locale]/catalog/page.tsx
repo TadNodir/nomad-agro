@@ -6,11 +6,15 @@ import { Download, AlertCircle, ArrowRight, FileText } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { Section } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
-import { BreadcrumbJsonLd, ItemListJsonLd } from '@/components/shared/JsonLd'
+import { PageJsonLd, ItemListJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
 import { CATALOG, type SpecValue } from '@/lib/catalog'
 import { pageMetadata } from '@/lib/seo'
 import { PRODUCT_PAGES, productPageSlug } from '@/lib/productPages'
+
+// Only the first row of photos loads eagerly; the other ~24 load as they near the viewport
+// instead of competing with the hero on first paint.
+const EAGER_IDS = new Set(CATALOG.flatMap((c) => c.groups.flatMap((g) => g.products.map((p) => p.id))).slice(0, 3))
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -21,6 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const tSeo = await getTranslations({ locale, namespace: 'seo.catalog' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
   const t = await getTranslations({ locale, namespace: 'catalog' })
   const tProducts = await getTranslations({ locale, namespace: 'products' })
   const tItems = await getTranslations({ locale, namespace: 'catalog.items' })
@@ -35,10 +41,13 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <BreadcrumbJsonLd
-        items={[
-          { name: 'Home', href: localePath(locale) },
-          { name: 'Catalog', href: localePath(locale, `/catalog`) },
+      <PageJsonLd
+        type="CollectionPage"
+        name={tSeo('title')}
+        locale={locale}
+        breadcrumbs={[
+          { name: tNav('home'), href: localePath(locale) },
+          { name: tNav('catalog'), href: localePath(locale, `/catalog`) },
         ]}
       />
       <ItemListJsonLd
@@ -52,7 +61,8 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
       {/* Hero */}
       <section className="pt-32 pb-16 bg-brand-forest grain-overlay" aria-label="Catalog hero">
         <div className="container-base">
-          <FadeInView>
+          {/* No FadeInView here: it hid the H1 (the LCP element) until hydration. */}
+          <div>
             <span className="text-xs font-semibold tracking-[0.2em] uppercase text-brand-lime block mb-4">
               {t('eyebrow')}
             </span>
@@ -66,7 +76,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
               <AlertCircle className="w-5 h-5 text-brand-lime flex-shrink-0 mt-0.5" />
               <p className="text-brand-lime/80 text-sm leading-relaxed">{t('downloadNote')}</p>
             </div>
-          </FadeInView>
+          </div>
         </div>
       </section>
 
@@ -133,7 +143,7 @@ export default async function CatalogPage({ params }: { params: Promise<{ locale
                         alt={tItems(product.id)}
                         fill
                         sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 92vw"
-                        loading="eager"
+                        loading={EAGER_IDS.has(product.id) ? 'eager' : 'lazy'}
                         className="object-cover"
                       />
                       <div className="absolute top-2.5 right-2.5">

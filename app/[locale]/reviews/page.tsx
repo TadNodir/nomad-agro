@@ -5,7 +5,7 @@ import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
-import { BreadcrumbJsonLd } from '@/components/shared/JsonLd'
+import { PageJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
@@ -18,15 +18,20 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ReviewsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const tSeo = await getTranslations({ locale, namespace: 'seo.reviews' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
   const t = await getTranslations({ locale, namespace: 'reviews' })
   const items = t.raw('items') as Array<{ company: string; country: string; products: string; text: string }>
 
   return (
     <>
-      <BreadcrumbJsonLd
-        items={[
-          { name: 'Home', href: localePath(locale) },
-          { name: 'Reviews', href: localePath(locale, `/reviews`) },
+      <PageJsonLd
+        type="WebPage"
+        name={tSeo('title')}
+        locale={locale}
+        breadcrumbs={[
+          { name: tNav('home'), href: localePath(locale) },
+          { name: tNav('reviews'), href: localePath(locale, `/reviews`) },
         ]}
       />
 

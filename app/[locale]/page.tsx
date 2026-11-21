@@ -9,8 +9,9 @@ import ScrollScrubFullPage from '@/components/home/ScrollScrubFullPage'
 // import Testimonials from '@/components/home/Testimonials'           // folded into ScrollScrubFullPage
 // import ContactSection from '@/components/home/ContactSection'       // folded into ScrollScrubFullPage
 import { FactsStrip } from '@/components/home/FactsStrip'
-import { OrganizationJsonLd } from '@/components/shared/JsonLd'
+import { PageJsonLd } from '@/components/shared/JsonLd'
 import { pageMetadata } from '@/lib/seo'
+import { localePath } from '@/lib/site'
 
 
 export async function generateMetadata({
@@ -31,10 +32,12 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const tSeo = await getTranslations({ locale, namespace: 'seo.home' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
 
   return (
     <>
-      <OrganizationJsonLd locale={locale} />
+      <PageJsonLd name={tSeo('title')} locale={locale} breadcrumbs={[{ name: tNav('home'), href: localePath(locale) }]} />
       {/*
         ScrollScrubFullPage contains all six section heroes in a 500vh
         scroll-scrub track with the video frame sequence as the background.

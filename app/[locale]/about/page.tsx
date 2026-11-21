@@ -6,7 +6,7 @@ import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactCTA } from '@/components/ui/ContactCTA'
-import { OrganizationJsonLd, BreadcrumbJsonLd } from '@/components/shared/JsonLd'
+import { PageJsonLd } from '@/components/shared/JsonLd'
 import { localePath } from '@/lib/site'
 import { ISO_CERT } from '@/lib/constants'
 import { pageMetadata } from '@/lib/seo'
@@ -30,6 +30,8 @@ export default async function AboutPage({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const tSeo = await getTranslations({ locale, namespace: 'seo.about' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
   const t = await getTranslations({ locale, namespace: 'about' })
   const stats = t.raw('stats') as Array<{ value: string; label: string }>
   const regions = t.raw('regions.regionsList') as string[]
@@ -37,11 +39,13 @@ export default async function AboutPage({
 
   return (
     <>
-      <OrganizationJsonLd locale={locale} />
-      <BreadcrumbJsonLd
-        items={[
-          { name: 'Home', href: localePath(locale) },
-          { name: 'About', href: localePath(locale, `/about`) },
+      <PageJsonLd
+        type="AboutPage"
+        name={tSeo('title')}
+        locale={locale}
+        breadcrumbs={[
+          { name: tNav('home'), href: localePath(locale) },
+          { name: tNav('about'), href: localePath(locale, `/about`) },
         ]}
       />
 

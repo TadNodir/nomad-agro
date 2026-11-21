@@ -6,7 +6,7 @@ import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactForm, ContactFormWithSpec } from '@/components/contacts/ContactForm'
-import { BreadcrumbJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
+import { PageJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
 import { COMPANY } from '@/lib/constants'
 import { SITE, localePath } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
@@ -32,6 +32,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
+  const tSeo = await getTranslations({ locale, namespace: 'seo.contacts' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
   const t = await getTranslations({ locale, namespace: 'contact' })
   const tFaq = await getTranslations({ locale, namespace: 'faq' })
   const faqItems = tFaq.raw('items') as Array<{ question: string; answer: string }>
@@ -78,10 +80,13 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <BreadcrumbJsonLd
-        items={[
-          { name: 'Home', href: localePath(locale) },
-          { name: 'Contacts', href: localePath(locale, `/contacts`) },
+      <PageJsonLd
+        type="ContactPage"
+        name={tSeo('title')}
+        locale={locale}
+        breadcrumbs={[
+          { name: tNav('home'), href: localePath(locale) },
+          { name: tNav('contact'), href: localePath(locale, `/contacts`) },
         ]}
       />
       <FaqJsonLd items={faqItems} />

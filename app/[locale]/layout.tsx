@@ -11,6 +11,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import '@/app/globals.css'
 import { SITE, alternatesFor } from '@/lib/site'
+import { OrganizationJsonLd } from '@/components/shared/JsonLd'
 import { ogImage, ogLocale } from '@/lib/seo'
 
 const lora = Lora({
@@ -31,12 +32,20 @@ export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
+// Only en/ru/uz exist. The middleware skips dotted paths (/llms.txt, /wp-login.php), which
+// otherwise reached this layout as locale "llms.txt" and rendered a 404 with page metadata.
+export const dynamicParams = false
+
+const isLocale = (locale: string): locale is (typeof routing.locales)[number] =>
+  (routing.locales as readonly string[]).includes(locale)
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
+  if (!isLocale(locale)) return { robots: { index: false } }
   const t = await getTranslations({ locale, namespace: 'seo.home' })
 
   // Fallback for routes without their own metadata (e.g. 404); pages use pageMetadata().
@@ -54,11 +63,8 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true },
-    },
+    // No explicit robots: index/follow is the default, and an explicit tag here was
+    // emitted next to the 404's noindex.
   }
 }
 
@@ -71,7 +77,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
 
-  if (!routing.locales.includes(locale as 'en' | 'ru' | 'uz')) {
+  if (!isLocale(locale)) {
     notFound()
   }
 
@@ -85,6 +91,7 @@ export default async function LocaleLayout({
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body>
+        <OrganizationJsonLd />
         <NextIntlClientProvider messages={messages}>
           <LenisProvider>
             <Navbar />
