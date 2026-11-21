@@ -8,7 +8,7 @@ import { Section, SectionHeader } from '@/components/ui/Section'
 import { ContactForm, ContactFormWithSpec } from '@/components/contacts/ContactForm'
 import { BreadcrumbJsonLd, FaqJsonLd } from '@/components/shared/JsonLd'
 import { COMPANY } from '@/lib/constants'
-import { localePath } from '@/lib/site'
+import { SITE, localePath } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
 const WhatsAppIcon = () => (
@@ -210,7 +210,7 @@ export default async function ContactsPage({ params }: { params: Promise<{ local
                     />
                   </div>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`}
+                    href={SITE.googleMaps}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green hover:text-brand-green-hover transition-colors"

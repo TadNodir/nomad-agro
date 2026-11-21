@@ -29,6 +29,12 @@ export function OrganizationJsonLd({ locale }: { locale: string }) {
           postalCode: SITE.address.postalCode,
           addressCountry: SITE.address.countryCode,
         },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: COMPANY.coordinates.lat,
+          longitude: COMPANY.coordinates.lng,
+        },
+        hasMap: SITE.googleMaps,
         contactPoint: COMPANY.phones.map((phone) => ({
           '@type': 'ContactPoint',
           telephone: phone.number,

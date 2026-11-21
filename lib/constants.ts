@@ -21,8 +21,8 @@ export const COMPANY = {
   whatsapp: `https://wa.me/${SITE.phone.slice(1)}`,
   telegram: `https://t.me/${SITE.phone}`,
   linkedin: SITE.sameAs[0],
-  // Sayram 7th passage, Mirzo Ulug'bek district, Tashkent (street-level; house 52 not geocoded)
-  coordinates: { lat: 41.33299, lng: 69.31952 },
+  // The pin of the Google Business Profile (SITE.googleMaps), so the site and Maps show the same spot.
+  coordinates: { lat: 41.3361144, lng: 69.320018 },
 } as const
 
 // Shown on the About certificate card and in the Organization JSON-LD.

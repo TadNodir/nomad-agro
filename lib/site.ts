@@ -16,11 +16,14 @@ export const SITE = {
     countryCode: 'UZ',
   },
   phone: '+998911929002',
+  // Google Business Profile (permanent CID link; the share link maps.app.goo.gl/akjxWJxX7N4PS26c9 redirects here)
+  googleMaps: 'https://maps.google.com/?cid=15638142317987521674',
   sameAs: [
     'https://www.linkedin.com/company/nomad-agro-ltd',
     'https://eye.tridge.com/trade-hub/companies/onpsQwaBbDpNeRNDVVztb6gtRWknnKiXbcNZkB',
     'https://www.goldenpages.uz/en/company/?Id=99169',
     'https://www.yellowpages.uz/en/company/nomad-agro-ltd-llc',
+    'https://maps.google.com/?cid=15638142317987521674',
   ],
   languages: [
     { code: 'en', name: 'English' },
