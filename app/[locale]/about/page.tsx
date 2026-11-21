@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { MapPin, Leaf, Award, TrendingUp, ExternalLink, ShieldCheck, Globe2 } from 'lucide-react'
+import { MapPin, Leaf, Award, TrendingUp, ExternalLink, ShieldCheck, Globe2, ClipboardCheck } from 'lucide-react'
 import { FadeInView } from '@/components/motion/FadeInView'
 import { StaggerContainer } from '@/components/motion/StaggerContainer'
 import { Section, SectionHeader } from '@/components/ui/Section'
@@ -102,13 +102,9 @@ export default async function AboutPage({
               <span className="text-xs text-bark">{t('badges.haccpSub')}</span>
             </li>
             <li className="h-full flex flex-col items-center text-center gap-2 bg-white rounded-2xl border border-parchment p-5">
-              <Image
-                src="/images/fda-registered.webp"
-                alt="FDA registered"
-                width={300}
-                height={300}
-                className="h-14 w-14"
-              />
+              {/* Plain icon, not the FDA logo: the logo is reserved for official FDA use,
+                  and FDA issues no registration certificates for food facilities. */}
+              <ClipboardCheck className="w-14 h-14 text-brand-green" aria-hidden="true" />
               <span className="font-serif text-lg font-semibold text-soil">{t('badges.fda')}</span>
               <span className="text-xs text-bark">{t('badges.fdaSub')}</span>
             </li>
