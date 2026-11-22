@@ -25,6 +25,8 @@ export const SITE = {
     'https://www.goldenpages.uz/en/company/?Id=99169',
     'https://www.yellowpages.uz/en/company/nomad-agro-ltd-llc',
     'https://www.google.com/maps?cid=15638142317987521674',
+    // Company's own Alibaba storefront ("Nomad Agro LLC").
+    'https://uz1576338360uwrb.trustpass.alibaba.com/',
   ],
   languages: [
     { code: 'en', name: 'English' },
